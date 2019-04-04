@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const Hapi = require('hapi');
 const Inert = require('inert');
 const Vision = require('vision');
@@ -10,8 +12,8 @@ const Util = require('util');
 const Hoek = require('hoek');
 
 const server = Hapi.Server({
-    port: 3000,
-    host: 'localhost'
+    port: process.env.PORT || 3000,
+    host: '0.0.0.0',
 });
 
 const swaggerOptions = {
@@ -22,7 +24,7 @@ const swaggerOptions = {
 };
 
 const dbOpts = {
-    url: 'mongodb://bob_user:328bu5ad@ds139295.mlab.com:39295/mobiletemplate',
+    url: process.env.MONGODB_URL,
     settings: {
         poolSize: 10
     },
