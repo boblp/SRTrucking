@@ -36,19 +36,23 @@ const main = function(request, callback){
 		if(err){ 
 			callback(err);
 		}else{
-			bcrypt.compare(password, result.password, function(err, res) {
-				if(res){
-					const token = jwt.sign({ id: result.email }, 'secret', {
-						expiresIn: 86400 // 24 hours
-					});
+			if (result && result.length > 0) {
+				bcrypt.compare(password, result.password, function(err, res) {
+					if(res){
+						const token = jwt.sign({ id: result.email }, 'secret', {
+							expiresIn: 86400 // 24 hours
+						});
 
-					response = token;
-				}else{
-					response = 'No Match';
-				}
+						response = token;
+					}else{
+						response = 'No Match';
+					}
 
-				callback(response);
-			});
+					callback(response);
+				});
+			}else{
+				callback(false);
+			}
 		}
 	});
 }
