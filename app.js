@@ -14,6 +14,7 @@ const Hoek = require('hoek');
 const server = Hapi.Server({
     port: process.env.PORT || 3000,
     host: '0.0.0.0',
+    routes: {cors: true}
 });
 
 const swaggerOptions = {
