@@ -13,7 +13,6 @@ module.exports.handler = function(request, h){
 				resolve(response);
 			});
 		}catch(e){
-			console.log(e.message);
 			resolve(e.message);
 		}
 	}); 
@@ -23,7 +22,7 @@ module.exports.handler = function(request, h){
 
 const main = function(request, callback){
 	const collection = request.mongo.db.collection(collectionName);
-	let response = '';
+	let response = false;
 
 	const user = request.query.user;
 	const password = request.query.password;
@@ -34,24 +33,20 @@ const main = function(request, callback){
 
 	collection.findOne(query, function(err, result) {
 		if(err){ 
-			callback(err);
+			callback(response);
 		}else{
-			if (result && result.length > 0) {
+			if (result) {
 				bcrypt.compare(password, result.password, function(err, res) {
 					if(res){
-						const token = jwt.sign({ id: result.email }, 'secret', {
+						response = jwt.sign({ id: result.email }, 'secret', {
 							expiresIn: 86400 // 24 hours
 						});
-
-						response = token;
-					}else{
-						response = 'No Match';
 					}
 
 					callback(response);
 				});
 			}else{
-				callback(false);
+				callback(response);
 			}
 		}
 	});
