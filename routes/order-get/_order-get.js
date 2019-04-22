@@ -1,45 +1,43 @@
 'use strict';
 const assert = require('assert');
 const jwt = require('jsonwebtoken');
-const moment = require('moment');
 const config = require('../../util/config.js');
 
-const collectionName = config.collections.messages;
+const collectionName = config.collections.orders;
 var response = { data: '', totalRecords: 0 };
 
 module.exports.handler = function(request, h){
 	const promise = new Promise((resolve, reject) => {
 		try{
 			jwt.verify(request.query.auth, 'secret', function(err, decoded) {
-		    	if (err) { callback('Invalid Code') }else{
-		    		main(decoded.id, request, function(response){
+		    	if (err){
+		    		resolve('Invalid Code or Level'); 
+		    	} else {
+		    		main(decoded, request, function(response){
 						resolve(response);
 					});
 		    	}
 		    });
 		}catch(e){
-			console.log(e.message)
-			response.data = e.message;
-			resolve(response);
+			resolve(e.message);
 		}
 	}); 
 
 	return promise;
 }
 
-const main = function(email, request, callback){
+const main = function(decoded, request, callback){
 	const collection = request.mongo.db.collection(collectionName);
+	console.log(decoded);
 
-	const insertObj = {
-		origin: email,
-		destiny: request.query.destiny,
-		message: request.query.message,
-		createdAt: moment(Date.now()).format('DD-MM-YYYY')
+	const query = {
+		email: decoded.id
 	};
 
-	collection.insertOne(insertObj, {}, function(err, result) {
+	collection.findOne(query, function(err, result) {
 		if(err){ callback(err); }else{
-			callback('success');
+			console.log(result)
+			callback(result);
 		}
 	});
 }

@@ -1,23 +1,21 @@
 'use strict';
-const assert = require('assert');
+
 const jwt = require('jsonwebtoken');
 const config = require('../../util/config.js');
-
-const collectionName = config.collections.users;
-var response = { data: '', totalRecords: 0 };
+const collectionName = config.collections.vendor;
 
 module.exports.handler = function(request, h){
 	const promise = new Promise((resolve, reject) => {
 		try{
 			jwt.verify(request.query.auth, 'secret', function(err, decoded) {
-		    	if (err){
+		    	if (err || decoded.level != 5) { 
 		    		resolve('Invalid Code or Level'); 
-		    	} else {
-		    		main(decoded, request, function(response){
+		    	}else{
+					main(decoded, request, function(response){
 						resolve(response);
 					});
-		    	}
-		    });
+				}
+			});
 		}catch(e){
 			resolve(e.message);
 		}
@@ -28,16 +26,25 @@ module.exports.handler = function(request, h){
 
 const main = function(decoded, request, callback){
 	const collection = request.mongo.db.collection(collectionName);
-	console.log(decoded);
+	let response = '';
 
-	const query = {
-		email: decoded.id
+	const insertObject = {
+		name: request.query.name
 	};
 
-	collection.findOne(query, function(err, result) {
-		if(err){ callback(err); }else{
-			console.log(result)
-			callback(result);
+	if(request.query.origin){
+		insertObject.origin = request.query.origin
+	}
+
+	if(request.query.destiny){
+		insertObject.destiny = request.query.destiny
+	}
+
+	collection.insertOne(insertObject, function(err, result) {
+		if(err){ response = err }else{
+			response = 'success';
 		}
+
+		callback(response);
 	});
 }

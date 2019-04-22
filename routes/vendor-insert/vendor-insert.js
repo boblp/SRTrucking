@@ -3,17 +3,17 @@ var handler = require('./_'+__filename.split(/[\\/]/).pop());
 
 module.exports = { 
 	method: 'get',
-	path: '/register',
+	path: '/vendor-insert',
 	config: { 
-		description: 'Register - Creates User',
-		notes: 'Register - Creates User',
+		description: 'Creates vendor',
+		notes: 'Creates vendor',
 		tags: ['api'],
 		validate: {
 			query: {
+				auth: joi.string().required().description('JWT Token'),
 				name: joi.string().required(),
-				email: joi.string().email({ minDomainAtoms: 2 }).required(),
-				password: joi.string().required(),
-				confirmPassword: joi.string().required()
+				origin: joi.string().description("['origin1', origin2]"),
+				destiny: joi.string().description("['destiny1', destiny2]")
 			}
 		}
 	}, handler: async (request, h) => { 

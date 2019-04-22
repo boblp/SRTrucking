@@ -3,16 +3,14 @@ var handler = require('./_'+__filename.split(/[\\/]/).pop());
 
 module.exports = { 
 	method: 'get',
-	path: '/message-insert',
+	path: '/users-get',
 	config: { 
-		description: 'Insert Message - returns Message data',
-		notes: 'Insert Message - returns Message data',
+		description: 'Get Users - returns users data',
+		notes: 'Get Users - returns users data',
 		tags: ['api'],
 		validate: {
 			query: {
-				auth: joi.string().required(),
-				destiny: joi.string().required(),
-				message: joi.number().required()
+				auth: joi.string().required().description('JWToken')
 			}
 		}
 	}, handler: async (request, h) => { 

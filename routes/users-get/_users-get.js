@@ -1,7 +1,6 @@
 'use strict';
 const assert = require('assert');
 const jwt = require('jsonwebtoken');
-const moment = require('moment');
 const config = require('../../util/config.js');
 
 const collectionName = config.collections.users;
@@ -11,34 +10,28 @@ module.exports.handler = function(request, h){
 	const promise = new Promise((resolve, reject) => {
 		try{
 			jwt.verify(request.query.auth, 'secret', function(err, decoded) {
-		    	if (err) { callback('Invalid Code') }else{
-		    		main(decoded.id, request, function(response){
+		    	if (err || decoded.level != 5){
+		    		resolve('Invalid Code or Level'); 
+		    	} else {
+		    		main(request, function(response){
 						resolve(response);
 					});
 		    	}
 		    });
 		}catch(e){
-			console.log(e.message)
-			response.data = e.message;
-			resolve(response);
+			resolve(e.message);
 		}
 	}); 
 
 	return promise;
 }
 
-const main = function(email, request, callback){
+const main = function(request, callback){
 	const collection = request.mongo.db.collection(collectionName);
 
-	const insertObj = {
-		user: email,
-		amount: amount,
-		createdAt: moment(Date.now()).format('DD-MM-YYYY') 
-	};
-
-	collection.insertOne(insertObj, {}, function(err, result) {
+	collection.find({}).toArray(function(err, result) {
 		if(err){ callback(err); }else{
-			callback('success');
+			callback(result);
 		}
 	});
 }

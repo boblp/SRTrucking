@@ -1,5 +1,5 @@
 'use strict';
-const assert = require('assert');
+
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const config = require('../../util/config.js');
@@ -38,7 +38,13 @@ const main = function(request, callback){
 			if (result) {
 				bcrypt.compare(password, result.password, function(err, res) {
 					if(res){
-						response = jwt.sign({ id: result.email }, 'secret', {
+						var key = { 
+							id: result.email, 
+							level: result.level, 
+							name: result.name 
+						};
+
+						response = jwt.sign(key, 'secret', {
 							expiresIn: 86400 // 24 hours
 						});
 					}

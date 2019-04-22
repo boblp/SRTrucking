@@ -1,17 +1,18 @@
 const joi = require('joi'); 
-var handler = require('./_'+__filename.split(/[\\/]/).pop());
+var handler = require('./_'+__filename.split(/[\\/]/).pop()); 
 
 module.exports = { 
 	method: 'get',
-	path: '/loan-insert',
+	path: '/vendor-get',
 	config: { 
-		description: 'Insert Loan - returns Loan data',
-		notes: 'Insert Loan - returns Loan data',
+		description: 'Get vendor - returns vendor data',
+		notes: 'Get vendor - returns vendor data',
 		tags: ['api'],
 		validate: {
 			query: {
 				auth: joi.string().required(),
-				amount: joi.number().required()
+				id: joi.string(),
+				name: joi.string()
 			}
 		}
 	}, handler: async (request, h) => { 

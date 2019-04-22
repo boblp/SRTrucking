@@ -5,10 +5,8 @@ module.exports = {
  	jwtKey: 'supersecret',
  	collections: {
  		users: 'Users',
- 		loans: 'Loans',
- 		history: 'History',
- 		logs: 'Logs',
- 		admin: 'Admin',
- 		messages: 'Messages'
+ 		orders: 'Orders',
+ 		//logs: 'Logs',
+ 		vendors: 'Vendors'
  	}
 };
