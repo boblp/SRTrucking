@@ -12,8 +12,9 @@ module.exports = {
 			query: {
 				auth: joi.string().required().description('JWT Token'),
 				name: joi.string().required(),
-				origin: joi.string().description("['origin1', origin2]"),
-				destiny: joi.string().description("['destiny1', destiny2]")
+				alias: joi.string(),
+				origins: joi.string().description("['origin1', origin2]"),
+				destinies: joi.string().description("['destiny1', destiny2]")
 			}
 		}
 	}, handler: async (request, h) => { 
