@@ -16,7 +16,8 @@ const server = Hapi.Server({
     host: '0.0.0.0',
     routes: {
         cors: {
-            origin: ["http://arbatech.io"]
+            //origin: ["http://arbatech.io"]
+            origin: ["*"]
         }
     }
 });
