@@ -2,7 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 const config = require('../../util/config.js');
-const collectionName = config.collections.vendor;
+const collectionName = config.collections.vendors;
 
 module.exports.handler = function(request, h){
 	const promise = new Promise((resolve, reject) => {
@@ -39,11 +39,11 @@ const main = function(decoded, request, callback){
 	}
 
 	if(request.query.origins){
-		insertObject.origins = request.query.origins
+		insertObject.origins = request.query.origins.split(',');
 	}
 
 	if(request.query.destinies){
-		insertObject.destinies = request.query.destinies
+		insertObject.destinies = request.query.destinies.split(',');
 	}
 
 	collection.insertOne(insertObject, function(err, result) {
