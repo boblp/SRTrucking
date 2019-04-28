@@ -32,13 +32,25 @@ const main = function(decoded, request, callback){
 		_id: request.query.id
 	};
 
-	const insertObject = {
-		$set: {},
-		$push: {}
+	let insertObject = {
+		$set: {}
 	};
 
-	insertObject.$set.name = request.query.name;
-	//insertObject.$push.origin = 
+	if(request.query.name){
+		insertObject.$set.name = request.query.name;
+	}
+
+	if(request.query.alias){
+		insertObject.$set.alias = request.query.alias;
+	}
+
+	if(request.query.origins){
+		insertObject.$set.origins = request.query.origins.split(',');
+	}
+
+	if(request.query.destinies){
+		insertObject.$set.destinies = request.query.destinies.split(',');
+	}
 
 	collection.updateOne(query, insertObject, function(err, result) {
 		if(err){ response = err }else{
