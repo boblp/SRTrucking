@@ -29,7 +29,9 @@ const main = function(decoded, request, callback){
 	let response = '';
 
 	const insertObject = {
-		name: request.query.name
+		name: request.query.name,
+		shippings: 0,
+		setbacks: 0
 	};
 
 	if(request.query.alias){

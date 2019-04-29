@@ -2,6 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 const config = require('../../util/config.js');
+const ObjectId = require('mongodb').ObjectID
 const collectionName = config.collections.vendors;
 
 module.exports.handler = function(request, h){
@@ -25,34 +26,37 @@ module.exports.handler = function(request, h){
 }
 
 const main = function(decoded, request, callback){
+	console.log('entro1');
 	const collection = request.mongo.db.collection(collectionName);
 	let response = '';
 
 	const query = {
-		_id: request.query.id
+		_id: ObjectId(request.query.id)
 	};
 
-	let insertObject = {
+	let updateObj = {
 		$set: {}
 	};
 
 	if(request.query.name){
-		insertObject.$set.name = request.query.name;
+		updateObj.$set.name = request.query.name;
 	}
 
 	if(request.query.alias){
-		insertObject.$set.alias = request.query.alias;
+		updateObj.$set.alias = request.query.alias;
 	}
 
 	if(request.query.origins){
-		insertObject.$set.origins = request.query.origins.split(',');
+		updateObj.$set.origins = request.query.origins.split(',');
 	}
 
 	if(request.query.destinies){
-		insertObject.$set.destinies = request.query.destinies.split(',');
+		updateObj.$set.destinies = request.query.destinies.split(',');
 	}
 
-	collection.updateOne(query, insertObject, function(err, result) {
+	collection.updateOne(query, updateObj, function(err, result) {
+		console.log('entro2');
+		console.log(err);
 		if(err){ response = err }else{
 			response = 'success';
 		}
