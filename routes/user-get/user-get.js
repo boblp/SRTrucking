@@ -3,7 +3,7 @@ var handler = require('./_'+__filename.split(/[\\/]/).pop());
 
 module.exports = { 
 	method: 'get',
-	path: '/users-get',
+	path: '/user-get',
 	config: { 
 		description: 'Get Users - returns users data',
 		notes: 'Get Users - returns users data',

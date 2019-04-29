@@ -26,7 +26,6 @@ module.exports.handler = function(request, h){
 }
 
 const main = function(decoded, request, callback){
-	console.log('entro1');
 	const collection = request.mongo.db.collection(collectionName);
 	let response = '';
 
@@ -55,8 +54,6 @@ const main = function(decoded, request, callback){
 	}
 
 	collection.updateOne(query, updateObj, function(err, result) {
-		console.log('entro2');
-		console.log(err);
 		if(err){ response = err }else{
 			response = 'success';
 		}
