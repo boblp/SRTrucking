@@ -31,7 +31,8 @@ const main = function(decoded, request, callback){
 	const insertObject = {
 		name: request.query.name,
 		shippings: 0,
-		setbacks: 0
+		setbacks: 0,
+		disabled: false
 	};
 
 	if(request.query.alias){

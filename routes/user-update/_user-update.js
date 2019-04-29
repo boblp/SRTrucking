@@ -41,12 +41,16 @@ const main = function(decoded, request, callback){
 		updateObj.$set.level = request.query.level
 	}
 
-	if(request.query.password){
-		bcrypt.hash(request.query.password, 10, function(err, hashedPassword) {
-			updateUser(collection, hashedPassword, request, updateObj, callback);
-		});
+	if(!request.query.disabled){
+		if(request.query.password){
+			bcrypt.hash(request.query.password, 10, function(err, hashedPassword) {
+				updateUser(collection, hashedPassword, request, updateObj, callback);
+			});
+		}else{
+			updateUser(collection, null, request, updateObj, callback);
+		}
 	}else{
-		updateUser(collection, null, request, updateObj, callback);
+		disableUser(collection, request.query.email, callback);
 	}
 }
 
@@ -60,7 +64,7 @@ var updateUser = function(collection, password, request, updateObj, callback){
 		updateObj.$set.password = password
 	}
 
-	updateObj.$set.modfiedAt = moment(Date.now()).format('DD-MM-YYYY');
+	updateObj.$set.modifiedAt = moment(Date.now()).format('DD-MM-YYYY');
 
 	collection.updateOne(query, updateObj, function(err, result) {
 		if(err){ 
@@ -72,3 +76,24 @@ var updateUser = function(collection, password, request, updateObj, callback){
 		callback(response);
 	});
 };
+
+var disableUser = function(collection, email, callback){
+	const query = {
+		email: email
+	};
+
+	const updateObj = {
+		disabled: true
+	};
+
+	collection.updateOne(query, updateObj, function(err, result) {
+		if(err){ 
+			response = err;
+		}else{
+			response = 'success';
+		}
+
+		callback(response);
+	});
+};
+

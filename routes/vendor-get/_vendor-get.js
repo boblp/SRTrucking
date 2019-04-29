@@ -26,7 +26,9 @@ module.exports.handler = function(request, h){
 
 const main = function(request, callback){
 	const collection = request.mongo.db.collection(collectionName);
-	const query = {};
+	const query = {
+		disabled: false
+	};
 
 	if(request.query.id){
 		query._id = request.query.id
@@ -34,6 +36,10 @@ const main = function(request, callback){
 
 	if(request.query.name){
 		query.name = request.query.name
+	}
+
+	if(request.query.viewDisabled){
+		query.disabled = request.query.viewDisabled;
 	}
 
 	collection.find(query).toArray(function(err, result) {

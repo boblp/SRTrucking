@@ -53,6 +53,10 @@ const main = function(decoded, request, callback){
 		updateObj.$set.destinies = request.query.destinies.split(',');
 	}
 
+	if(request.query.disabled){
+		updateObj.$set.disabled = request.query.disabled;
+	}
+
 	collection.updateOne(query, updateObj, function(err, result) {
 		if(err){ response = err }else{
 			response = 'success';

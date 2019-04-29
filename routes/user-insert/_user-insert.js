@@ -44,7 +44,7 @@ const main = function(decoded, request, callback){
 
 		const insertObject = {
 			$set: {
-				modfiedAt: moment(Date.now()).format('DD-MM-YYYY')
+				modifiedAt: moment(Date.now()).format('DD-MM-YYYY')
 			},
 			$setOnInsert: {
 				name: name,
@@ -52,7 +52,8 @@ const main = function(decoded, request, callback){
 				email: email,
 				password: hashedPassword,
 				createdAt: moment(Date.now()).format('DD-MM-YYYY'),
-				level: level
+				level: level,
+				disabled: false
 			}
 		};
 

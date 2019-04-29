@@ -12,7 +12,8 @@ module.exports = {
 			query: {
 				auth: joi.string().required(),
 				id: joi.string(),
-				name: joi.string()
+				name: joi.string(),
+				viewDisabled: joi.boolean().default(false).description('View disabled vendors')
 			}
 		}
 	}, handler: async (request, h) => { 

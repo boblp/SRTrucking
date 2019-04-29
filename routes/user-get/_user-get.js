@@ -28,8 +28,15 @@ module.exports.handler = function(request, h){
 
 const main = function(request, callback){
 	const collection = request.mongo.db.collection(collectionName);
+	const query = {
+		disabled: false
+	};
 
-	collection.find({}).toArray(function(err, result) {
+	if(request.query.viewDisabled){
+		query.disabled = request.query.viewDisabled;
+	}
+
+	collection.find(query).toArray(function(err, result) {
 		if(err){ callback(err); }else{
 			callback(result);
 		}
