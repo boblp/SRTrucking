@@ -52,12 +52,17 @@ const main = function(decoded, request, callback){
 				},
 				$setOnInsert: {
 					name: name,
+					phone: 0,
 					email: email,
 					password: hashedPassword,
 					createdAt: moment(Date.now()).format('DD-MM-YYYY'),
 					level: level
 				}
 			};
+
+			if(request.query.phone){
+				insertObject.$setOnInsert.phone = request.query.phone;
+			}
 
 			collection.updateOne(query, insertObject, { upsert: true },function(err, result) {
 				if(err){ 

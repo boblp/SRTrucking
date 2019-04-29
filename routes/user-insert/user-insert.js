@@ -12,6 +12,7 @@ module.exports = {
 			query: {
 				auth: joi.string().required().description('JWT Token'),
 				name: joi.string().required(),
+				phone: joi.string(),
 				email: joi.string().email({ minDomainAtoms: 2 }).required(),
 				password: joi.string().required(),
 				confirmPassword: joi.string().required(),
