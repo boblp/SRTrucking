@@ -10,7 +10,8 @@ module.exports = {
 		tags: ['api'],
 		validate: {
 			query: {
-				auth: joi.string().required().description('JWToken')
+				auth: joi.string().required().description('JWToken'),
+				viewDisabled: joi.boolean().default(false).description('View disabled users')
 			}
 		}
 	}, handler: async (request, h) => { 
