@@ -35,48 +35,43 @@ const main = function(decoded, request, callback){
 	const name = request.query.name;
 	const email = request.query.email;
 	const password = request.query.password;
-	const confirmPassword = request.query.confirmPassword;
 	const level = request.query.level;
 
-	if(password !== confirmPassword){
-		callback("Passwords don't match.");
-	}else{
-		bcrypt.hash(password, 10, function(err, hashedPassword) {
-			const query = {
-				email: email
-			};
+	bcrypt.hash(password, 10, function(err, hashedPassword) {
+		const query = {
+			email: email
+		};
 
-			const insertObject = {
-				$set: {
-					modfiedAt: moment(Date.now()).format('DD-MM-YYYY')
-				},
-				$setOnInsert: {
-					name: name,
-					phone: 0,
-					email: email,
-					password: hashedPassword,
-					createdAt: moment(Date.now()).format('DD-MM-YYYY'),
-					level: level
+		const insertObject = {
+			$set: {
+				modfiedAt: moment(Date.now()).format('DD-MM-YYYY')
+			},
+			$setOnInsert: {
+				name: name,
+				phone: 0,
+				email: email,
+				password: hashedPassword,
+				createdAt: moment(Date.now()).format('DD-MM-YYYY'),
+				level: level
+			}
+		};
+
+		if(request.query.phone){
+			insertObject.$setOnInsert.phone = request.query.phone;
+		}
+
+		collection.updateOne(query, insertObject, { upsert: true },function(err, result) {
+			if(err){ 
+				response = err;
+			}else{
+				if(result.upsertedId === null && result.matchedCount === 1){
+					response = 'This user already exists';
+				}else{
+					response = 'success';
 				}
-			};
-
-			if(request.query.phone){
-				insertObject.$setOnInsert.phone = request.query.phone;
 			}
 
-			collection.updateOne(query, insertObject, { upsert: true },function(err, result) {
-				if(err){ 
-					response = err;
-				}else{
-					if(result.upsertedId === null && result.matchedCount === 1){
-						response = 'This user already exists';
-					}else{
-						response = 'success';
-					}
-				}
-
-				callback(response);
-			});
+			callback(response);
 		});
-	}
+	});
 }

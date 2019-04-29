@@ -15,7 +15,6 @@ module.exports = {
 				phone: joi.string(),
 				email: joi.string().email({ minDomainAtoms: 2 }).required(),
 				password: joi.string().required(),
-				confirmPassword: joi.string().required(),
 				level: joi.number().required()
 			}
 		}
