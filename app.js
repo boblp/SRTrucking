@@ -24,7 +24,7 @@ const server = Hapi.Server({
 
 const swaggerOptions = {
     info: {
-        title: 'Mobile API',
+        title: 'SRT API',
         version: '1.0.1',
     }
 };

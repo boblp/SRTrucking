@@ -13,8 +13,8 @@ module.exports = {
 				auth: joi.string().required().description('JWT Token'),
 				name: joi.string().required(),
 				alias: joi.string(),
-				origins: joi.string().description("['origin1', origin2]"),
-				destinies: joi.string().description("['destiny1', destiny2]")
+				origins: joi.string().description("origin, origin2"),
+				destinies: joi.string().description("destiny, destiny2")
 			}
 		}
 	}, handler: async (request, h) => { 

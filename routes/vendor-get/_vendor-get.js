@@ -29,7 +29,7 @@ const main = function(request, callback){
 	const query = {};
 
 	if(request.query.id){
-		query._id = request.query._id
+		query._id = request.query.id
 	}
 
 	if(request.query.name){
