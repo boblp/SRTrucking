@@ -83,7 +83,10 @@ var disableUser = function(collection, email, callback){
 	};
 
 	const updateObj = {
-		disabled: true
+		$set: {
+			disabled: true,
+			modifiedAt: moment(Date.now()).format('DD-MM-YYYY');
+		}
 	};
 
 	collection.updateOne(query, updateObj, function(err, result) {
