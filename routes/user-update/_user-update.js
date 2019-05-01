@@ -85,7 +85,7 @@ var disableUser = function(collection, email, callback){
 	const updateObj = {
 		$set: {
 			disabled: true,
-			modifiedAt: moment(Date.now()).format('DD-MM-YYYY');
+			modifiedAt: moment(Date.now()).format('DD-MM-YYYY')
 		}
 	};
 
