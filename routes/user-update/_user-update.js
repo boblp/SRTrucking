@@ -42,6 +42,10 @@ const main = function(decoded, request, callback){
 		updateObj.$set.level = request.query.level
 	}
 
+	if(request.query.phone){
+		updateObj.$set.phone = request.query.phone
+	}
+
 	if(!request.query.disabled){
 		if(request.query.password){
 			bcrypt.hash(request.query.password, 10, function(err, hashedPassword) {
