@@ -15,6 +15,9 @@ module.exports = {
 				alias: joi.string(),
 				origins: joi.string().description("origin, origin2"),
 				destinies: joi.string().description("destiny, destiny2")
+			}, 
+			failAction: async (request, h, err) => {
+		        return err;
 			}
 		}
 	}, handler: async (request, h) => { 

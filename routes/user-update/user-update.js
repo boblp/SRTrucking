@@ -16,6 +16,9 @@ module.exports = {
 				password: joi.string(),
 				level: joi.number(),
 				disabled: joi.boolean().default(false).description('Disables Vendor')
+			}, 
+			failAction: async (request, h, err) => {
+		        return err;
 			}
 		}
 	}, handler: async (request, h) => { 

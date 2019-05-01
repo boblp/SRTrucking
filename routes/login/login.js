@@ -12,6 +12,9 @@ module.exports = {
 			query: {
 				user: joi.string().required(),
 				password: joi.string().required(),
+			}, 
+			failAction: async (request, h, err) => {
+		        return err;
 			}
 		}
 	}, handler: async (request, h) => { 

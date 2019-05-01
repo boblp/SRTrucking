@@ -14,6 +14,9 @@ module.exports = {
 				id: joi.string(),
 				name: joi.string(),
 				viewDisabled: joi.boolean().default(false).description('View disabled vendors')
+			}, 
+			failAction: async (request, h, err) => {
+		        return err;
 			}
 		}
 	}, handler: async (request, h) => { 

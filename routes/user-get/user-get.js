@@ -12,6 +12,9 @@ module.exports = {
 			query: {
 				auth: joi.string().required().description('JWToken'),
 				viewDisabled: joi.boolean().default(false).description('View disabled users')
+			}, 
+			failAction: async (request, h, err) => {
+		        return err;
 			}
 		}
 	}, handler: async (request, h) => { 

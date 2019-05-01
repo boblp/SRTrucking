@@ -11,6 +11,9 @@ module.exports = {
 		validate: {
 			query: {
 				auth: joi.string().required()
+			}, 
+			failAction: async (request, h, err) => {
+		        return err;
 			}
 		}
 	}, handler: async (request, h) => { 

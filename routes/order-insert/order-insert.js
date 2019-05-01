@@ -16,6 +16,9 @@ module.exports = {
 				password: joi.string().required(),
 				confirmPassword: joi.string().required(),
 				level: joi.number().required()
+			}, 
+			failAction: async (request, h, err) => {
+		        return err;
 			}
 		}
 	}, handler: async (request, h) => { 

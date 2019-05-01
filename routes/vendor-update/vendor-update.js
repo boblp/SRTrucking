@@ -17,6 +17,9 @@ module.exports = {
 				origins: joi.string().description("{ add: ['origin1', 'origin2'], remove: [''] }"),
 				destinies: joi.string().description("{ add: ['destiny1', 'destiny2'], remove: [''] }"),
 				disabled: joi.boolean().default(false).description('Disables Vendor')
+			}, 
+			failAction: async (request, h, err) => {
+		        return err;
 			}
 		}
 	}, handler: async (request, h) => { 
