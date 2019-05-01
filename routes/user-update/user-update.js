@@ -13,6 +13,7 @@ module.exports = {
 				auth: joi.string().required().description('JWT Token'),
 				email: joi.string().email({ minDomainAtoms: 2 }).required(),
 				name: joi.string(),
+				phone: joi.string(),
 				password: joi.string(),
 				level: joi.number(),
 				disabled: joi.boolean().default(false).description('Disables Vendor')
