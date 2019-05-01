@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 const config = require('../../util/config.js');
+let response = '';
 
 const collectionName = config.collections.users;
 
@@ -55,7 +56,6 @@ const main = function(decoded, request, callback){
 }
 
 var updateUser = function(collection, password, request, updateObj, callback){
-	let response = '';
 	const query = {
 		email: request.query.email
 	};
