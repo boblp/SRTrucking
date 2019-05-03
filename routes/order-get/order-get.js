@@ -11,7 +11,9 @@ module.exports = {
 		validate: {
 			query: {
 				auth: joi.string().required(),
-				srt: joi.string().required()
+				date: joi.string(),
+				_id: joi.string(),
+				viewComplete: joi.boolean().default(false).description('View complete orders')
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;

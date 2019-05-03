@@ -1,10 +1,8 @@
 'use strict';
-const assert = require('assert');
+
 const jwt = require('jsonwebtoken');
 const config = require('../../util/config.js');
-
 const collectionName = config.collections.orders;
-var response = { data: '', totalRecords: 0 };
 
 module.exports.handler = function(request, h){
 	const promise = new Promise((resolve, reject) => {
@@ -13,7 +11,7 @@ module.exports.handler = function(request, h){
 		    	if (err){
 		    		resolve('Invalid Code or Level'); 
 		    	} else {
-		    		main(decoded, request, function(response){
+		    		main(request, function(response){
 						resolve(response);
 					});
 		    	}
@@ -26,17 +24,20 @@ module.exports.handler = function(request, h){
 	return promise;
 }
 
-const main = function(decoded, request, callback){
+const main = function(request, callback){
 	const collection = request.mongo.db.collection(collectionName);
-	console.log(decoded);
+	const query = {};
 
-	const query = {
-		email: decoded.id
-	};
+	if(request.query.srt){
+		query.srt = request.query.srt
+	}
 
-	collection.findOne(query, function(err, result) {
+	if(request.query.date){
+		query.date = request.query.date
+	}
+
+	collection.find(query).toArray(function(err, result) {
 		if(err){ callback(err); }else{
-			console.log(result)
 			callback(result);
 		}
 	});
