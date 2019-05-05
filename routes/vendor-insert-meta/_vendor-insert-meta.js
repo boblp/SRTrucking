@@ -34,15 +34,18 @@ const main = function(decoded, request, callback){
 
 	let updateObj = {
 		$push: {
-			destiny: request.query.destiny,
-			price: request.query.price
+			
 		}
 	};
 
+	updateObj.$push[request.query.category] = {};
+
 	if(request.query.category === 'transport'){
-		updateObj.$push.origin = request.query.origin;
-		updateObj.$push.mode = request.query.mode;
-		updateObj.$push.type = request.query.type;
+		updateObj.$push[request.query.category].price = request.query.price;
+		updateObj.$push[request.query.category].destiny = request.query.destiny;
+		updateObj.$push[request.query.category].origin = request.query.origin;
+		updateObj.$push[request.query.category].mode = request.query.mode;
+		updateObj.$push[request.query.category].type = request.query.type;
 
 		collection.updateOne(query, updateObj, function(err, result) {
 			if(err){ 
@@ -56,6 +59,9 @@ const main = function(decoded, request, callback){
 	}
 
 	if(request.query.category === 'cross'){
+		updateObj.$push[request.query.category].price = request.query.price;
+		updateObj.$push[request.query.category].destiny = request.query.destiny;
+
 		collection.updateOne(query, updateObj, function(err, result) {
 			if(err){ 
 				response = err;
@@ -68,7 +74,9 @@ const main = function(decoded, request, callback){
 	}
 
 	if(request.query.category === 'transfer'){
-		updateObj.$push.weight = request.query.weight;
+		updateObj.$push[request.query.category].price = request.query.price;
+		updateObj.$push[request.query.category].destiny = request.query.destiny;
+		updateObj.$push[request.query.category].weight = request.query.weight;
 
 		collection.updateOne(query, updateObj, function(err, result) {
 			if(err){ 
@@ -82,7 +90,9 @@ const main = function(decoded, request, callback){
 	}
 
 	if(request.query.category === 'empty'){
-		updateObj.$push.type = request.query.type;
+		updateObj.$push[request.query.category].price = request.query.price;
+		updateObj.$push[request.query.category].destiny = request.query.destiny;
+		updateObj.$push[request.query.category].type = request.query.type;
 
 		collection.updateOne(query, updateObj, function(err, result) {
 			if(err){ 
