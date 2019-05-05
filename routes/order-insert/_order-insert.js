@@ -67,6 +67,7 @@ const main = function(decoded, request, callback){
 		fz: request.query.fz,
 		volume: request.query.volume,
 		decks: deckArray,
+		client: "Metalsa",
 		createdAt: Date.now(),
 		modifiedAt: Date.now(),
 		lastModifier: decoded.name

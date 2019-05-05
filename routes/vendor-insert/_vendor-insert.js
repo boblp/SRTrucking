@@ -32,21 +32,17 @@ const main = function(decoded, request, callback){
 		name: request.query.name,
 		shippings: 0,
 		setbacks: 0,
-		disabled: false
+		disabled: false,
+		transport: [],
+		cross: [],
+		transfer: [],
+		empty: []
 	};
 
 	if(request.query.alias){
 		insertObject.alias = request.query.alias
 	}else{
 		insertObject.alias = request.query.name
-	}
-
-	if(request.query.origins){
-		insertObject.origins = request.query.origins.split(',');
-	}
-
-	if(request.query.destinies){
-		insertObject.destinies = request.query.destinies.split(',');
 	}
 
 	collection.insertOne(insertObject, function(err, result) {
