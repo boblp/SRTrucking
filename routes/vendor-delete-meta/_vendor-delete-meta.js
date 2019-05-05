@@ -30,32 +30,16 @@ const main = function(decoded, request, callback){
 	let response = '';
 
 	const query = {
-		_id: ObjectId(request.query.id)
+		_id: ObjectId(request.query.vendorId)
 	};
 
 	let updateObj = {
-		$set: {}
+		$pull: {}
 	};
 
-	if(request.query.name){
-		updateObj.$set.name = request.query.name;
-	}
-
-	if(request.query.alias){
-		updateObj.$set.alias = request.query.alias;
-	}
-
-	if(request.query.origins){
-		updateObj.$set.origins = request.query.origins.split(',');
-	}
-
-	if(request.query.destinies){
-		updateObj.$set.destinies = request.query.destinies.split(',');
-	}
-
-	if(request.query.disabled){
-		updateObj.$set.disabled = request.query.disabled;
-	}
+	updateObj.$pull[request.query.category] = {
+		id: request.query.id
+	};
 
 	collection.updateOne(query, updateObj, function(err, result) {
 		if(err){ response = err }else{

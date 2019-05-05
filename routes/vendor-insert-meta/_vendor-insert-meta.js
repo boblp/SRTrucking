@@ -1,6 +1,8 @@
 'use strict';
 
 const jwt = require('jsonwebtoken');
+const uniqid = require('uniqid');
+const moment = require('moment');
 const config = require('../../util/config.js');
 const ObjectId = require('mongodb').ObjectID
 const collectionName = config.collections.vendors;
@@ -28,6 +30,7 @@ module.exports.handler = function(request, h){
 const main = function(decoded, request, callback){
 	const collection = request.mongo.db.collection(collectionName);
 	let response = '';
+	const category = request.query.category;
 	const query = {
 		_id: ObjectId(request.query.id)
 	};
@@ -38,29 +41,17 @@ const main = function(decoded, request, callback){
 		}
 	};
 
-	updateObj.$push[request.query.category] = {};
+	updateObj.$push[category] = {
+		id: uniqid(),
+		createdAt: moment(Date.now()).format('DD-MM-YYYY')
+	};
 
-	if(request.query.category === 'transport'){
-		updateObj.$push[request.query.category].price = request.query.price;
-		updateObj.$push[request.query.category].destiny = request.query.destiny;
-		updateObj.$push[request.query.category].origin = request.query.origin;
-		updateObj.$push[request.query.category].mode = request.query.mode;
-		updateObj.$push[request.query.category].type = request.query.type;
-
-		collection.updateOne(query, updateObj, function(err, result) {
-			if(err){ 
-				response = err;
-			}else{
-				response = 'success';
-			}
-
-			callback(response);
-		});
-	}
-
-	if(request.query.category === 'cross'){
-		updateObj.$push[request.query.category].price = request.query.price;
-		updateObj.$push[request.query.category].destiny = request.query.destiny;
+	if(category === 'transport'){
+		updateObj.$push[category].price = request.query.price;
+		updateObj.$push[category].destiny = request.query.destiny;
+		updateObj.$push[category].origin = request.query.origin;
+		updateObj.$push[category].mode = request.query.mode;
+		updateObj.$push[category].type = request.query.type;
 
 		collection.updateOne(query, updateObj, function(err, result) {
 			if(err){ 
@@ -73,10 +64,9 @@ const main = function(decoded, request, callback){
 		});
 	}
 
-	if(request.query.category === 'transfer'){
-		updateObj.$push[request.query.category].price = request.query.price;
-		updateObj.$push[request.query.category].destiny = request.query.destiny;
-		updateObj.$push[request.query.category].weight = request.query.weight;
+	if(category === 'cross'){
+		updateObj.$push[category].price = request.query.price;
+		updateObj.$push[category].destiny = request.query.destiny;
 
 		collection.updateOne(query, updateObj, function(err, result) {
 			if(err){ 
@@ -89,10 +79,26 @@ const main = function(decoded, request, callback){
 		});
 	}
 
-	if(request.query.category === 'empty'){
-		updateObj.$push[request.query.category].price = request.query.price;
-		updateObj.$push[request.query.category].destiny = request.query.destiny;
-		updateObj.$push[request.query.category].type = request.query.type;
+	if(category === 'transfer'){
+		updateObj.$push[category].price = request.query.price;
+		updateObj.$push[category].destiny = request.query.destiny;
+		updateObj.$push[category].weight = request.query.weight;
+
+		collection.updateOne(query, updateObj, function(err, result) {
+			if(err){ 
+				response = err;
+			}else{
+				response = 'success';
+			}
+
+			callback(response);
+		});
+	}
+
+	if(category === 'empty'){
+		updateObj.$push[category].price = request.query.price;
+		updateObj.$push[category].destiny = request.query.destiny;
+		updateObj.$push[category].type = request.query.type;
 
 		collection.updateOne(query, updateObj, function(err, result) {
 			if(err){ 
