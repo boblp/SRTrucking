@@ -71,7 +71,8 @@ const main = function(decoded, request, callback){
 		client: "Metalsa",
 		createdAt: moment(Date.now()).format('DD-MM-YYYY'),
 		modifiedAt: moment(Date.now()).format('DD-MM-YYYY'),
-		lastModifier: decoded.name
+		lastModifier: decoded.name,
+		deleted: false
 	};
 
 	collection.insertOne(insertObject, function(err, result) {
