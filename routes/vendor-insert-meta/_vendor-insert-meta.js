@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const uniqid = require('uniqid');
 const moment = require('moment');
 const config = require('../../util/config.js');
-const ObjectId = require('mongodb').ObjectID
+const ObjectId = require('mongodb').ObjectID;
 const collectionName = config.collections.vendors;
 
 module.exports.handler = function(request, h){

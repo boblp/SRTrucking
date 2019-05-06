@@ -2,6 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 const config = require('../../util/config.js');
+const ObjectId = require('mongodb').ObjectID;
 const collectionName = config.collections.vendors;
 
 module.exports.handler = function(request, h){
@@ -31,11 +32,11 @@ const main = function(request, callback){
 	};
 
 	if(request.query.id){
-		query._id = request.query.id
+		query._id = ObjectId(request.query.id);
 	}
 
 	if(request.query.name){
-		query.name = request.query.name
+		query.name = request.query.name;
 	}
 
 	if(request.query.viewDisabled){
