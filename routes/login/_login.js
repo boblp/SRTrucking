@@ -28,7 +28,8 @@ const main = function(request, callback){
 	const password = request.query.password;
 
 	const query = {
-		email: user
+		email: user,
+		disabled: false
 	};
 
 	collection.findOne(query, function(err, result) {

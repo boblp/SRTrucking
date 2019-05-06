@@ -2,6 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 const config = require('../../util/config.js');
+const moment = require('moment');
 const collectionName = config.collections.orders;
 let response = '';
 
@@ -68,8 +69,8 @@ const main = function(decoded, request, callback){
 		volume: request.query.volume,
 		decks: deckArray,
 		client: "Metalsa",
-		createdAt: Date.now(),
-		modifiedAt: Date.now(),
+		createdAt: moment(Date.now()).format('DD-MM-YYYY'),
+		modifiedAt: moment(Date.now()).format('DD-MM-YYYY'),
 		lastModifier: decoded.name
 	};
 
