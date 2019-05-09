@@ -30,6 +30,10 @@ const main = function(request, callback){
 		deleted: false
 	};
 
+	if(request.query.id){
+		_id: ObjectId(request.query.id)
+	}
+
 	if(request.query.srt){
 		query.srt = request.query.srt
 	}
