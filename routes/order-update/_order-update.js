@@ -2,6 +2,7 @@
 const assert = require('assert');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
+const ObjectId = require('mongodb').ObjectID;
 const config = require('../../util/config.js');
 
 const collectionName = config.collections.orders;
