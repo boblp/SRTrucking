@@ -12,7 +12,7 @@ module.exports = {
 			query: {
 				auth: joi.string().required(),
 				date: joi.string(),
-				_id: joi.string(),
+				id: joi.string(),
 				viewComplete: joi.boolean().default(false).description('View complete orders')
 			}, 
 			failAction: async (request, h, err) => {
