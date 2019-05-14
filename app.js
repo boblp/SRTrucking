@@ -11,7 +11,17 @@ const Glob = require('glob');
 const Util = require('util');
 const Hoek = require('hoek');
 
-const io = require('socket.io')();
+const io = require('socket.io')({
+    handlePreflightRequest: (req, res) => {
+        const headers = {
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Origin": req.headers.origin, //or the specific origin you want to give access to,
+            "Access-Control-Allow-Credentials": true
+        };
+        res.writeHead(200, headers);
+        res.end();
+    }
+});
 io.on('connection', client => { console.log('connected') });
 io.listen(8080);
 console.log(`Socket Server is running at port: 8080`);
