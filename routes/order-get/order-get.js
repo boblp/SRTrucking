@@ -12,6 +12,9 @@ module.exports = {
 			query: {
 				auth: joi.string().required(),
 				date: joi.string(),
+				status: joi.string(),
+				location: joi.string(),
+				mineOnly: joi.boolean(),
 				id: joi.string(),
 				viewComplete: joi.boolean().default(false).description('View complete orders')
 			}, 

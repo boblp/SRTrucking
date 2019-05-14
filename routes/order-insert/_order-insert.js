@@ -49,6 +49,7 @@ const main = function(decoded, request, callback){
 			volume: request.query.volume,
 			decks: decks,
 			client: "Metalsa",
+			createdBy: decoded.id,
 			createdAt: moment(Date.now()).format('DD-MM-YYYY'),
 			modifiedAt: moment(Date.now()).format('DD-MM-YYYY'),
 			lastModifier: decoded.name,

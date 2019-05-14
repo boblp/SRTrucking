@@ -12,7 +12,7 @@ module.exports.handler = function(request, h){
 		    	if (err){
 		    		resolve('Invalid Code or Level'); 
 		    	} else {
-		    		main(request, function(response){
+		    		main(request, decoded, function(response){
 						resolve(response);
 					});
 		    	}
@@ -25,7 +25,7 @@ module.exports.handler = function(request, h){
 	return promise;
 }
 
-const main = function(request, callback){
+const main = function(request, decoded, callback){
 	const collection = request.mongo.db.collection(collectionName);
 	const query = {
 		deleted: false
@@ -41,6 +41,25 @@ const main = function(request, callback){
 
 	if(request.query.date){
 		query.date = request.query.date
+	}
+
+	if(request.query.status){
+		query.status = request.query.status
+	}
+
+	if(request.query.location){
+		query.$or = [
+			{
+				origin: request.query.location
+			},
+			{
+				destiny: request.query.location
+			}
+		]
+	}
+
+	if(request.query.mineOnly){
+		query.createdBy = decoded.id
 	}
 
 	collection.find(query).toArray(function(err, result) {
