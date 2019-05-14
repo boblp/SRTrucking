@@ -11,6 +11,11 @@ const Glob = require('glob');
 const Util = require('util');
 const Hoek = require('hoek');
 
+const io = require('socket.io')();
+io.on('connection', client => { console.log('connected') });
+io.listen(8080);
+console.log(`Socket Server is running at port: 8080`);
+
 const server = Hapi.Server({
     port: process.env.PORT || 3000,
     host: '0.0.0.0',
@@ -48,7 +53,7 @@ const init = async () => {
         {
             plugin: require('hapi-swaggered-ui'),
             options: {
-                title: 'Mobile API',
+                title: 'SRT API',
                 path: '/docs',
                 authorization: {
                     field: 'apiKey',
@@ -90,7 +95,7 @@ const init = async () => {
     });
 
     await server.start();
-    console.log(`Server is running at: ${server.info.uri}`);
+    console.log(`Main Server is running at: ${server.info.uri}`);
 };
 
 process.on('unhandledRejection', (error) => {

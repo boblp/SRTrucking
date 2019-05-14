@@ -2,8 +2,10 @@
 const assert = require('assert');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
+const async = require('async');
 const ObjectId = require('mongodb').ObjectID;
 const config = require('../../util/config.js');
+let response = '';
 
 const collectionName = config.collections.orders;
 
@@ -14,13 +16,9 @@ module.exports.handler = function(request, h){
 		    	if (err) { 
 		    		resolve('Invalid Code or Level'); 
 		    	}else{
-		    		if(decoded.level == 1){
-		    			main(decoded, request, function(response){
-							resolve(response);
-						});
-		    		}else{
-		    			resolve('Invalid Code or Level :C'); 
-		    		}
+		    		main(decoded, request, function(response){
+						resolve(response);
+					});
 				}
 			});
 		}catch(e){
@@ -33,36 +31,67 @@ module.exports.handler = function(request, h){
 
 const main = function(decoded, request, callback){
 	const collection = request.mongo.db.collection(collectionName);
-	let response = '';
+	const updateObj = request.query.updateObj;
 
-	const query = {
-		_id: ObjectId(request.query.id)
-	};
+	// const structureExample = [{
+	// 	id: "be7l4lsjvlld4eo",
+	// 	srt: "updateSuccess1",
+	// 	tractor: "hhhhh"
+	// },{
+	// 	id: "be7l4lsjvlld4ep",
+	// 	srt: "updateSuccess2",
+	// 	tractor: "ppppp"
+	// }]
 
-	const updateObj = {
-		$set: {
-			modfiedAt: moment(Date.now()).format('DD-MM-YYYY')
-		},
-		$setOnInsert: {
-			name: name,
-			email: email,
-			password: hashedPassword,
-			createdAt: moment(Date.now()).format('DD-MM-YYYY'),
-			level: level
-		}
-	};
-
-	collection.updateOne(query, updateObj, { upsert: true },function(err, result) {
-		if(err){ 
-			response = err;
-		}else{
-			if(result.upsertedId === null && result.matchedCount === 1){
-				response = 'This user already exists';
-			}else{
-				response = 'success';
-			}
-		}
-
-		callback(response);
+	async.each(updateObj, function(data, cb) {
+	    updateDeck(request.query.id, data, collection, function(){
+	    	cb();
+	    });
+	}, function(err) {
+	    if (err) { callback(err); }else{
+	    	callback('success');
+	    }
 	});
 }
+
+const updateDeck = function(id, data, collection, callback){
+	const query = {
+		_id: ObjectId(id),
+		"decks.id": data.id
+	};
+
+	var newData = {};
+
+	async.eachOf(data, function(dataRow, key, cb2) {
+		console.log(key, dataRow);
+		if(key != 'id'){
+			newData['decks.$.'+key] = dataRow;
+		}
+
+		cb2();
+	}, function(err) {
+	    if( err ) { console.log(err) } else {
+	    	const updateObj = {
+		        $set: newData
+		    };
+
+		    console.log(query);
+		    console.log(updateObj);
+
+			collection.updateOne(query, updateObj, { upsert: false }, function(err, result) {
+				if(err){ 
+					console.log(err);
+					response = err;
+				}else{
+					if(result.upsertedId === null && result.matchedCount === 1){
+						response = 'This user already exists';
+					}else{
+						response = 'success';
+					}
+				}
+
+				callback(err, response);
+			});
+	    }
+	});
+};

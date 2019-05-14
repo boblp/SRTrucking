@@ -3,6 +3,8 @@
 const jwt = require('jsonwebtoken');
 const config = require('../../util/config.js');
 const moment = require('moment');
+const async = require('async');
+const uniqid = require('uniqid');
 const collectionName = config.collections.orders;
 let response = '';
 
@@ -29,57 +31,63 @@ module.exports.handler = function(request, h){
 const main = function(decoded, request, callback){
 	const collection = request.mongo.db.collection(collectionName);
 	const deckArray = [];
-	let deckTemplate = {
-		id: 1,
-		srt: '',
-		loadDate: '',
-		timeWindow: '',
-		documentsDate: '',
-		crossDate: '',
-		invoice: '',
-		teamUS: '',
-		teamMX: '',
-		vehicleType: '',
-		scac: '',
-		caat: '',
-		cross: '',
-		carrierMX: '',
-		carrierUS: '',
-		documentsStatus: '',
-		status: '',
-		transferBusiness: '',
-		local: '',
-		extra: '',
-		empty: '',
-		tractor: '?'
-	};
 
-	for (var i = parseInt(request.query.qty) - 1; i >= 0; i--) {
-		deckTemplate.id = i;
-		deckArray.push(deckTemplate);
-	}
+	const iterations = parseInt(request.query.qty);
 
-	const insertObject = {
-		origin: request.query.origin,
-		destiny: request.query.destiny,
-		qty: request.query.qty,
-		type: request.query.type,
-		time: request.query.time,
-		fz: request.query.fz,
-		volume: request.query.volume,
-		decks: deckArray,
-		client: "Metalsa",
-		createdAt: moment(Date.now()).format('DD-MM-YYYY'),
-		modifiedAt: moment(Date.now()).format('DD-MM-YYYY'),
-		lastModifier: decoded.name,
-		deleted: false
-	};
+	async.timesSeries(iterations, function(n, next) {
+	    addDeck(n, function(err, user) {
+	        next(err, user);
+	    });
+	}, function(err, decks) {
+		const insertObject = {
+			origin: request.query.origin,
+			destiny: request.query.destiny,
+			qty: request.query.qty,
+			type: request.query.type,
+			time: request.query.time,
+			fz: request.query.fz,
+			volume: request.query.volume,
+			decks: decks,
+			client: "Metalsa",
+			createdAt: moment(Date.now()).format('DD-MM-YYYY'),
+			modifiedAt: moment(Date.now()).format('DD-MM-YYYY'),
+			lastModifier: decoded.name,
+			deleted: false
+		};
 
-	collection.insertOne(insertObject, function(err, result) {
-		if(err){ response = err }else{
-			response = 'success';
-		}
+		collection.insertOne(insertObject, function(err, result) {
+			if(err){ response = err }else{
+				response = 'success';
+			}
 
-		callback(response);
+			callback(response);
+		});
 	});
 }
+
+var addDeck = function(id, callback) {
+    callback(null, {
+        id: uniqid(),
+		srt: 'aa',
+		loadDate: 'bbb',
+		timeWindow: 'ccc',
+		documentsDate: 'ddd',
+		crossDate: 'eee',
+		invoice: 'fff',
+		teamUS: 'ggg',
+		teamMX: 'hhh',
+		vehicleType: 'iii',
+		scac: 'jjj',
+		caat: 'kkk',
+		cross: 'lll',
+		carrierMX: 'mmm',
+		carrierUS: 'nnn',
+		documentsStatus: 'ooo',
+		status: 'ppp',
+		transferBusiness: 'qqq',
+		local: 'rrr',
+		extra: 'sss',
+		empty: 'ttt',
+		tractor: 'uu'
+    });
+};
