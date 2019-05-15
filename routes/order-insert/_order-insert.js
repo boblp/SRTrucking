@@ -129,7 +129,7 @@ var addDeck = function(id, callback) {
 		invoiceSRT: 'vvv',
 		invoiceClient: 'vvv2',
 		rc: 'xxx',
-		paymentNafinas; 'yyy',
+		paymentNafinas: 'yyy',
 		POD: 'zzz',
 		equipment: 'aaa',
 		equipmentNum: 'bbb',
