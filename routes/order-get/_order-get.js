@@ -30,9 +30,8 @@ const main = function(request, decoded, callback){
 	const query = {
 		deleted: false
 	};
-
 	if(request.query.id){
-		_id: ObjectId(request.query.id)
+		query._id = ObjectId(request.query.id)
 	}
 
 	if(request.query.srt){
