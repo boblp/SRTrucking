@@ -80,15 +80,61 @@ var addDeck = function(id, callback) {
 		vehicleType: 'iii',
 		scac: 'jjj',
 		caat: 'kkk',
-		cross: 'lll',
-		carrierMX: 'mmm',
-		carrierUS: 'nnn',
+		cross: {
+			name: '',
+			invoice: '',
+			date: '',
+			cost: ''
+		},
+		carrierMX: {
+			name: '',
+			invoice: '',
+			date: '',
+			cost: ''
+		},
+		carrierUS: {
+			name: '',
+			invoice: '',
+			date: '',
+			cost: ''
+		},
 		documentsStatus: 'ooo',
 		status: 'ppp',
-		transferBusiness: 'qqq',
-		local: 'rrr',
+		transfer: {
+			name: '',
+			invoice: '',
+			date: '',
+			cost: ''
+		},
+		local: {
+			name: '',
+			invoice: '',
+			date: '',
+			cost: ''
+		},
 		extra: 'sss',
 		empty: 'ttt',
-		tractor: 'uu'
+		tractor: 'uu',
+		//master stuff:
+		//srt
+		//origin
+		//Destiny
+
+		//carrierMX
+		//CarrierUS
+		//cross
+		//local
+		//transfer
+
+		invoiceSRT: 'vvv',
+		invoiceClient: 'vvv2',
+		rc: 'xxx',
+		paymentNafinas; 'yyy',
+		POD: 'zzz',
+		equipment: 'aaa',
+		equipmentNum: 'bbb',
+		totalSale: '$$$',
+		actualPrice: '$$$',
+		notes: 'ccc'
     });
 };
