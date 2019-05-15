@@ -113,7 +113,12 @@ var addDeck = function(id, callback) {
 			cost: ''
 		},
 		extra: 'sss',
-		empty: 'ttt',
+		empty: {
+			name: '',
+			invoice: '',
+			date: '',
+			cost: ''
+		},
 		tractor: 'uu',
 		//master stuff:
 		//srt
