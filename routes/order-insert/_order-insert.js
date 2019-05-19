@@ -85,19 +85,22 @@ var addDeck = function(id, callback) {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: ''
+			cost: '',
+			status: 'Not Started'
 		},
 		carrierMX: {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: ''
+			cost: '',
+			status: 'Not Started'
 		},
 		carrierUS: {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: ''
+			cost: '',
+			status: 'Not Started'
 		},
 		documentsStatus: 'ooo',
 		status: 'ppp',
@@ -105,20 +108,23 @@ var addDeck = function(id, callback) {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: ''
+			cost: '',
+			status: 'Not Started'
 		},
 		local: {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: ''
+			cost: '',
+			status: 'Not Started'
 		},
 		extra: 'sss',
 		empty: {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: ''
+			cost: '',
+			status: 'Not Started'
 		},
 		tractor: 'uu',
 		//master stuff:
