@@ -122,8 +122,6 @@ var addDeck = function(id, callback) {
 		tractor: 'uu',
 		//master stuff:
 		//srt
-		//origin
-		//Destiny
 
 		//carrierMX
 		//CarrierUS
@@ -140,6 +138,7 @@ var addDeck = function(id, callback) {
 		equipmentNum: 'bbb',
 		totalSale: '$$$',
 		actualPrice: '$$$',
-		notes: 'ccc'
+		notes: 'ccc',
+		instructionsLetter: ''
     });
 };
