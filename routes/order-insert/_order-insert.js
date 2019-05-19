@@ -53,7 +53,8 @@ const main = function(decoded, request, callback){
 			createdAt: moment(Date.now()).format('DD-MM-YYYY'),
 			modifiedAt: moment(Date.now()).format('DD-MM-YYYY'),
 			lastModifier: decoded.name,
-			deleted: false
+			deleted: false,
+			delivered: false
 		};
 
 		collection.insertOne(insertObject, function(err, result) {

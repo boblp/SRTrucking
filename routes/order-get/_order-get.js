@@ -42,6 +42,10 @@ const main = function(request, decoded, callback){
 		query.date = request.query.date
 	}
 
+	if(request.query.delivered){
+		query.delivered = request.query.delivered
+	}
+
 	if(request.query.status){
 		query.status = request.query.status
 	}

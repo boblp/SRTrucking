@@ -16,7 +16,8 @@ module.exports = {
 				location: joi.string(),
 				mineOnly: joi.boolean(),
 				id: joi.string(),
-				viewComplete: joi.boolean().default(false).description('View complete orders')
+				viewComplete: joi.boolean().default(false).description('View complete orders'),
+				delivered: joi.boolean().description('View delivered orders')
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;
