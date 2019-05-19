@@ -69,6 +69,7 @@ const main = function(decoded, request, callback){
 var addDeck = function(id, callback) {
     callback(null, {
         id: uniqid(),
+        deckNumber: id+1,
 		srt: 'aa',
 		loadDate: 'bbb',
 		timeWindow: 'ccc',
@@ -133,7 +134,8 @@ var addDeck = function(id, callback) {
 		invoiceClient: 'vvv2',
 		rc: 'xxx',
 		paymentNafinas: 'yyy',
-		POD: 'zzz',
+		POD: '',
+		POD_file: '',
 		equipment: 'aaa',
 		equipmentNum: 'bbb',
 		totalSale: '$$$',
