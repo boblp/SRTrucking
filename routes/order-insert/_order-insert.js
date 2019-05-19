@@ -141,6 +141,7 @@ var addDeck = function(id, callback) {
 		totalSale: '$$$',
 		actualPrice: '$$$',
 		notes: 'ccc',
-		instructionsLetter: ''
+		instructionsLetter: '',
+		shippingStatus: 'Shipping'
     });
 };
