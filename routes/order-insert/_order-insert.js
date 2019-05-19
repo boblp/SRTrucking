@@ -148,6 +148,6 @@ var addDeck = function(id, callback) {
 		actualPrice: '$$$',
 		notes: 'ccc',
 		instructionsLetter: '',
-		shippingStatus: 'false'
+		delivered: 'false'
     });
 };
