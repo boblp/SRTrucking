@@ -45,7 +45,7 @@ const main = function(request, callback){
 							name: result.name 
 						};
 
-						token = jwt.sign(key, 'secret', {
+						jwt.sign(key, 'secret', {
 							expiresIn: 86400 // 24 hours
 						}, function(resp){
 							response = {
