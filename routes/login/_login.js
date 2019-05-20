@@ -47,17 +47,19 @@ const main = function(request, callback){
 
 						token = jwt.sign(key, 'secret', {
 							expiresIn: 86400 // 24 hours
+						}, function(resp){
+							response = {
+								token: resp,
+								name: result.name,
+								id: result.email, 
+								level: result.level
+							};
+
+							callback(response);
 						});
-
-						response = {
-							token: token,
-							name: result.name,
-							id: result.email, 
-							level: result.level
-						};
+					}else{
+						callback(response);
 					}
-
-					callback(response);
 				});
 			}else{
 				callback(response);
