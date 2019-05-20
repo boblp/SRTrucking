@@ -38,11 +38,11 @@ const main = function(request, decoded, callback){
 		query.srt = request.query.srt
 	}
 
-	if(request.query.date){
-		query.date = request.query.date
+	if(request.query.createdAt){
+		query.createdAt = request.query.createdAt
 	}
 
-	if(request.query.delivered){
+	if(request.query.delivered != undefined){
 		query.delivered = request.query.delivered
 	}
 

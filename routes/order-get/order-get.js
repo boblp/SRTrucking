@@ -11,7 +11,7 @@ module.exports = {
 		validate: {
 			query: {
 				auth: joi.string().required(),
-				date: joi.string(),
+				createdAt: joi.string(),
 				status: joi.string(),
 				location: joi.string(),
 				mineOnly: joi.boolean(),
