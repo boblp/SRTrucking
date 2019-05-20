@@ -103,7 +103,7 @@ var addDeck = function(id, callback) {
 			cost: '',
 			status: 'Not Started'
 		},
-		documentsStatus: 'ooo',
+		documentsStatus: '',
 		status: 'ppp',
 		transfer: {
 			name: '',
@@ -149,6 +149,10 @@ var addDeck = function(id, callback) {
 		actualPrice: '$$$',
 		notes: 'ccc',
 		instructionsLetter: '',
-		delivered: 'false'
+		delivered: 'false',
+		flat_or_equipment: '',
+		flat: '',
+		plates: '',
+		state: ''
     });
 };
