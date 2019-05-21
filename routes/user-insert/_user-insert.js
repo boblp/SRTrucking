@@ -53,7 +53,8 @@ const main = function(decoded, request, callback){
 				password: hashedPassword,
 				createdAt: moment(Date.now()).format('DD-MM-YYYY'),
 				level: level,
-				disabled: false
+				disabled: false,
+				profilePic: ''
 			}
 		};
 
