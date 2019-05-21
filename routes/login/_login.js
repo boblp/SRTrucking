@@ -53,7 +53,8 @@ const main = function(request, callback){
 							token: token,
 							name: result.name,
 							id: result.email, 
-							level: result.level
+							level: result.level,
+							profilePic: result.profilePic
 						};
 					}
 
