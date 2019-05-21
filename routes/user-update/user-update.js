@@ -16,7 +16,8 @@ module.exports = {
 				phone: joi.string(),
 				password: joi.string(),
 				level: joi.number(),
-				disabled: joi.boolean().default(false).description('Disables Vendor')
+				disabled: joi.boolean().default(false).description('Disables Vendor'),
+				profilePic: joi.string()
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;

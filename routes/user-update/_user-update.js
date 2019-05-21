@@ -46,6 +46,10 @@ const main = function(decoded, request, callback){
 		updateObj.$set.phone = request.query.phone
 	}
 
+	if(request.query.profilePic){
+		updateObj.$set.profilePic = request.query.profilePic;
+	}
+
 	if(!request.query.disabled){
 		if(request.query.password){
 			bcrypt.hash(request.query.password, 10, function(err, hashedPassword) {
