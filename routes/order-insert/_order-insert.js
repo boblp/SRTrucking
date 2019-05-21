@@ -75,7 +75,6 @@ var addDeck = function(id, callback) {
 		loadDate: 'bbb',
 		timeWindow: 'ccc',
 		documentsDate: 'ddd',
-		crossDate: 'eee',
 		invoice: 'fff',
 		teamUS: 'ggg',
 		teamMX: 'hhh',
@@ -161,6 +160,8 @@ var addDeck = function(id, callback) {
 		flat_or_equipment: '',
 		flat: '',
 		plates: '',
-		state: ''
+		state: '',
+		vendorPaymentStatus: '',
+		clientPaymentStatus: ''
     });
 };
