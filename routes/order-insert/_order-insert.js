@@ -161,7 +161,7 @@ var addDeck = function(id, callback) {
 		flat: '',
 		plates: '',
 		state: '',
-		vendorPaymentStatus: '',
-		clientPaymentStatus: ''
+		vendorPaymentStatus: 'false',
+		clientPaymentStatus: 'false'
     });
 };
