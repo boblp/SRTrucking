@@ -11,13 +11,13 @@ module.exports = {
 		validate: {
 			query: {
 				auth: joi.string().required().description('JWT Token'),
-				origin: joi.string().required(),
-				destiny: joi.string().required(),
-				qty: joi.string().required(),
-				type: joi.string().required(),
-				time: joi.string().required(),
-				fz: joi.string().required(),
-				volume: joi.string().required()
+				origin: joi.string().required().trim(),
+				destiny: joi.string().required().trim(),
+				qty: joi.string().required().trim(),
+				type: joi.string().required().trim(),
+				time: joi.string().required().trim(),
+				fz: joi.string().required().trim(),
+				volume: joi.string().required().trim()
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;

@@ -65,7 +65,7 @@ const updateDeck = function(id, data, collection, callback){
 	async.eachOf(data, function(dataRow, key, cb2) {
 		console.log(key, dataRow);
 		if(key != 'id' && key != 'cross' && key != 'carrierMX' && key != 'carrierUS' && key != 'transfer' && key != 'local' && key != 'empty'){
-			newData['decks.$.'+key] = dataRow;
+			newData['decks.$.'+key] = dataRow.trim();
 		}
 
 		cb2();

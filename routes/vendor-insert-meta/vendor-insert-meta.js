@@ -11,15 +11,15 @@ module.exports = {
 		validate: {
 			query: {
 				auth: joi.string().required().description('JWT Token'),
-				id: joi.string().required(),
-				category: joi.string().required().valid('transport','cross','transfer','empty').required(),
-				origin: joi.string(),
-				destiny:joi.string(),
-				mode: joi.string(),
-				type: joi.string(),
-				weight: joi.string(),
-				type: joi.string(),
-				price: joi.string()
+				id: joi.string().trim().required(),
+				category: joi.string().trim().required().valid('transport','cross','transfer','empty').required(),
+				origin: joi.string().trim(),
+				destiny:joi.string().trim(),
+				mode: joi.string().trim(),
+				type: joi.string().trim(),
+				weight: joi.string().trim(),
+				type: joi.string().trim(),
+				price: joi.string().trim()
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;

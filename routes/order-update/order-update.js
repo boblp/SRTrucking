@@ -11,7 +11,7 @@ module.exports = {
 		validate: {
 			query: {
 				auth: joi.string().required().description('JWT Token'),
-				id: joi.string().required(),
+				id: joi.string().trim().required(),
 				updateObject: joi.string().required()
 			}, 
 			failAction: async (request, h, err) => {

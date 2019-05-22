@@ -11,10 +11,10 @@ module.exports = {
 		validate: {
 			query: {
 				auth: joi.string().required().description('JWT Token'),
-				id: joi.string().required(),
-				name: joi.string(),
-				state: joi.string(),
-				country: joi.string(),
+				id: joi.string().required().trim(),
+				name: joi.string().trim(),
+				state: joi.string().trim(),
+				country: joi.string().trim(),
 				disabled: joi.boolean().default(false).description('Disables Location')
 			}, 
 			failAction: async (request, h, err) => {
