@@ -33,9 +33,9 @@ const main = function(request, callback){
 	};
 
 	const sort = {
-		country:1,
-		state:1,
-		name:1
+		name:-1,
+		state:-1,
+		country:-1
 	};
 
 	if(request.query.viewDisabled){
