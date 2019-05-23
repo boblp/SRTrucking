@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 const moment = require("moment");
 const config = require('../../util/config.js');
 
-const collectionName = config.collections.emails;
+// const collectionName = config.collections.emails;
 var response = { data: '', totalRecords: 0 };
 
 module.exports.handler = function(request, h){
@@ -29,7 +29,7 @@ module.exports.handler = function(request, h){
 }
 
 const main = function(request, decoded, callback){
-	const collection = request.mongo.db.collection(collectionName);
+	// const collection = request.mongo.db.collection(collectionName);
 	const insertObject = {
 		email: request.query.email,
 		subject: request.query.subject,
@@ -44,13 +44,14 @@ const main = function(request, decoded, callback){
 
 	sendEmail(insertObject).catch(console.error);
 
-	collection.insertOne(insertObject, function(err, result) {
-		if(err){ response = err }else{
-			response = 'success';
-		}
+	// collection.insertOne(insertObject, function(err, result) {
+	// 	if(err){ response = err }else{
+	// 		response = 'success';
+	// 	}
 
-		callback(response);
-	});
+	// 	callback(response);
+	// });
+	callback("success");
 }
 
 async function sendEmail(data){
@@ -66,7 +67,8 @@ async function sendEmail(data){
 	});
 
 	let info = await transporter.sendMail({
-		from: '"'+data.name+'" <'+data.id+'>',
+		// from: '"'+data.name+'" <'+data.id+'>',
+		from: "bob0011@hotmail.com",
 		to: "bob0011@hotmail.com, luishilariomtz@gmail.com",
 		subject: data.subject,
 		text: data.message,
