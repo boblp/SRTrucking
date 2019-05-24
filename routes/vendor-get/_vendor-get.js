@@ -28,9 +28,7 @@ module.exports.handler = function(request, h){
 const main = function(request, callback){
 	const collection = request.mongo.db.collection(collectionName);
 	const sort = {
-		name:-1,
-		state:-1,
-		country:-1
+		name:-1
 	};
 
 	const query = {
