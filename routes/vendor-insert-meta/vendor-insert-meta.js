@@ -12,7 +12,7 @@ module.exports = {
 			query: {
 				auth: joi.string().required().description('JWT Token'),
 				id: joi.string().trim().required(),
-				category: joi.string().trim().required().valid('transport','cross','transfer','empty').required(),
+				category: joi.string().trim().required().valid('transport','cross','transfer','empty','local').required(),
 				origin: joi.string().trim(),
 				destiny:joi.string().trim(),
 				mode: joi.string().trim(),

@@ -36,7 +36,8 @@ const main = function(decoded, request, callback){
 		transport: [],
 		cross: [],
 		transfer: [],
-		empty: []
+		empty: [],
+		local: []
 	};
 
 	if(request.query.alias){

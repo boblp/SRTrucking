@@ -85,21 +85,21 @@ var addDeck = function(id, callback) {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: '',
+			cost: 0,
 			status: 'Not Started'
 		},
 		carrierMX: {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: '',
+			cost: 0,
 			status: 'Not Started'
 		},
 		carrierUS: {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: '',
+			cost: 0,
 			status: 'Not Started'
 		},
 		documentsStatus: '',
@@ -108,14 +108,14 @@ var addDeck = function(id, callback) {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: '',
+			cost: 0,
 			status: 'Not Started'
 		},
 		local: {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: '',
+			cost: 0,
 			status: 'Not Started'
 		},
 		extra: 'sss',
@@ -123,7 +123,7 @@ var addDeck = function(id, callback) {
 			name: '',
 			invoice: '',
 			date: '',
-			cost: '',
+			cost: 0,
 			status: 'Not Started'
 		},
 		tractor: 'uu',
@@ -152,8 +152,9 @@ var addDeck = function(id, callback) {
 		clientInvoice_file : '',
 		equipment: 'aaa',
 		equipmentNum: 'bbb',
-		totalSale: '$$$',
-		actualPrice: '$$$',
+		totalSale: 0,
+		actualPrice: 0,
+		margin: 0,
 		notes: 'ccc',
 		instructionsLetter: '',
 		delivered: 'false',

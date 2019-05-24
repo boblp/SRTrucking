@@ -67,6 +67,7 @@ const main = function(decoded, request, callback){
 	if(category === 'cross'){
 		updateObj.$push[category].price = request.query.price;
 		updateObj.$push[category].destiny = request.query.destiny;
+		updateObj.$push[category].type = request.query.type;
 
 		collection.updateOne(query, updateObj, function(err, result) {
 			if(err){ 
@@ -82,7 +83,7 @@ const main = function(decoded, request, callback){
 	if(category === 'transfer'){
 		updateObj.$push[category].price = request.query.price;
 		updateObj.$push[category].destiny = request.query.destiny;
-		updateObj.$push[category].weight = request.query.weight;
+		updateObj.$push[category].type = request.query.type;
 
 		collection.updateOne(query, updateObj, function(err, result) {
 			if(err){ 
@@ -97,8 +98,20 @@ const main = function(decoded, request, callback){
 
 	if(category === 'empty'){
 		updateObj.$push[category].price = request.query.price;
-		updateObj.$push[category].destiny = request.query.destiny;
-		updateObj.$push[category].type = request.query.type;
+
+		collection.updateOne(query, updateObj, function(err, result) {
+			if(err){ 
+				response = err;
+			}else{
+				response = 'success';
+			}
+
+			callback(response);
+		});
+	}
+
+	if(category === 'local'){
+		updateObj.$push[category].price = request.query.price;
 
 		collection.updateOne(query, updateObj, function(err, result) {
 			if(err){ 
