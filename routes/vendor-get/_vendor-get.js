@@ -27,6 +27,12 @@ module.exports.handler = function(request, h){
 
 const main = function(request, callback){
 	const collection = request.mongo.db.collection(collectionName);
+	const sort = {
+		name:-1,
+		state:-1,
+		country:-1
+	};
+
 	const query = {
 		disabled: false
 	};
@@ -43,7 +49,7 @@ const main = function(request, callback){
 		query.disabled = request.query.viewDisabled;
 	}
 
-	collection.find(query).toArray(function(err, result) {
+	collection.find(query).sort(sort).toArray(function(err, result) {
 		if(err){ callback(err); }else{
 			callback(result);
 		}
