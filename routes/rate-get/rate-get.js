@@ -12,7 +12,7 @@ module.exports = {
 			query: {
 				auth: joi.string().required(),
 				type: joi.string().required().valid('transport','cross','transfer','empty','local').required(),
-				equipment: joi.string().required();
+				equipment: joi.string().required()
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;
