@@ -85,6 +85,7 @@ var addDeck = function(id, callback) {
 			invoice: '',
 			date: '',
 			cost: 0,
+			paymentDate: '',
 			status: 'Not Started'
 		},
 		carrierMX: {
@@ -92,6 +93,7 @@ var addDeck = function(id, callback) {
 			invoice: '',
 			date: '',
 			cost: 0,
+			paymentDate: '',
 			status: 'Not Started'
 		},
 		carrierUS: {
@@ -99,6 +101,7 @@ var addDeck = function(id, callback) {
 			invoice: '',
 			date: '',
 			cost: 0,
+			paymentDate: '',
 			status: 'Not Started'
 		},
 		documentsStatus: '',
@@ -108,6 +111,7 @@ var addDeck = function(id, callback) {
 			invoice: '',
 			date: '',
 			cost: 0,
+			paymentDate: '',
 			status: 'Not Started'
 		},
 		local: {
@@ -115,6 +119,7 @@ var addDeck = function(id, callback) {
 			invoice: '',
 			date: '',
 			cost: 0,
+			paymentDate: '',
 			status: 'Not Started'
 		},
 		extra: '',
@@ -123,6 +128,7 @@ var addDeck = function(id, callback) {
 			invoice: '',
 			date: '',
 			cost: 0,
+			paymentDate: '',
 			status: 'Not Started'
 		},
 		tractor: '',
