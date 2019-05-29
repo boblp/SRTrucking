@@ -44,7 +44,9 @@ const main = function(request, callback){
 	    }
 	},{
 	    $match: {
-	        "transport.type": request.query.equipment
+	        "transport.type": request.query.equipment,
+	        "transport.origin": request.query.equipment,
+	        "transport.destiny": request.query.equipment
 	    }
 	}];
 
