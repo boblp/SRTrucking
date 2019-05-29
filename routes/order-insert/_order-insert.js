@@ -71,16 +71,16 @@ var addDeck = function(id, callback) {
     callback(null, {
         id: uniqid(),
         deckNumber: id+1,
-		srt: 'aa',
-		loadDate: 'bbb',
-		timeWindow: 'ccc',
-		documentsDate: 'ddd',
-		invoice: 'fff',
-		teamUS: 'ggg',
-		teamMX: 'hhh',
-		vehicleType: 'iii',
-		scac: 'jjj',
-		caat: 'kkk',
+		srt: '',
+		loadDate: '',
+		timeWindow: '',
+		documentsDate: '',
+		invoice: '',
+		teamUS: '',
+		teamMX: '',
+		vehicleType: '',
+		scac: '',
+		caat: '',
 		cross: {
 			name: '',
 			invoice: '',
@@ -103,7 +103,7 @@ var addDeck = function(id, callback) {
 			status: 'Not Started'
 		},
 		documentsStatus: '',
-		status: 'ppp',
+		status: '',
 		transfer: {
 			name: '',
 			invoice: '',
@@ -118,7 +118,7 @@ var addDeck = function(id, callback) {
 			cost: 0,
 			status: 'Not Started'
 		},
-		extra: 'sss',
+		extra: '',
 		empty: {
 			name: '',
 			invoice: '',
@@ -126,7 +126,7 @@ var addDeck = function(id, callback) {
 			cost: 0,
 			status: 'Not Started'
 		},
-		tractor: 'uu',
+		tractor: '',
 		//master stuff:
 		//srt
 
@@ -136,10 +136,10 @@ var addDeck = function(id, callback) {
 		//local
 		//transfer
 
-		invoiceSRT: 'vvv',
-		invoiceClient: 'vvv2',
-		rc: 'xxx',
-		paymentNafinas: 'yyy',
+		invoiceSRT: '',
+		invoiceClient: '',
+		rc: '',
+		paymentNafinas: '',
 		POD : '',
 		POD_file : '',
 		vendorInvoice : '',
@@ -150,12 +150,12 @@ var addDeck = function(id, callback) {
 		paymentAddOn_file : '',
 		clientInvoice : '',
 		clientInvoice_file : '',
-		equipment: 'aaa',
-		equipmentNum: 'bbb',
+		equipment: '',
+		equipmentNum: '',
 		totalSale: 0,
 		actualPrice: 0,
 		margin: 0,
-		notes: 'ccc',
+		notes: '',
 		instructionsLetter: '',
 		delivered: 'false',
 		flat_or_equipment: '',
