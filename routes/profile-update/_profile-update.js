@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 const config = require('../../util/config.js');
+let response = '';
 
 const collectionName = config.collections.users;
 
@@ -29,8 +30,6 @@ module.exports.handler = function(request, h){
 
 const main = function(decoded, request, callback){
 	const collection = request.mongo.db.collection(collectionName);
-	let response = '';
-
 	let updateObj = {
 		$set: {}
 	};
@@ -39,11 +38,33 @@ const main = function(decoded, request, callback){
 		updateObj.$set.name = request.query.name
 	}
 
+	if(request.query.phone){
+		updateObj.$set.phone = request.query.phone
+	}
+
+	if(request.query.profilePic){
+		updateObj.$set.profilePic = request.query.profilePic;
+	}
+
+	if(request.query.password){
+		bcrypt.hash(request.query.password, 10, function(err, hashedPassword) {
+			updateUser(collection, decoded, hashedPassword, request, updateObj, callback);
+		});
+	}else{
+		updateUser(collection, decoded, null, request, updateObj, callback);
+	}
+}
+
+var updateUser = function(collection, decoded, password, request, updateObj, callback){
 	const query = {
 		email: decoded.id
 	};
 
-	updateObj.$set.modfiedAt = moment(Date.now()).format('DD-MM-YYYY');
+	if(password){
+		updateObj.$set.password = password
+	}
+
+	updateObj.$set.modifiedAt = moment(Date.now()).format('DD-MM-YYYY');
 
 	collection.updateOne(query, updateObj, function(err, result) {
 		if(err){ 
@@ -54,4 +75,5 @@ const main = function(decoded, request, callback){
 
 		callback(response);
 	});
-}
+};
+
