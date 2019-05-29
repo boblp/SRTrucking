@@ -72,7 +72,6 @@ var addDeck = function(id, callback) {
         id: uniqid(),
         deckNumber: id+1,
 		srt: '',
-		loadDate: '',
 		timeWindow: '',
 		documentsDate: '',
 		invoice: '',
