@@ -12,7 +12,7 @@ module.exports = {
 			query: {
 				auth: joi.string().required(),
 				createdAt: joi.string(),
-				status: joi.string(),
+				type: joi.string(),
 				location: joi.string(),
 				mineOnly: joi.boolean(),
 				id: joi.string(),

@@ -46,8 +46,8 @@ const main = function(request, decoded, callback){
 		query.delivered = request.query.delivered
 	}
 
-	if(request.query.status){
-		query.status = request.query.status
+	if(request.query.type){
+		query.type = request.query.type
 	}
 
 	if(request.query.location){
