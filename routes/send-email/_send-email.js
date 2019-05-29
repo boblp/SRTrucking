@@ -55,24 +55,22 @@ const main = function(request, decoded, callback){
 }
 
 async function sendEmail(data){
-	let testAccount = await nodemailer.createTestAccount();
 	let transporter = nodemailer.createTransport({
-		host: "smtp.ethereal.email",
+		host: "smtp.gmail.com",
 		port: 587,
 		secure: false,
 		auth: {
-			user: testAccount.user,
-			pass: testAccount.pass
+			user: "srt.emailsender@gmail.com",
+			pass: "328bu5ad"
 		}
 	});
 
 	let info = await transporter.sendMail({
-		// from: '"'+data.name+'" <'+data.id+'>',
-		from: "bob0011@hotmail.com",
-		to: "bob0011@hotmail.com, luishilariomtz@gmail.com",
-		subject: data.subject,
-		text: data.message,
-		//html: "<b>Hello world?</b>" // html body
+		from: '"Support Foo" <foo@support.com>',
+	    to: data.email,
+	    subject: data.subject,
+	    text: data.message,
+	    html: "<b>" + data.message + "</b>"
 	});
 
 	console.log("Message sent: %s", info.messageId);
