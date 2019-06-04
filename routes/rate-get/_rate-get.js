@@ -28,27 +28,66 @@ const main = function(request, callback){
 	const collection = request.mongo.db.collection(collectionName);
 
 	var pipeline = [{
-	    $match:{ 
-	        transport: { 
-	            $exists: true, 
-	            $not: { $size: 0 } 
-	        } 
+	    $match: {
+	        $or: [{ 
+	            "transport.type": request.query.equipment,
+	            "transport.destiny": request.query.destination,
+	            "transport.origin": request.query.origin
+	        },{
+	            "cross.type": request.query.equipmentType,
+	            "cross.destiny": request.query.destination
+	        },{ 
+	            "transfer.type": request.query.equipmentType,
+	            "transfer.destiny": request.query.destination
+	        }]
 	    }
 	},{
-	    $unwind: '$'+request.query.type
-	},{
-	    $project: {
+		$project: {
 	        name: 1,
 	        alias: 1,
-	        transport:1
-	    }
-	},{
-	    $match: {
-	        "transport.type": request.query.equipment,
-	        "transport.origin": request.query.equipment,
-	        "transport.destiny": request.query.equipment
+	        transport: {
+	            $filter: {
+	                input: '$transport',
+	                as: 'item',
+	                cond: {
+	                    $and: [
+	                        { $eq: ['$$item.type', request.query.equipment] },
+	                        { $eq: ['$$item.destiny', request.query.destination] },
+	                        { $eq: ['$$item.origin', request.query.origin] }
+	                    ]
+	                }
+	            }
+	        },
+	        transfer: {
+	            $filter: {
+	                input: '$transfer',
+	                as: 'item',
+	                cond: {
+	                    $and: [
+	                        { $eq: ['$$item.type', request.query.equipmentType] },
+	                        { $eq: ['$$item.destiny', request.query.destination] },
+	                    ]
+	                }
+	            }
+	        },
+	        cross: {
+	            $filter: {
+	                input: '$cross',
+	                as: 'item',
+	                cond: {
+	                    $and: [
+	                        { $eq: ['$$item.type', request.query.equipmentType] },
+	                        { $eq: ['$$item.destiny', request.query.destination] },
+	                    ]
+	                }
+	            }
+	        },
+	        local:1,
+	        empty:1
 	    }
 	}];
+
+
 
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ callback(err); }else{

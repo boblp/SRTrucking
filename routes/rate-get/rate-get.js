@@ -14,7 +14,9 @@ module.exports = {
 				type: joi.string().required().valid('transport','cross','transfer','empty','local').required(),
 				equipment: joi.string().required(),
 				origin: joi.string().required(),
-				destiny: joi.string().required()
+				destination: joi.string().required(),
+				equipmentType: joi.string().required()
+
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;

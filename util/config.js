@@ -7,7 +7,7 @@ module.exports = {
  		users: 'Users',
  		orders: 'Orders',
  		locations: 'Locations',
- 		//logs: 'Logs',
+ 		configs: 'Configs',
  		vendors: 'Vendors'
  	}
 };
