@@ -43,7 +43,9 @@ const main = function(decoded, request, callback){
 			callback(response);
 		}
 
-		var currentSRT = resultConfig[0].srt;
+		console.log(resultConfig);
+		//var currentSRT = resultConfig[0].srt;
+		var currentSRT = 100;
 
 		async.timesSeries(iterations, function(n, next) {
 			srt = currentSRT-iterations;
