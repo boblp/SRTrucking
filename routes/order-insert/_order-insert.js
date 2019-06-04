@@ -37,18 +37,17 @@ const main = function(decoded, request, callback){
 
 	const iterations = parseInt(request.query.qty);
 
-	collectionConfigs.update({}, { $inc: { srt: 1 } }, { upsert: false }, function(err, resultConfig) {
+	collectionConfigs.findOneAndUpdate({}, { $inc: { srt: iterations } }, {}, function(err, resultConfig) {
 		if(err){ response = err }else{
 			response = 'success';
 			callback(response);
 		}
 
 		console.log(resultConfig);
-		//var currentSRT = resultConfig[0].srt;
-		var currentSRT = 100;
+		var currentSRT = resultConfig.value.srt;
 
 		async.timesSeries(iterations, function(n, next) {
-			srt = currentSRT-iterations;
+			srt = currentSRT;
 
 		    addDeck(n, srt+n, function(err, user) {
 		        next(err, user);
@@ -87,7 +86,7 @@ var addDeck = function(id, srt, callback) {
     callback(null, {
         id: uniqid(),
         deckNumber: id+1,
-		srt: srt,
+		srt: "SRT"+srt,
 		timeWindow: '',
 		documentsDate: '',
 		invoice: '',
