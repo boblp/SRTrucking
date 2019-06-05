@@ -2,7 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 const config = require('../../util/config.js');
-const collectionName = config.collections.vendors;
+const collectionName = config.collections.orders;
 
 module.exports.handler = function(request, h){
 	const promise = new Promise((resolve, reject) => {
