@@ -59,9 +59,9 @@ const main = function(request, callback){
 	}
 
 	var pipeline = [{
-	    $unwind: '$decks'
-	},{
 	    $match: query
+	},{
+	    $unwind: '$decks'
 	},{
 	    $replaceRoot: { 
 	        newRoot: "$decks" 
