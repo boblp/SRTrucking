@@ -47,15 +47,15 @@ const main = function(request, callback){
 	}
 
 	if (request.query.isDelivered){
-		deckQuery.POD = request.query.isDelivered
+		deckQuery.POD = { $ne: '' };
 	}
 
 	if (request.query.hasRC){
-		deckQuery.rc = request.query.hasRC
+		deckQuery.rc = { $ne: '' };
 	}
 
 	if (request.query.hasClientInvoice){
-		deckQuery.invoiceClient = request.query.hasClientInvoice
+		deckQuery.invoiceClient = { $ne: '' };
 	}
 
 	var pipeline = [{
