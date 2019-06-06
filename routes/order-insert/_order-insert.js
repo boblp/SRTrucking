@@ -72,7 +72,7 @@ const main = function(decoded, request, callback){
 			};
 
 			if(request.query.notes){
-				insertObject.creationNotes = resut.query.notes;
+				insertObject.creationNotes = request.query.notes;
 			}
 
 			collectionOrders.insertOne(insertObject, function(err, result) {
