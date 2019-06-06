@@ -71,6 +71,10 @@ const main = function(decoded, request, callback){
 				delivered: false
 			};
 
+			if(request.query.notes){
+				insertObject.creationNotes = resut.query.notes;
+			}
+
 			collectionOrders.insertOne(insertObject, function(err, result) {
 				if(err){ response = err }else{
 					response = 'success';

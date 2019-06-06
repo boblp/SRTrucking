@@ -65,6 +65,10 @@ const main = function(request, callback){
 	},{
 	    $unwind: '$decks'
 	},{
+	    $addFields: {
+	    	"decks.orderId": "$_id"
+	    }
+	},{
 	    $replaceRoot: { 
 	        newRoot: "$decks" 
 	    } 
