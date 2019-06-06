@@ -35,7 +35,6 @@ const main = function(request, callback){
 	const deckQuery = {
 		POD: { $eq: '' },
         rc: { $eq: '' },
-        paymentNafinas: { $eq: '' },
         invoice: { $eq: ''}
 	};
 
