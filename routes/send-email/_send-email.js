@@ -35,7 +35,7 @@ const main = function(request, decoded, callback){
 		subject: request.query.subject,
 		message: request.query.message,
 		createdBy: decoded.id,
-		createdAt: moment(Date.now()).format('DD-MM-YYYY')
+		createdAt: moment(Date.now()).format('YYYY-MM-DD')
 	};
 
 	if(request.query.deckData){

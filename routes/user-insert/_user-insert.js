@@ -44,14 +44,14 @@ const main = function(decoded, request, callback){
 
 		const insertObject = {
 			$set: {
-				modifiedAt: moment(Date.now()).format('DD-MM-YYYY')
+				modifiedAt: moment(Date.now()).format('YYYY-MM-DD')
 			},
 			$setOnInsert: {
 				name: name,
 				phone: 0,
 				email: email,
 				password: hashedPassword,
-				createdAt: moment(Date.now()).format('DD-MM-YYYY'),
+				createdAt: moment(Date.now()).format('YYYY-MM-DD'),
 				level: level,
 				disabled: false,
 				profilePic: 'https://s3.amazonaws.com/srt-trucking/profile/user_pic.jpg'

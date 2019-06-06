@@ -64,8 +64,8 @@ const main = function(decoded, request, callback){
 				decks: decks,
 				client: "Metalsa",
 				createdBy: decoded.id,
-				createdAt: moment(Date.now()).format('DD-MM-YYYY'),
-				modifiedAt: moment(Date.now()).format('DD-MM-YYYY'),
+				createdAt: moment(Date.now()).format('YYYY-MM-DD'),
+				modifiedAt: moment(Date.now()).format('YYYY-MM-DD'),
 				lastModifier: decoded.name,
 				deleted: false,
 				delivered: false

@@ -43,7 +43,7 @@ const main = function(decoded, request, callback){
 
 	updateObj.$push[category] = {
 		id: uniqid(),
-		createdAt: moment(Date.now()).format('DD-MM-YYYY')
+		createdAt: moment(Date.now()).format('YYYY-MM-DD')
 	};
 
 	if(category === 'transport'){

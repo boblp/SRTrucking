@@ -72,7 +72,7 @@ var updateUser = function(collection, password, request, updateObj, callback){
 		updateObj.$set.password = password
 	}
 
-	updateObj.$set.modifiedAt = moment(Date.now()).format('DD-MM-YYYY');
+	updateObj.$set.modifiedAt = moment(Date.now()).format('YYYY-MM-DD');
 
 	collection.updateOne(query, updateObj, function(err, result) {
 		if(err){ 
@@ -93,7 +93,7 @@ var disableUser = function(collection, email, callback){
 	const updateObj = {
 		$set: {
 			disabled: true,
-			modifiedAt: moment(Date.now()).format('DD-MM-YYYY')
+			modifiedAt: moment(Date.now()).format('YYYY-MM-DD')
 		}
 	};
 

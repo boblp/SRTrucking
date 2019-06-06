@@ -57,7 +57,7 @@ const main = function(decoded, request, callback){
 		_id: ObjectId(request.query.id),
 	};
 
-	updateObj.$set.modfiedAt = moment(Date.now()).format('DD-MM-YYYY');
+	updateObj.$set.modfiedAt = moment(Date.now()).format('YYYY-MM-DD');
 
 	collection.updateOne(query, updateObj, function(err, result) {
 		if(err){ 
