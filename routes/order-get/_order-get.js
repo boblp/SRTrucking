@@ -30,6 +30,7 @@ const main = function(request, decoded, callback){
 	const query = {
 		deleted: false
 	};
+
 	if(request.query.id){
 		query._id = ObjectId(request.query.id)
 	}
@@ -42,8 +43,8 @@ const main = function(request, decoded, callback){
 		query.createdAt = request.query.createdAt
 	}
 
-	if(request.query.delivered != undefined){
-		query.delivered = request.query.delivered
+	if(request.query.delivered){
+		query["decks.POD"] = { $ne: '' };
 	}
 
 	if(request.query.type){
