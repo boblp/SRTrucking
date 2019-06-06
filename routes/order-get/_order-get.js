@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../../util/config.js');
 const ObjectId = require('mongodb').ObjectID;
 const collectionName = config.collections.orders;
+const moment = require('moment');
 
 module.exports.handler = function(request, h){
 	const promise = new Promise((resolve, reject) => {
@@ -67,8 +68,14 @@ const main = function(request, decoded, callback){
 		query.createdBy = decoded.id
 	}
 
+	if (request.query.daysBack){
+		let queryDate = moment().subtract(request.query.daysBack, 'days').format("YYYY-MM-DD");
+		query.createdAt ={ $gt: queryDate };
+	}
+
 	collection.find(query).toArray(function(err, result) {
 		if(err){ callback(err); }else{
+			console.log(result.length);
 			callback(result);
 		}
 	});
