@@ -18,7 +18,7 @@ module.exports = {
 				time: joi.string().required().trim(),
 				fz: joi.string().required().trim(),
 				volume: joi.string().required().trim(),
-				notes: joi.string(),
+				notes: joi.string()
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;
