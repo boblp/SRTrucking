@@ -70,12 +70,11 @@ const main = function(request, decoded, callback){
 
 	if (request.query.daysBack){
 		let queryDate = moment().subtract(request.query.daysBack, 'days').format("YYYY-MM-DD");
-		query.createdAt ={ $gt: queryDate };
+		query.createdAt = { $gt: queryDate };
 	}
 
 	collection.find(query).toArray(function(err, result) {
 		if(err){ callback(err); }else{
-			console.log(result.length);
 			callback(result);
 		}
 	});
