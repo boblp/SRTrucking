@@ -2,7 +2,7 @@ const joi = require('joi');
 var handler = require('./_'+__filename.split(/[\\/]/).pop());
 
 module.exports = { 
-	method: 'get',
+	method: 'post',
 	path: '/send-email',
 	config: { 
 		description: 'Send Email',

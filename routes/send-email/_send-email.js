@@ -66,7 +66,7 @@ async function sendEmail(data){
 	});
 
 	let info = await transporter.sendMail({
-		from: '"Support Foo" <foo@support.com>',
+		from: '"SRT Deck Info" <srt.emailsender@gmail.com>',
 	    to: data.email,
 	    subject: data.subject,
 	    text: data.message,
