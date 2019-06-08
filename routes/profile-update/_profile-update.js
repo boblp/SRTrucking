@@ -46,6 +46,10 @@ const main = function(decoded, request, callback){
 		updateObj.$set.profilePic = request.query.profilePic;
 	}
 
+	if(request.query.signaturePic){
+		updateObj.$set.signaturePic = request.query.signaturePic;
+	}
+
 	if(request.query.password){
 		bcrypt.hash(request.query.password, 10, function(err, hashedPassword) {
 			updateUser(collection, decoded, hashedPassword, request, updateObj, callback);

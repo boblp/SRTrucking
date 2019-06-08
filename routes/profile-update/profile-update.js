@@ -14,7 +14,8 @@ module.exports = {
 				name: joi.string().trim(),
 				phone: joi.string().trim(),
 				password: joi.string(),
-				profilePic: joi.string().trim()
+				profilePic: joi.string().trim(),
+				signaturePic: joi.string().trim()
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;

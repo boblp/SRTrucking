@@ -54,7 +54,8 @@ const main = function(decoded, request, callback){
 				createdAt: moment(Date.now()).format('YYYY-MM-DD'),
 				level: level,
 				disabled: false,
-				profilePic: 'https://s3.amazonaws.com/srt-trucking/profile/user_pic.jpg'
+				profilePic: 'https://s3.amazonaws.com/srt-trucking/profile/user_pic.jpg',
+				signaturePic: 'https://s3.us-east-1.amazonaws.com/srt-trucking/signature/1560021967516_1560021967.png'
 			}
 		};
 
