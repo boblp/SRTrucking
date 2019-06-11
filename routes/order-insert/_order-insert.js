@@ -99,6 +99,7 @@ var addDeck = function(id, srt, callback) {
 		vehicleType: '',
 		scac: '',
 		caat: '',
+		driver: '',
 		cross: {
 			name: '',
 			invoice: '',
