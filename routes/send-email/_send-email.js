@@ -75,18 +75,25 @@ const main = function(request, decoded, callback){
 
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ callback(err); }else{
-			var html = '<table><tr>';
-
+			var text = '';
+			var html = '';
+			html += '<table style="font-family:Verdana;width:1000px;height:100px;text-align:center;"><thead style="background: #0B6FA4;"><tr>';
 			for(var j in result[0]) {
-				html += '<th>' + j + '</th>';
+				if (j == 'deckNumber') {
+					text = '#'
+				}else{
+					text = j;
+				}
+
+				html += '<th style="padding:3px 2px;font-size:12px;color:#fff;text-align:center;">' + text + '</th>';
 			}
 
-			html += '</tr>';
+			html += '</thead></tr>';
 			
 			for( var i = 0; i < result.length; i++) {
 				html += '<tr>';
 				for( var j in result[i] ) {
-					html += '<td>' + result[i][j] + '</td>';
+					html += '<td style="padding:3px 2px;font-size:10px">' + result[i][j] + '</td>';
 				}
 			}
 
@@ -115,7 +122,7 @@ async function sendEmail(data, html){
 	    to: data.email,
 	    subject: data.subject,
 	    text: data.message,
-	    html: "<b>" + data.message + html +"</b>"
+	    html: data.message + "<br><br>" + html
 	});
 
 	console.log("Message sent: %s", info.messageId);
