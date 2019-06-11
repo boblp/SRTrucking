@@ -2,7 +2,7 @@ const joi = require('joi');
 var handler = require('./_'+__filename.split(/[\\/]/).pop());
 
 module.exports = { 
-	method: 'post',
+	method: 'get',
 	path: '/send-email',
 	config: { 
 		description: 'Send Email',
@@ -14,7 +14,9 @@ module.exports = {
 				subject: joi.string().required().description('Email Subject'),
 				message: joi.string().required().description('Email Message'),
 				email: joi.string().required().description('Email destination'),
-				deckData: joi.string().description('Deck data to be sent')
+				orderId: joi.string().description('Order ID'),
+				mode: joi.string().description('impo expo national etc'),
+				deckIds: joi.string().description('Deck IDs to be sent')
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;
