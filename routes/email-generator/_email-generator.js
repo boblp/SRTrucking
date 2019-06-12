@@ -74,24 +74,31 @@ const main = function(request, decoded, callback){
 
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ callback(err); }else{
-			var html = '<table><tr>';
-
+			var text = '';
+			var html = '';
+			html += '<table style="font-family:Verdana;text-align:center;"><thead style="background: #0B6FA4;"><tr>';
 			for(var j in result[0]) {
-				html += '<th>' + j + '</th>';
+				if (j == 'deckNumber') {
+					text = '#'
+				}else{
+					text = j;
+				}
+
+				html += '<th style="padding:3px 2px;font-size:12px;color:#fff;text-align:center;">' + text + '</th>';
 			}
 
-			html += '</tr>';
+			html += '</thead></tr>';
 			
 			for( var i = 0; i < result.length; i++) {
 				html += '<tr>';
 				for( var j in result[i] ) {
-					html += '<td>' + result[i][j] + '</td>';
+					html += '<td style="padding:3px 2px;font-size:10px">' + result[i][j] + '</td>';
 				}
 			}
 
 			html += '</table>';
 
-			createImageFromHTML(html, callback).catch(console.error);;
+			createImageFromHTML(html, callback).catch(console.error);
 		}
 	});
 }
@@ -112,7 +119,7 @@ async function createImageFromHTML(html, callback){
 const selectMode = function(mode){
 	const project = {
 		deckNumber: 1,
-		loadDate: 1,
+		timeWindow: 1,
 		invoice: 1,
 		status: 1,
 		vehicleType: 1

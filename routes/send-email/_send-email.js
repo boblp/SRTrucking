@@ -132,7 +132,7 @@ async function sendEmail(data, html){
 const selectMode = function(mode){
 	const project = {
 		deckNumber: 1,
-		loadDate: 1,
+		timeWindow: 1,
 		invoice: 1,
 		status: 1,
 		vehicleType: 1
