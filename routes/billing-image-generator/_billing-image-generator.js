@@ -6,11 +6,6 @@ const moment = require("moment");
 const config = require('../../util/config.js');
 const ObjectId = require('mongodb').ObjectID;
 const puppeteer = require('puppeteer');
-const fs =require('fs');
-const imagesToPdf = require("images-to-pdf");
-const merge = require('easy-pdf-merge');
-const download = require('download-pdf');
-
 
 const collectionName = config.collections.orders;
 var response = { data: '', totalRecords: 0 };
@@ -28,7 +23,6 @@ module.exports.handler = function(request, h){
 		    	}
 		    });
 		}catch(e){
-			console.log(e);
 			resolve(e.message);
 		}
 	}); 
@@ -133,56 +127,20 @@ const main = function(request, decoded, callback){
 
 			html += '</table>';
 
-
-
-			createImageFromHTML(html, result.length, function(response1){
-				var filePath = 'pdf/image/combinado.pdf';
-				// var fileName = Date.now() + Math.floor(Math.random() * 100) + '.pdf';
-				// filePath += fileName;
-
-				imagesToPdf([response1], filePath, function(response2){
-					var filePath = 'pdf/combined/';
-					var fileName = 'combinado.pdf';
-					filePath += fileName;
-
-					var pdf = request.query.s3Link;
- 
-					var options = {
-					    directory: "./pdf/s3/",
-					    filename: fileName
-					}
-					 
-					download(pdf, options, function(err){
-					    if (err) throw err
-					    console.log("PDF downloaded from S3")
-					}) 
-
-					merge(['pdf/s3/'+fileName,response2],filePath,function(err){
-					        if(err)
-					        return console.log(err);
-					        console.log('Successfully merged!');
-					        callback(filePath);
-					});
-				});
-
-
-			}).catch(console.error);
+			createImageFromHTML(html, result.length, callback).catch(console.error);
 		}
 	});
-	
 }
 
-
 async function createImageFromHTML(html, count, callback){
-
-	var filePath = 'email/images/combinado.png';
-	// var fileName = Date.now() + Math.floor(Math.random() * 100) + '.png';
-	// filePath += fileName;
+	var filePath = 'email/images/';
+	var fileName = Date.now() + Math.floor(Math.random() * 100) + '.png';
+	filePath += fileName;
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
 	await page.setViewport({ width: 0, height: 40+(count*20) });
 	await page.setContent(html);
-	await page.screenshot({path: filePath});
+	await page.screenshot({path: filePath, fullPage: true});
 	await browser.close();
 	console.log("El archivo está en: %s",filePath);
 	callback(filePath);

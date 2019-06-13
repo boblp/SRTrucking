@@ -3,7 +3,7 @@ var handler = require('./_'+__filename.split(/[\\/]/).pop());
 
 module.exports = { 
 	method: 'get',
-	path: '/email-generator',
+	path: '/order-image-generator',
 	config: { 
 		description: 'Send Email',
 		notes: 'Send Email',

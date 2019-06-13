@@ -98,17 +98,18 @@ const main = function(request, decoded, callback){
 
 			html += '</table>';
 
-			createImageFromHTML(html, callback).catch(console.error);
+			createImageFromHTML(html, result.length, callback).catch(console.error);
 		}
 	});
 }
 
-async function createImageFromHTML(html, callback){
+async function createImageFromHTML(html, count, callback){
 	var filePath = 'email/images/';
 	var fileName = Date.now() + Math.floor(Math.random() * 100) + '.png';
 	filePath += fileName;
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
+	await page.setViewport({ width: 0, height: 40+(count*20) });
 	await page.setContent(html);
 	await page.screenshot({path: filePath});
 	await browser.close();
