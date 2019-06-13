@@ -19,8 +19,8 @@ module.exports = {
 			}
 		}
 	}, handler: async (request, h) => {
-		return h.file('./pdf/combined/1560389543057.pdf', {
-            mode: 'attachment',
+		return h.file(request.query.fileName, {
+            mode: 'inline',
             filename: 'testing',
             confine: false
         });

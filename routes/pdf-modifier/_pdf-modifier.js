@@ -174,7 +174,6 @@ const main = function(request, decoded, callback){
 
 
 async function createImageFromHTML(html, count, callback){
-
 	var filePath = 'email/images/combinado.png';
 	// var fileName = Date.now() + Math.floor(Math.random() * 100) + '.png';
 	// filePath += fileName;
@@ -182,7 +181,7 @@ async function createImageFromHTML(html, count, callback){
 	const page = await browser.newPage();
 	await page.setViewport({ width: 0, height: 40+(count*20) });
 	await page.setContent(html);
-	await page.screenshot({path: filePath});
+	await page.screenshot({path: filePath, fullPage: true});
 	await browser.close();
 	console.log("El archivo está en: %s",filePath);
 	callback(filePath);
