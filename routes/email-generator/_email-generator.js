@@ -128,6 +128,7 @@ const selectMode = function(mode){
 	if(mode == 'National MX'){
 		project.carrierMX = 1;
 		project.tractor = 1;
+		project.driver = 1;
 	}else if(mode == 'Import'){
 		project.teamUS = 1;
 		project.teamMX = 1;
