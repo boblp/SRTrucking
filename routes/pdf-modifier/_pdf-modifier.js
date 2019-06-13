@@ -134,7 +134,7 @@ const main = function(request, decoded, callback){
 					        if(err)
 					        return console.log(err);
 					        console.log('Successfully merged!');
-					        callback(fileName);
+					        callback(filePath);
 					});
 
 					
