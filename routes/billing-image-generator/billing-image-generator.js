@@ -3,10 +3,10 @@ var handler = require('./_'+__filename.split(/[\\/]/).pop());
 
 module.exports = { 
 	method: 'get',
-	path: '/pdf-modifier',
+	path: '/billing-image-generator',
 	config: { 
-		description: 'Generate Invoice PDF',
-		notes: 'Generate Invoice PDF',
+		description: 'Send Email',
+		notes: 'Send Email',
 		tags: ['api'],
 		validate: {
 			query: {
@@ -15,8 +15,7 @@ module.exports = {
 				destination: joi.string(),
 				isDelivered: joi.boolean().default(false).description('View delivered orders, by POD'),
 				hasRC: joi.boolean().default(false).description('Searches by RC'),
-				hasClientInvoice: joi.boolean().default(false).description('Searches by clientInvoice'),
-				s3Link: joi.string().required().description('link PDF')
+				hasClientInvoice: joi.boolean().default(false).description('Searches by clientInvoice')
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;
