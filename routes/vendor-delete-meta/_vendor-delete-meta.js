@@ -9,7 +9,7 @@ module.exports.handler = function(request, h){
 	const promise = new Promise((resolve, reject) => {
 		try{
 			jwt.verify(request.query.auth, 'secret', function(err, decoded) {
-		    	if (err || decoded.level != 5) { 
+		    	if (err) { 
 		    		resolve('Invalid Code or Level'); 
 		    	}else{
 					main(decoded, request, function(response){
