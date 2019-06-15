@@ -177,7 +177,7 @@ async function createImageFromHTML(html, count, callback){
 	var filePath = 'email/images/combinado.png';
 	// var fileName = Date.now() + Math.floor(Math.random() * 100) + '.png';
 	// filePath += fileName;
-	const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+	const browser = await puppeteer.launch({args: ['--no-sandbox']});
 	const page = await browser.newPage();
 	await page.setViewport({ width: 0, height: 40+(count*20) });
 	await page.setContent(html);
