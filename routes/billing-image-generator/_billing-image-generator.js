@@ -150,6 +150,5 @@ async function createImageFromHTML(html, count, callback){
 	await page.screenshot({path: filePath, fullPage: true});
 	await browser.close();
 	console.log("El archivo está en: %s",filePath);
-	console.log('test');
 	callback(filePath);
 }
