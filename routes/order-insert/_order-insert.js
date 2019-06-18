@@ -124,7 +124,7 @@ var addDeck = function(id, srt, time, callback) {
 			paymentDate: '',
 			status: 'Not Started'
 		},
-		documentsStatus: '',
+		documentsStatus: 'Pending',
 		status: '',
 		transfer: {
 			name: '',
@@ -143,6 +143,7 @@ var addDeck = function(id, srt, time, callback) {
 			status: 'Not Started'
 		},
 		extra: '',
+		extraName: '',
 		empty: {
 			name: '',
 			invoice: '',
@@ -189,6 +190,7 @@ var addDeck = function(id, srt, time, callback) {
 		instructionsLetter_file: '',
 		manifest_file: '',
 		motion_file: '',
+		releaseOrder_file: '',
 		flat_or_equipment: '',
 		flat: '',
 		plates: '',
