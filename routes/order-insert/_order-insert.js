@@ -49,7 +49,7 @@ const main = function(decoded, request, callback){
 		async.timesSeries(iterations, function(n, next) {
 			srt = currentSRT;
 
-		    addDeck(n, srt+n, function(err, user) {
+		    addDeck(n, srt+n, request.query.time, function(err, user) {
 		        next(err, user);
 		    });
 		}, function(err, decks) {
@@ -86,12 +86,12 @@ const main = function(decoded, request, callback){
 	});
 }
 
-var addDeck = function(id, srt, callback) {
+var addDeck = function(id, srt, time, callback) {
     callback(null, {
         id: uniqid(),
         deckNumber: id+1,
 		srt: "SRT"+srt,
-		timeWindow: '',
+		timeWindow: moment(time, 'hh:mmA').add(id+1, 'hour').format('hh:mmA'),
 		documentsDate: '',
 		invoice: '',
 		teamUS: '',
