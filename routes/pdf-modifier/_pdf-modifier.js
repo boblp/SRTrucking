@@ -28,7 +28,6 @@ module.exports.handler = function(request, h){
 		    	}
 		    });
 		}catch(e){
-			console.log(e);
 			resolve(e.message);
 		}
 	}); 
@@ -105,8 +104,6 @@ const main = function(request, decoded, callback){
 	}
 	];
 
-	console.log(JSON.stringify(pipeline));
-
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ callback(err); }else{
 			var text = '';
@@ -141,6 +138,7 @@ const main = function(request, decoded, callback){
 				// filePath += fileName;
 
 				imagesToPdf([response1], filePath, function(response2){
+					console.log('imgtoPDF');
 					var filePath = 'pdf/combined/';
 					var fileName = 'combinado.pdf';
 					filePath += fileName;
@@ -154,14 +152,14 @@ const main = function(request, decoded, callback){
 					 
 					download(pdf, options, function(err){
 					    if (err) throw err
-					    console.log("PDF downloaded from S3")
-					}) 
-
-					merge(['pdf/s3/'+fileName,response2],filePath,function(err){
-					        if(err)
-					        return console.log(err);
-					        console.log('Successfully merged!');
-					        callback(filePath);
+					    console.log("PDF downloaded from S3");
+					
+						merge(['pdf/s3/'+fileName,response2],filePath,function(err){
+						        if(err)
+						        return console.log(err);
+						        console.log('Successfully merged!');
+						        callback(filePath);
+						});
 					});
 				});
 
