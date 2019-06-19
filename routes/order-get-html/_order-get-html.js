@@ -122,7 +122,7 @@ const main = function(request, decoded, callback){
 						"<td class='price_listing import_table export_table'><input type='text' class='browser-default  input-table datepicker dateTable' name='local.date' value='"+result[0].decks[i].local.date+"'></td>"+
 						"<td class='empty_name price_listing import_table export_table'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].empty.name+"' list='vendor_options'></td>"+
 						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table cost_master' name='empty.cost' value='"+result[0].decks[i].empty.cost+"'></td>"+
-						"<td class='extraName import_table export_table national_table'><input type='string' class='browser-default input-table' name='extraName' value='"+result[0].decks[i].extraName+"' list='vendor_options'></td>"+
+						"<td class='extraName import_table export_table national_table'><input type='string' class='browser-default input-table' name='extraName' value='"+(!result[0].decks[i].extraName ? "" : result[0].decks[i].extraName)+"' list='vendor_options'></td>"+
 						"<td class='import_table export_table national_table'><input type='text' class='browser-default  input-table' name='extra' value='"+result[0].decks[i].extra+"'></td>"+
 						// "<td class='export_table'><input type='text' class='browser-default  input-table' name='documentsStatus' value='"+result[0].decks[i].documentsStatus+"'></td>"+
 						"<td class='export_table'><select class='browser-default ' name='documentsStatus'>";
