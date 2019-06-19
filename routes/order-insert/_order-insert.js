@@ -125,7 +125,7 @@ var addDeck = function(id, srt, time, callback) {
 			status: 'Not Started'
 		},
 		documentsStatus: 'Pending',
-		status: '',
+		status: 'Not Started',
 		transfer: {
 			name: '',
 			invoice: '',
