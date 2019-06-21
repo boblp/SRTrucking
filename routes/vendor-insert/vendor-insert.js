@@ -12,7 +12,9 @@ module.exports = {
 			query: {
 				auth: joi.string().required().description('JWT Token'),
 				name: joi.string().trim().required(),
-				alias: joi.string().trim(),
+				alias: joi.string().allow("").trim(),
+				scac: joi.string().trim(),
+				caat: joi.string().trim()
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;
