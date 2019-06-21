@@ -77,15 +77,15 @@ const main = function(request, decoded, callback){
 		if(err){ callback(err); }else{
 			var orderTable = "";
 			var statusOptions = [
-				"CarrierMX",
-				"Cross",
-				"Customs",
-				"Transfer",
-				"CarrierUS",
-				"Local",
-				"Empty",
-				"Delivered",
-				"Canceled"
+				"carrierMX",
+				"cross",
+				"customs",
+				"transfer",
+				"carrierUS",
+				"local",
+				"empty",
+				"delivered",
+				"canceled"
 			];
 			for(var i=0; i<result[0].decks.length; i++) {
 				if(request.query.get_type == "view"){
