@@ -77,13 +77,15 @@ const main = function(request, decoded, callback){
 		if(err){ callback(err); }else{
 			var orderTable = "";
 			var statusOptions = [
-				"Cross",
 				"CarrierMX",
-				"CarrierUS",
+				"Cross",
+				"Customs",
 				"Transfer",
+				"CarrierUS",
 				"Local",
 				"Empty",
-				"Delivered"
+				"Delivered",
+				"Canceled"
 			];
 			for(var i=0; i<result[0].decks.length; i++) {
 				if(request.query.get_type == "view"){
