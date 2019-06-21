@@ -46,7 +46,16 @@ const main = function(request, decoded, callback){
 	}
 
 	if(request.query.delivered){
-		query["decks.POD"] = { $ne: '' };
+		query["decks"] = {
+			$not: {
+				$elemMatch:{
+					"status": {
+			           $ne: "delivered"
+			        }
+				}
+			}
+		};
+		query["decks.status"] = "delivered";
 	}
 
 	if(request.query.type){
@@ -72,6 +81,8 @@ const main = function(request, decoded, callback){
 		let queryDate = moment().subtract(request.query.daysBack, 'days').format("YYYY-MM-DD");
 		query.createdAt = { $gt: queryDate };
 	}
+
+	console.log(JSON.stringify(query));
 
 	collection.find(query).toArray(function(err, result) {
 		if(err){ callback(err); }else{
