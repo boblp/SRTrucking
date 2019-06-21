@@ -158,14 +158,6 @@ const main = function(request, decoded, callback){
 						"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].clientInvoice_file ? "<input type='file' data-name='clientInvoice' data-value='"+result[0].decks[i].id+"' name='clientInvoice_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].clientInvoice_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
 						"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].clientInvoiceXml_file ? "<input type='file' data-name='clientInvoiceXml' data-value='"+result[0].decks[i].id+"' name='clientInvoiceXml_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].clientInvoiceXml_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
 						"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].releaseOrder_file ? "<input type='file' data-name='releaseOrder' data-value='"+result[0].decks[i].id+"' name='releaseOrder_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].releaseOrder_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
-						"<td class='import_table export_table national_table'>";
-						if(result[0].decks[i].POD_file == '' || typeof result[0].decks[i].POD_file == 'undefined'){
-							orderTable += "<p>Not delivered</p>";
-						}else{
-							orderTable += "<p class='green-text'>Delivered</p>";
-						}
-						orderTable +=
-						"</td>"+
 						"<td><input type='number' class='browser-default input-table' name='actualPrice' value='"+result[0].decks[i].actualPrice+"' readonly hidden></td>"+
 						"<td><input type='number' class='browser-default input-table' name='totalSale' value='"+result[0].decks[i].totalSale+"' hidden></td>"+
 						"<td><input type='number' class='browser-default input-table' name='margin' value='"+result[0].decks[i].margin+"' readonly hidden></td>"+
