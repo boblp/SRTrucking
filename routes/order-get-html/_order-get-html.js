@@ -105,7 +105,7 @@ const main = function(request, decoded, callback){
 						"<td class='national_table'><input type='text' class='browser-default  input-table' name='flat_or_equipment' value='"+result[0].decks[i].flat_or_equipment+"'></td>"+
 						"<td class='import_table export_table'><input type='text' class='browser-default  input-table' name='scac' value='"+result[0].decks[i].scac+"'></td>"+
 						"<td class='import_table export_table'><input type='text' class='browser-default  input-table' name='caat' value='"+result[0].decks[i].caat+"'></td>"+
-						"<td class='import_table export_table national_table'><input type='text' class='browser-default  input-table' name='driver' value='"+result[0].decks[i].driver+"'></td>"+
+						"<td class='import_table export_table national_table extra_table'><input type='text' class='browser-default input-table' name='driver' value='"+result[0].decks[i].driver+"'></td>"+
 						"<td class='cross_name price_listing import_table export_table'><input type='string' class='browser-default input-table' name='cross.name' value='"+result[0].decks[i].cross.name+"' list='vendor_options'></td>"+
 						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table cost_master' name='cross.cost' value='"+result[0].decks[i].cross.cost+"'></td>"+
 						// "<td class='price_listing import_table export_table'><input type='text' class='browser-default  input-table datepicker dateTable' name='cross.date' value='"+result[0].decks[i].cross.date+"'></td>"+
