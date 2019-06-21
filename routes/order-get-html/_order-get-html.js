@@ -136,11 +136,11 @@ const main = function(request, decoded, callback){
 						"<td class='extraName import_table export_table national_table'><input type='string' class='browser-default input-table' name='extraName' value='"+(!result[0].decks[i].extraName ? "" : result[0].decks[i].extraName)+"' list='vendor_options'></td>"+
 						"<td class='import_table export_table national_table'><input type='text' class='browser-default  input-table' name='extra' value='"+result[0].decks[i].extra+"'></td>"+
 						// "<td class='export_table'><input type='text' class='browser-default  input-table' name='documentsStatus' value='"+result[0].decks[i].documentsStatus+"'></td>"+
-						"<td class='export_table'><select class='browser-default ' name='documentsStatus'>";
+						"<td class='export_table'><select class='browser-default "+(result[0].decks[i].documentsStatus == 'Pending' ? 'red white-text' : 'green white-text')+"' name='documentsStatus'>";
 						if(result[0].decks[i].documentsStatus == 'Pending' || result[0].decks[i].documentsStatus == '' || typeof result[0].decks[i].documentsStatus == 'undefined'){
-							orderTable += "<option value='Pending' selected>Pending</option><option value='Done'>Done</option>";
+							orderTable += "<option value='Pending' class='red white-text' selected>Pending</option><option value='Done' class='green white-text'>Done</option>";
 						}else{
-							orderTable += "<option value='Pending'>Pending</option><option value='Done' selected>Done</option>";
+							orderTable += "<option value='Pending' class='red white-text'>Pending</option><option value='Done' class='green white-text' selected>Done</option>";
 						}
 						orderTable +=
 						"</select></td>"+

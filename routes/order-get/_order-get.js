@@ -46,7 +46,7 @@ const main = function(request, decoded, callback){
 	}
 
 	if(request.query.delivered){
-		query["decks"] = {
+		query.decks = {
 			$not: {
 				$elemMatch:{
 					"status": {
