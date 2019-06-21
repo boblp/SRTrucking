@@ -46,7 +46,7 @@ const main = function(request, decoded, callback){
 	}
 
 	if(request.query.delivered){
-		query["decks"] = {
+		query.decks = {
 			$not: {
 				$elemMatch:{
 					"status": {
@@ -85,58 +85,58 @@ const main = function(request, decoded, callback){
 	collection.find(query).toArray(function(err, result) {
 		if(err){ callback(err); }else{
 			var orderTable = "";
-			var statusOptions = [
-				"carrierMX",
-				"cross",
-				"customs",
-				"transfer",
-				"carrierUS",
-				"local",
-				"empty",
-				"delivered",
-				"canceled"
-			];
+			var statusOptions = {
+				"carrierMX" : "green white-text",
+				"cross" : "purple white-text",
+				"customs" : "white black-text",
+				"transfer" : "blue white-text",
+				"carrierUS" : "red white-text",
+				"local" : "orange white-text",
+				"empty" : "teal white-text",
+				"delivered" : "green white-text",
+				"canceled" : "red white-text"
+			};
 			for(var i=0; i<result[0].decks.length; i++) {
 				if(request.query.get_type == "view"){
 					orderTable += 
-					"<tr data-id='"+result[0].decks[i].id+"' class='order_table_row "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"'>"+
+					"<tr data-id='"+result[0].decks[i].id+"' class='order_table_row'>"+
 						"<td class='import_table export_table national_table'>"+result[0].decks[i].deckNumber+"</td>"+
 						"<td class='import_table export_table national_table'>"+result[0].decks[i].srt+"</td>"+
-						"<td class='export_table national_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" timepicker input-table' name='timeWindow' value='"+moment(result[0].decks[i].timeWindow, 'hh:mmA').format('hh:mmA')+"'></td>"+
-						"<td class='import_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='documentsDate' value='"+result[0].decks[i].documentsDate+"'></td>"+
-						"<td class='import_table export_table national_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : result[0].decks[i].invoice == '' ? 'red' : '')+"  hola  input-table' name='invoice' value='"+result[0].decks[i].invoice+"'></td>"+
-						"<td class='import_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='teamUS' value='"+result[0].decks[i].teamUS+"'></td>"+
-						"<td class='import_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='teamMX' value='"+result[0].decks[i].teamMX+"'></td>"+
-						"<td class='import_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='vehicleType' value='"+result[0].decks[i].vehicleType+"'></td>"+
-						"<td class='export_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='flat' value='"+result[0].decks[i].flat+"'></td>"+
-						"<td class='export_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='plates' value='"+result[0].decks[i].plates+"'></td>"+
-						"<td class='export_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='state' value='"+result[0].decks[i].state+"'></td>"+
-						"<td class='national_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='flat_or_equipment' value='"+result[0].decks[i].flat_or_equipment+"'></td>"+
-						"<td class='import_table export_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='scac' value='"+result[0].decks[i].scac+"'></td>"+
-						"<td class='import_table export_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='caat' value='"+result[0].decks[i].caat+"'></td>"+
-						"<td class='import_table export_table national_table extra_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table' name='driver' value='"+result[0].decks[i].driver+"'></td>"+
-						"<td class='cross_name price_listing import_table export_table'><input type='string' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table' name='cross.name' value='"+result[0].decks[i].cross.name+"' list='vendor_options'></td>"+
-						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table cost_master' name='cross.cost' value='"+result[0].decks[i].cross.cost+"'></td>"+
-						// "<td class='price_listing import_table export_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table datepicker dateTable' name='cross.date' value='"+result[0].decks[i].cross.date+"'></td>"+
-						// "<td class='carrierMX_name price_listing import_table export_table national_table'><select class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"' name='carrierMX.name' data-value='"+result[0].decks[i].carrierMX.name+"'>"+result+"</select></td>"+
-						"<td class='carrierMX_name price_listing import_table export_table national_table'><input type='string' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table' name='carrierMX.name' value='"+result[0].decks[i].carrierMX.name+"' list='vendor_options'></td>"+
-						// "<td class='price_listing import_table export_table national_table'><input type='number' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table cost_master' name='carrierMX.cost' value='"+result[0].decks[i].carrierMX.cost+"'></td>"+
-						// "<td class='price_listing import_table export_table national_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table datepicker dateTable' name='carrierMX.date' value='"+result[0].decks[i].carrierMX.date+"'></td>"+
-						"<td class='carrierUS_name price_listing import_table export_table'><input type='string' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table' name='carrierUS.name' value='"+result[0].decks[i].carrierUS.name+"' list='vendor_options'></td>"+
-						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table cost_master' name='carrierUS.cost' value='"+result[0].decks[i].carrierUS.cost+"'></td>"+
-						// "<td class='price_listing import_table export_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table datepicker dateTable' name='carrierUS.date' value='"+result[0].decks[i].carrierUS.date+"'></td>"+
-						"<td class='transfer_name price_listing import_table export_table'><input type='string' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table' name='transfer.name' value='"+result[0].decks[i].transfer.name+"' list='vendor_options'></td>"+
-						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table cost_master' name='transfer.cost' value='"+result[0].decks[i].transfer.cost+"'></td>"+
-						// "<td class='price_listing import_table export_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table datepicker dateTable' name='transfer.date' value='"+result[0].decks[i].transfer.date+"'></td>"+
-						"<td class='local_name price_listing import_table export_table'><input type='string' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table' name='local.name' value='"+result[0].decks[i].local.name+"' list='vendor_options'></td>"+
-						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table cost_master' name='local.cost' value='"+result[0].decks[i].local.cost+"'></td>"+
-						// "<td class='price_listing import_table export_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table datepicker dateTable' name='local.date' value='"+result[0].decks[i].local.date+"'></td>"+
-						"<td class='empty_name price_listing import_table export_table'><input type='string' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table' name='empty.name' value='"+result[0].decks[i].empty.name+"' list='vendor_options'></td>"+
-						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table cost_master' name='empty.cost' value='"+result[0].decks[i].empty.cost+"'></td>"+
-						"<td class='extraName import_table export_table national_table'><input type='string' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table' name='extraName' value='"+(!result[0].decks[i].extraName ? "" : result[0].decks[i].extraName)+"' list='vendor_options'></td>"+
-						"<td class='import_table export_table national_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='extra' value='"+result[0].decks[i].extra+"'></td>"+
-						// "<td class='export_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='documentsStatus' value='"+result[0].decks[i].documentsStatus+"'></td>"+
-						"<td class='export_table'><select class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" ' name='documentsStatus'>";
+						"<td class='export_table national_table'><input type='text' class='browser-default timepicker input-table' name='timeWindow' value='"+moment(result[0].decks[i].timeWindow, 'hh:mmA').format('hh:mmA')+"'></td>"+
+						"<td class='import_table'><input type='text' class='browser-default  input-table' name='documentsDate' value='"+result[0].decks[i].documentsDate+"'></td>"+
+						"<td class='import_table export_table national_table'><input type='text' class='browser-default "+(result[0].decks[i].invoice == '' ? 'red' : '')+"  input-table' name='invoice' value='"+result[0].decks[i].invoice+"'></td>"+
+						"<td class='import_table'><input type='text' class='browser-default  input-table' name='teamUS' value='"+result[0].decks[i].teamUS+"'></td>"+
+						"<td class='import_table'><input type='text' class='browser-default  input-table' name='teamMX' value='"+result[0].decks[i].teamMX+"'></td>"+
+						"<td class='import_table'><input type='text' class='browser-default  input-table' name='vehicleType' value='"+result[0].decks[i].vehicleType+"'></td>"+
+						"<td class='export_table'><input type='text' class='browser-default  input-table' name='flat' value='"+result[0].decks[i].flat+"'></td>"+
+						"<td class='export_table'><input type='text' class='browser-default  input-table' name='plates' value='"+result[0].decks[i].plates+"'></td>"+
+						"<td class='export_table'><input type='text' class='browser-default  input-table' name='state' value='"+result[0].decks[i].state+"'></td>"+
+						"<td class='national_table'><input type='text' class='browser-default  input-table' name='flat_or_equipment' value='"+result[0].decks[i].flat_or_equipment+"'></td>"+
+						"<td class='import_table export_table'><input type='text' class='browser-default  input-table' name='scac' value='"+result[0].decks[i].scac+"'></td>"+
+						"<td class='import_table export_table'><input type='text' class='browser-default  input-table' name='caat' value='"+result[0].decks[i].caat+"'></td>"+
+						"<td class='import_table export_table national_table extra_table'><input type='text' class='browser-default input-table' name='driver' value='"+result[0].decks[i].driver+"'></td>"+
+						"<td class='cross_name price_listing import_table export_table'><input type='string' class='browser-default input-table' name='cross.name' value='"+result[0].decks[i].cross.name+"' list='vendor_options'></td>"+
+						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table cost_master' name='cross.cost' value='"+result[0].decks[i].cross.cost+"'></td>"+
+						// "<td class='price_listing import_table export_table'><input type='text' class='browser-default  input-table datepicker dateTable' name='cross.date' value='"+result[0].decks[i].cross.date+"'></td>"+
+						// "<td class='carrierMX_name price_listing import_table export_table national_table'><select class='browser-default' name='carrierMX.name' data-value='"+result[0].decks[i].carrierMX.name+"'>"+result+"</select></td>"+
+						"<td class='carrierMX_name price_listing import_table export_table national_table'><input type='string' class='browser-default input-table' name='carrierMX.name' value='"+result[0].decks[i].carrierMX.name+"' list='vendor_options'></td>"+
+						// "<td class='price_listing import_table export_table national_table'><input type='number' class='browser-default input-table cost_master' name='carrierMX.cost' value='"+result[0].decks[i].carrierMX.cost+"'></td>"+
+						// "<td class='price_listing import_table export_table national_table'><input type='text' class='browser-default  input-table datepicker dateTable' name='carrierMX.date' value='"+result[0].decks[i].carrierMX.date+"'></td>"+
+						"<td class='carrierUS_name price_listing import_table export_table'><input type='string' class='browser-default input-table' name='carrierUS.name' value='"+result[0].decks[i].carrierUS.name+"' list='vendor_options'></td>"+
+						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table cost_master' name='carrierUS.cost' value='"+result[0].decks[i].carrierUS.cost+"'></td>"+
+						// "<td class='price_listing import_table export_table'><input type='text' class='browser-default  input-table datepicker dateTable' name='carrierUS.date' value='"+result[0].decks[i].carrierUS.date+"'></td>"+
+						"<td class='transfer_name price_listing import_table export_table'><input type='string' class='browser-default input-table' name='transfer.name' value='"+result[0].decks[i].transfer.name+"' list='vendor_options'></td>"+
+						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table cost_master' name='transfer.cost' value='"+result[0].decks[i].transfer.cost+"'></td>"+
+						// "<td class='price_listing import_table export_table'><input type='text' class='browser-default  input-table datepicker dateTable' name='transfer.date' value='"+result[0].decks[i].transfer.date+"'></td>"+
+						"<td class='local_name price_listing import_table export_table'><input type='string' class='browser-default input-table' name='local.name' value='"+result[0].decks[i].local.name+"' list='vendor_options'></td>"+
+						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table cost_master' name='local.cost' value='"+result[0].decks[i].local.cost+"'></td>"+
+						// "<td class='price_listing import_table export_table'><input type='text' class='browser-default  input-table datepicker dateTable' name='local.date' value='"+result[0].decks[i].local.date+"'></td>"+
+						"<td class='empty_name price_listing import_table export_table'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].empty.name+"' list='vendor_options'></td>"+
+						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table cost_master' name='empty.cost' value='"+result[0].decks[i].empty.cost+"'></td>"+
+						"<td class='extraName import_table export_table national_table'><input type='string' class='browser-default input-table' name='extraName' value='"+(!result[0].decks[i].extraName ? "" : result[0].decks[i].extraName)+"' list='vendor_options'></td>"+
+						"<td class='import_table export_table national_table'><input type='text' class='browser-default  input-table' name='extra' value='"+result[0].decks[i].extra+"'></td>"+
+						// "<td class='export_table'><input type='text' class='browser-default  input-table' name='documentsStatus' value='"+result[0].decks[i].documentsStatus+"'></td>"+
+						"<td class='export_table'><select class='browser-default ' name='documentsStatus'>";
 						if(result[0].decks[i].documentsStatus == 'Pending' || result[0].decks[i].documentsStatus == '' || typeof result[0].decks[i].documentsStatus == 'undefined'){
 							orderTable += "<option value='Pending' selected>Pending</option><option value='Done'>Done</option>";
 						}else{
@@ -144,32 +144,32 @@ const main = function(request, decoded, callback){
 						}
 						orderTable +=
 						"</select></td>"+
-						"<td class='import_table export_table national_table status'><select class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" ' name='status'>";
+						"<td class='import_table export_table national_table status'><select class='browser-default "+statusOptions[result[0].decks[i].status]+"' name='status'>";
 						if(result[0].decks[i].status == ''){
-							orderTable += "<option value='Not Started' selected>Not Started</option>";
+							orderTable += "<option value='Not Started' class='white black-text' selected>Not Started</option>";
 						}else{
-							orderTable += "<option value='Not Started'>Not Started</option>";
+							orderTable += "<option value='Not Started' class='white black-text'>Not Started</option>";
 						}
-						for(var j=0; j<statusOptions.length;j++){
-							if(statusOptions[j] == result[0].decks[i].status){
-								orderTable += "<option value='"+statusOptions[j]+"' selected>"+statusOptions[j]+"</option>";
+						for (var key in statusOptions) {
+							if(key == result[0].decks[i].status){
+								orderTable += "<option value='"+key+"' class='"+statusOptions[key]+"' selected>"+key+"</option>";
 							}else{
-								orderTable += "<option value='"+statusOptions[j]+"'>"+statusOptions[j]+"</option>";	
+								orderTable += "<option value='"+key+"' class='"+statusOptions[key]+"'>"+key+"</option>";	
 							}
 							
 						}
 						orderTable += "</select</td>"+
-						"<td class='import_table export_table national_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='notes' value='"+result[0].decks[i].notes+"'></td>"+
-						"<td class='national_table'><input type='text' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+"  input-table' name='tractor' value='"+result[0].decks[i].tractor+"'></td>"+
+						"<td class='import_table export_table national_table'><input type='text' class='browser-default  input-table' name='notes' value='"+result[0].decks[i].notes+"'></td>"+
+						"<td class='national_table'><input type='text' class='browser-default  input-table' name='tractor' value='"+result[0].decks[i].tractor+"'></td>"+
 						"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].instructionsLetter_file ? "<input type='file' data-name='instructionsLetter' data-value='"+result[0].decks[i].id+"' name='instructionsLetter_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].instructionsLetter_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
 						"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].manifest_file ? "<input type='file' data-name='manifest' data-value='"+result[0].decks[i].id+"' name='manifest_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].manifest_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
 						"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].motion_file ? "<input type='file' data-name='motion' data-value='"+result[0].decks[i].id+"' name='motion_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].motion_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
 						"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].clientInvoice_file ? "<input type='file' data-name='clientInvoice' data-value='"+result[0].decks[i].id+"' name='clientInvoice_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].clientInvoice_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
 						"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].clientInvoiceXml_file ? "<input type='file' data-name='clientInvoiceXml' data-value='"+result[0].decks[i].id+"' name='clientInvoiceXml_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].clientInvoiceXml_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
 						"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].releaseOrder_file ? "<input type='file' data-name='releaseOrder' data-value='"+result[0].decks[i].id+"' name='releaseOrder_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].releaseOrder_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
-						"<td><input type='number' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table' name='actualPrice' value='"+result[0].decks[i].actualPrice+"' readonly hidden></td>"+
-						"<td><input type='number' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table' name='totalSale' value='"+result[0].decks[i].totalSale+"' hidden></td>"+
-						"<td><input type='number' class='browser-default "+(result[0].decks[i].status == 'delivered' ? 'green' : '')+" input-table' name='margin' value='"+result[0].decks[i].margin+"' readonly hidden></td>"+
+						"<td><input type='number' class='browser-default input-table' name='actualPrice' value='"+result[0].decks[i].actualPrice+"' readonly hidden></td>"+
+						"<td><input type='number' class='browser-default input-table' name='totalSale' value='"+result[0].decks[i].totalSale+"' hidden></td>"+
+						"<td><input type='number' class='browser-default input-table' name='margin' value='"+result[0].decks[i].margin+"' readonly hidden></td>"+
 					"</tr>";
 				}else{
 					orderTable += 
@@ -292,18 +292,18 @@ const main = function(request, decoded, callback){
 							orderTable +=
 							"<td class='import_table export_table national_table status'><select class='browser-default ' name='status'>";
 							if(result[0].decks[i].status == ''){
-								orderTable += "<option value='Not Started' selected>Not Started</option>";
+								orderTable += "<option value='Not Started' class='white black-text' selected>Not Started</option>";
 							}else{
-								orderTable += "<option value='Not Started'>Not Started</option>";
+								orderTable += "<option value='Not Started' class='white black-text'>Not Started</option>";
 							}
-							for(var j=0; j<statusOptions.length;j++){
-								if(statusOptions[j] == result[0].decks[i].status){
-									orderTable += "<option value='"+statusOptions[j]+"' selected>"+statusOptions[j]+"</option>";
-								}else{
-									orderTable += "<option value='"+statusOptions[j]+"'>"+statusOptions[j]+"</option>";	
-								}
-								
+							for (var key in statusOptions) {
+							if(key == result[0].decks[i].status){
+								orderTable += "<option value='"+key+"' class='"+statusOptions[key]+"' selected>"+key+"</option>";
+							}else{
+								orderTable += "<option value='"+key+"' class='"+statusOptions[key]+"'>"+key+"</option>";	
 							}
+							
+						}
 							orderTable += "</select</td>"+
 							"<td><select class='browser-default ' name='vendorPaymentStatus'>";
 							if(result[0].decks[i].vendorPaymentStatus == 'false' || typeof result[0].decks[i].vendorPaymentStatus == 'undefined'){
