@@ -98,9 +98,9 @@ const exportExcel = function(results, callback){
 
 	try {
 		const csv = json2csv(results, opts);
+		callback(csv);
 	} catch (err) {
 		console.error(err);
+		callback(err);
 	}
-
-  	callback(csv);
 }
