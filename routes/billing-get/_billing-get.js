@@ -78,7 +78,22 @@ const main = function(request, callback){
 
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ callback(err); }else{
-			callback(result);
+
+			var data = {
+				totalSale : 0,
+				actualPrice : 0,
+				margin : 0
+			};
+
+			result.forEach(function(element) {
+				data.totalSale += parseInt(element.totalSale);
+				data.actualPrice += parseInt(element.actualPrice);
+				data.margin += parseInt(element.margin);
+			});
+
+			data.decks = result;
+
+			callback(data);
 		}
 	});
 }
