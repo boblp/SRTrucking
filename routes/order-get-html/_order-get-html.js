@@ -101,7 +101,7 @@ const main = function(request, decoded, callback){
 					orderTable += 
 					"<tr data-id='"+result[0].decks[i].id+"' class='order_table_row'>"+
 						"<td class='import_table export_table national_table'>"+result[0].decks[i].deckNumber+"</td>"+
-						"<td class='import_table export_table national_table'>"+result[0].decks[i].srt+"</td>"+
+						"<td class='import_table export_table national_table'><input type='text' class='browser-default  input-table' name='srt' value='"+result[0].decks[i].srt+"'></td>"+
 						"<td class='export_table national_table'><input type='text' class='browser-default timepicker input-table' name='timeWindow' value='"+moment(result[0].decks[i].timeWindow, 'hh:mmA').format('hh:mmA')+"'></td>"+
 						"<td class='import_table'><input type='text' class='browser-default  input-table' name='documentsDate' value='"+result[0].decks[i].documentsDate+"'></td>"+
 						"<td class='import_table export_table national_table'><input type='text' class='browser-default "+(result[0].decks[i].invoice == '' ? 'red' : '')+"  input-table' name='invoice' value='"+result[0].decks[i].invoice+"'></td>"+
@@ -175,7 +175,7 @@ const main = function(request, decoded, callback){
 					orderTable += 
 						"<tr data-id='"+result[0].decks[i].id+"' class='order_table_master_row'>"+
 							"<td>"+result[0].decks[i].deckNumber+"</td>"+
-							"<td>"+result[0].decks[i].srt+"</td>"+
+							"<td><input type='text' class='browser-default  input-table' name='srt' value='"+result[0].decks[i].srt+"'></td>"+
 							"<td class='cross_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].cross.name+"' list='vendor_options'></td>"+
 							"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='cross.invoice' value='"+result[0].decks[i].cross.invoice+"'></td>"+
 							"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='cross.date' value='"+result[0].decks[i].cross.date+"'></td>"+
