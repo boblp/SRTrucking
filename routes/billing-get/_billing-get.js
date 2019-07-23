@@ -81,8 +81,8 @@ const main = function(request, callback){
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ callback(err); }else{
 			if (request.query.returnExcel) {
-				exportExcel(result, function(){
-					callback('Done');
+				exportExcel(result, function(csv){
+					callback(csv);
 				});
 			}else{
 				callback(result);
@@ -92,16 +92,15 @@ const main = function(request, callback){
 }
 
 const exportExcel = function(results, callback){
-	//const json2csv = require('json2csv').parse;
+	const json2csv = require('json2csv').parse;
 	const fields = ['srt', 'timeWindow'];
-	//const opts = { fields };
+	const opts = { fields };
 
 	try {
-		//const csv = json2csv(results, opts);
-		downloadCsv(results, fields, 'excel');
+		const csv = json2csv(results, opts);
 	} catch (err) {
 		console.error(err);
 	}
 
-  	//callback();
+  	callback(csv);
 }
