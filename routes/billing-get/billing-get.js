@@ -15,7 +15,8 @@ module.exports = {
 				destination: joi.string(),
 				isDelivered: joi.boolean().default(false).description('View delivered orders, by POD'),
 				hasRC: joi.boolean().default(false).description('Searches by RC'),
-				hasClientInvoice: joi.boolean().default(false).description('Searches by clientInvoice')
+				hasClientInvoice: joi.boolean().default(false).description('Searches by clientInvoice'),
+				returnExcel: joi.boolean().default(false).description('returns an excel'),
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;
