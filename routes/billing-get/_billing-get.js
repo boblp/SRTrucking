@@ -3,6 +3,8 @@
 const jwt = require('jsonwebtoken');
 const config = require('../../util/config.js');
 const collectionName = config.collections.orders;
+const json2csv = require('json2csv');
+const downloadCsv = require('download-csv');
 
 module.exports.handler = function(request, h){
 	const promise = new Promise((resolve, reject) => {
@@ -78,22 +80,41 @@ const main = function(request, callback){
 
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ callback(err); }else{
+			if (request.query.returnExcel) {
+				exportExcel(result, function(csv){
+					callback(csv);
+				});
+			}else{
+				var data = {
+					totalSale : 0,
+					actualPrice : 0,
+					margin : 0
+				};
 
-			var data = {
-				totalSale : 0,
-				actualPrice : 0,
-				margin : 0
-			};
+				result.forEach(function(element) {
+					data.totalSale += parseInt(element.totalSale);
+					data.actualPrice += parseInt(element.actualPrice);
+					data.margin += parseInt(element.margin);
+				});
 
-			result.forEach(function(element) {
-				data.totalSale += parseInt(element.totalSale);
-				data.actualPrice += parseInt(element.actualPrice);
-				data.margin += parseInt(element.margin);
-			});
+				data.decks = result;
 
-			data.decks = result;
-
-			callback(data);
+				callback(data);
+			}
 		}
 	});
+}
+
+const exportExcel = function(results, callback){
+	const json2csv = require('json2csv').parse;
+	const fields = ['srt', 'timeWindow'];
+	const opts = { fields };
+
+	try {
+		const csv = json2csv(results, opts);
+		callback(csv);
+	} catch (err) {
+		console.error(err);
+		callback(err);
+	}
 }
