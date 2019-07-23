@@ -119,10 +119,10 @@ const main = function(request, decoded, callback){
 						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table cost_master' name='cross.cost' value='"+result[0].decks[i].cross.cost+"'></td>"+
 						// "<td class='price_listing import_table export_table'><input type='text' class='browser-default  input-table datepicker dateTable' name='cross.date' value='"+result[0].decks[i].cross.date+"'></td>"+
 						// "<td class='carrierMX_name price_listing import_table export_table national_table'><select class='browser-default' name='carrierMX.name' data-value='"+result[0].decks[i].carrierMX.name+"'>"+result+"</select></td>"+
-						"<td class='carrierMX_name price_listing import_table export_table national_table'><input type='string' class='browser-default input-table' name='carrierMX.name' value='"+result[0].decks[i].carrierMX.name+"' list='vendor_options'></td>"+
+						"<td class='carrierMX_name price_listing import_table export_table national_table_mx'><input type='string' class='browser-default input-table' name='carrierMX.name' value='"+result[0].decks[i].carrierMX.name+"' list='vendor_options'></td>"+
 						// "<td class='price_listing import_table export_table national_table'><input type='number' class='browser-default input-table cost_master' name='carrierMX.cost' value='"+result[0].decks[i].carrierMX.cost+"'></td>"+
 						// "<td class='price_listing import_table export_table national_table'><input type='text' class='browser-default  input-table datepicker dateTable' name='carrierMX.date' value='"+result[0].decks[i].carrierMX.date+"'></td>"+
-						"<td class='carrierUS_name price_listing import_table export_table'><input type='string' class='browser-default input-table' name='carrierUS.name' value='"+result[0].decks[i].carrierUS.name+"' list='vendor_options'></td>"+
+						"<td class='carrierUS_name price_listing import_table export_table national_table_us'><input type='string' class='browser-default input-table' name='carrierUS.name' value='"+result[0].decks[i].carrierUS.name+"' list='vendor_options'></td>"+
 						// "<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table cost_master' name='carrierUS.cost' value='"+result[0].decks[i].carrierUS.cost+"'></td>"+
 						// "<td class='price_listing import_table export_table'><input type='text' class='browser-default  input-table datepicker dateTable' name='carrierUS.date' value='"+result[0].decks[i].carrierUS.date+"'></td>"+
 						"<td class='transfer_name price_listing import_table export_table'><input type='string' class='browser-default input-table' name='transfer.name' value='"+result[0].decks[i].transfer.name+"' list='vendor_options'></td>"+
@@ -180,14 +180,14 @@ const main = function(request, decoded, callback){
 							"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='cross.invoice' value='"+result[0].decks[i].cross.invoice+"'></td>"+
 							"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='cross.date' value='"+result[0].decks[i].cross.date+"'></td>"+
 							"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='cross.paymentDate' value='"+result[0].decks[i].cross.paymentDate+"'></td>"+
-							"<td class='carrierMX_name import_table export_table national_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].carrierMX.name+"' list='vendor_options'></td>"+
-							"<td class='import_table export_table national_table price_listing'><input type='text' class='browser-default input-table' name='carrierMX.invoice' value='"+result[0].decks[i].carrierMX.invoice+"'></td>"+
-							"<td class='import_table export_table national_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierMX.date' value='"+result[0].decks[i].carrierMX.date+"'></td>"+
-							"<td class='import_table export_table national_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierMX.paymentDate' value='"+result[0].decks[i].carrierMX.paymentDate+"'></td>"+
-							"<td class='carrierUS_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].carrierUS.name+"' list='vendor_options'></td>"+
-							"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='carrierUS.invoice' value='"+result[0].decks[i].carrierUS.invoice+"'></td>"+
-							"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierUS.date' value='"+result[0].decks[i].carrierUS.date+"'></td>"+
-							"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierUS.paymentDate' value='"+result[0].decks[i].carrierUS.paymentDate+"'></td>"+
+							"<td class='carrierMX_name import_table export_table national_table_mx price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].carrierMX.name+"' list='vendor_options'></td>"+
+							"<td class='import_table export_table national_table_mx price_listing'><input type='text' class='browser-default input-table' name='carrierMX.invoice' value='"+result[0].decks[i].carrierMX.invoice+"'></td>"+
+							"<td class='import_table export_table national_table_mx price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierMX.date' value='"+result[0].decks[i].carrierMX.date+"'></td>"+
+							"<td class='import_table export_table national_table_mx price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierMX.paymentDate' value='"+result[0].decks[i].carrierMX.paymentDate+"'></td>"+
+							"<td class='carrierUS_name import_table export_table national_table_us price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].carrierUS.name+"' list='vendor_options'></td>"+
+							"<td class='import_table export_table national_table_us price_listing'><input type='text' class='browser-default input-table' name='carrierUS.invoice' value='"+result[0].decks[i].carrierUS.invoice+"'></td>"+
+							"<td class='import_table export_table national_table_us price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierUS.date' value='"+result[0].decks[i].carrierUS.date+"'></td>"+
+							"<td class='import_table export_table national_table_us price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierUS.paymentDate' value='"+result[0].decks[i].carrierUS.paymentDate+"'></td>"+
 							"<td class='transfer_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].transfer.name+"' list='vendor_options'></td>"+
 							"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='transfer.invoice' value='"+result[0].decks[i].transfer.invoice+"'></td>"+
 							"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='transfer.date' value='"+result[0].decks[i].transfer.date+"'></td>"+
@@ -281,8 +281,8 @@ const main = function(request, decoded, callback){
 							}
 							orderTable +=
 							"<td class='import_table export_table'><input type='number' class='browser-default input-table cost_master' name='cross.cost' value='"+result[0].decks[i].cross.cost+"'></td>"+
-							"<td class='import_table export_table national_table'><input type='number' class='browser-default input-table cost_master' name='carrierMX.cost' value='"+result[0].decks[i].carrierMX.cost+"'></td>"+
-							"<td class='import_table export_table'><input type='number' class='browser-default input-table cost_master' name='carrierUS.cost' value='"+result[0].decks[i].carrierUS.cost+"'></td>"+
+							"<td class='import_table export_table national_table_mx'><input type='number' class='browser-default input-table cost_master' name='carrierMX.cost' value='"+result[0].decks[i].carrierMX.cost+"'></td>"+
+							"<td class='import_table export_table national_table_us'><input type='number' class='browser-default input-table cost_master' name='carrierUS.cost' value='"+result[0].decks[i].carrierUS.cost+"'></td>"+
 							"<td class='import_table export_table'><input type='number' class='browser-default input-table cost_master' name='transfer.cost' value='"+result[0].decks[i].transfer.cost+"'></td>"+
 							"<td class='import_table export_table'><input type='number' class='browser-default input-table cost_master' name='local.cost' value='"+result[0].decks[i].local.cost+"'></td>"+
 							"<td class='import_table export_table'><input type='number' class='browser-default input-table cost_master' name='empty.cost' value='"+result[0].decks[i].empty.cost+"'></td>"+
