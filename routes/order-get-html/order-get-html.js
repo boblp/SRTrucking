@@ -19,7 +19,8 @@ module.exports = {
 				get_type: joi.string(),
 				viewComplete: joi.boolean().default(false).description('View complete orders'),
 				delivered: joi.boolean().description('View delivered orders'),
-				daysBack: joi.number().description('Days to look back')
+				daysBack: joi.number().description('Days to look back'),
+				returnExcel: joi.boolean().description('Returns CSV')
 			}, 
 			failAction: async (request, h, err) => {
 		        return err;
