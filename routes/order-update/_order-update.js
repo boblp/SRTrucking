@@ -44,7 +44,7 @@ const main = function(decoded, request, callback){
 	// }]
 
 	async.each(updateObj, function(data, cb) {
-	    updateDeck(request.query.id, data, collection, function(){
+	    updateDeck(request, request.query.id, data, collection, function(){
 	    	cb();
 	    });
 	}, function(err) {
@@ -54,7 +54,7 @@ const main = function(decoded, request, callback){
 	});
 }
 
-const updateDeck = function(id, data, collection, callback){
+const updateDeck = function(request, id, data, collection, callback){
 	const query = {
 		_id: ObjectId(id),
 		"decks.id": data.id
@@ -66,9 +66,30 @@ const updateDeck = function(id, data, collection, callback){
 		console.log(key, dataRow);
 		if(key != 'id' && key != 'cross' && key != 'carrierMX' && key != 'carrierUS' && key != 'transfer' && key != 'local' && key != 'empty'){
 			newData['decks.$.'+key] = dataRow.trim();
+			if(key == 'cross.name'){
+				const collectionName2 = config.collections.vendors;
+				const collection2 = request.mongo.db.collection(collectionName2);
+				const query2 = {
+					disabled : false,
+					name : dataRow.trim()
+				};
+				collection2.find(query2).toArray(function(err, result) {
+					if(err){
+						cb2();
+					}else{
+						console.log(result[0]);
+						newData['decks.$.scac'] = (result[0].scac === undefined ? '' : result[0].scac);
+						newData['decks.$.caat'] = (result[0].caat === undefined ? '' : result[0].caat);
+						cb2();
+					}
+				});
+			}else{
+				cb2();
+			}
+			
+		}else{
+			cb2();
 		}
-
-		cb2();
 	}, function(err) {
 	    if( err ) { console.log(err) } else {
 	    	const updateObj = {
