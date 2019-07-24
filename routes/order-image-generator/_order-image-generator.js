@@ -70,7 +70,7 @@ const main = function(request, decoded, callback){
 		$project: selectMode(request.query.mode)
 	}];
 
-	console.log(JSON.stringify(pipeline));
+	// console.log(JSON.stringify(pipeline));
 
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ callback(err); }else{
@@ -84,7 +84,7 @@ const main = function(request, decoded, callback){
 					text = j;
 				}
 
-				html += '<th style="padding:3px 2px;font-size:12px;color:#fff;text-align:center;">' + text + '</th>';
+				html += '<th style="padding:3px 2px;font-size:10px;color:#fff;text-align:center;">' + text + '</th>';
 			}
 
 			html += '</thead></tr>';
@@ -145,6 +145,7 @@ const selectMode = function(mode){
 		project.scac = 1;
 		project.caat = 1;
 		project.carrierMX = 1;
+		project.carrierUS = 1;
 		project.transfer = 1;
 		project.cross = 1;
 	}else if(mode == 'National US'){

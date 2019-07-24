@@ -86,7 +86,27 @@ const main = function(request, decoded, callback){
 
 	collection.find(query).toArray(function(err, result) {
 		if(err){ callback(err); }else{
-			callback(result);
+			if(request.query.returnExcel){
+				exportExcel(result, function(csv){
+					callback(csv);
+				});
+			}else{
+				callback(result);
+			}
 		}
 	});
+}
+
+const exportExcel = function(results, callback){
+	const json2csv = require('json2csv').parse;
+	const fields = ['srt', 'timeWindow'];
+	const opts = { fields };
+
+	try {
+		const csv = json2csv(results, opts);
+		callback(csv);
+	} catch (err) {
+		console.error(err);
+		callback(err);
+	}
 }
