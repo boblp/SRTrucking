@@ -383,3 +383,17 @@ const main = function(request, decoded, callback){
 		}
 	});
 }
+
+const exportExcel = function(results, callback){
+	const json2csv = require('json2csv').parse;
+	const fields = ['srt', 'timeWindow'];
+	const opts = { fields };
+
+	try {
+		const csv = json2csv(results, opts);
+		callback(csv);
+	} catch (err) {
+		console.error(err);
+		callback(err);
+	}
+}
