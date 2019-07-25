@@ -109,7 +109,7 @@ const main = function(request, callback){
 
 const exportExcel = function(results, callback){
 	const json2csv = require('json2csv').parse;
-	const fields = ['srt', 'timeWindow'];
+	const fields = csvFields();
 	const opts = { fields };
 
 	try {
@@ -119,4 +119,67 @@ const exportExcel = function(results, callback){
 		console.error(err);
 		callback(err);
 	}
+}
+
+const csvFields = function(){
+	const fields = [{
+		label: 'Deck Number',
+		value: 'deckNumber'
+	},{
+		label: 'SRT',
+		value: 'srt'
+	},{
+		label: 'Invoice SRT',
+		value: 'invoiceSRT'
+	},{
+		label: 'Rebilling',
+		value: 'rebilling'
+	},{
+		label: 'RC',
+		value: 'rc'
+	},{
+		label: 'Invoice Client',
+		value: 'invoiceClient'
+	},{
+		label: 'Payment Nafinas',
+		value: 'paymentNafinas'
+	}];
+
+	
+	fields.push({label:"CarrierMX Name",value:"carrierMX.name"});
+	fields.push({label:"CarrierMX Invoice",value:"carrierMX.invoice"});
+	fields.push({label:"CarrierMX Date",value:"carrierMX.date"});
+	fields.push({label:"CarrierMX Cost",value:"carrierMX.cost"});
+	fields.push({label:"CarrierMX Payment Date",value:"carrierMX.paymentDate"});
+	fields.push({label:"CarrierMX Status",value:"carrierMX.status"});
+	fields.push({label:"CarrierUS Name",value:"carrierUS.name"});
+	fields.push({label:"CarrierUS Invoice",value:"carrierUS.invoice"});
+	fields.push({label:"CarrierUS Date",value:"carrierUS.date"});
+	fields.push({label:"CarrierUS Cost",value:"carrierUS.cost"});
+	fields.push({label:"CarrierUS Payment Date",value:"carrierUS.paymentDate"});
+	fields.push({label:"CarrierUS Status",value:"carrierUS.status"});
+	fields.push({label:"Transfer Name",value:"transfer.name"});
+	fields.push({label:"Transfer Invoice",value:"transfer.invoice"});
+	fields.push({label:"Transfer Date",value:"transfer.date"});
+	fields.push({label:"Transfer Cost",value:"transfer.cost"});
+	fields.push({label:"Transfer Payment Date",value:"transfer.paymentDate"});
+	fields.push({label:"Transfer Status",value:"transfer.status"});
+	fields.push({label:"Cross Name",value:"cross.name"});
+	fields.push({label:"Cross Invoice",value:"cross.invoice"});
+	fields.push({label:"Cross Date",value:"cross.date"});
+	fields.push({label:"Cross Cost",value:"cross.cost"});
+	fields.push({label:"Cross Payment Date",value:"cross.paymentDate"});
+	fields.push({label:"Cross Status",value:"cross.status"});
+	fields.push({label:"Empty Name",value:"empty.name"});
+	fields.push({label:"Empty Invoice",value:"empty.invoice"});
+	fields.push({label:"Empty Date",value:"empty.date"});
+	fields.push({label:"Empty Cost",value:"empty.cost"});
+	fields.push({label:"Empty Payment Date",value:"empty.paymentDate"});
+	fields.push({label:"Empty Status",value:"empty.status"});
+	fields.push({label:"Actual Price",value:"actualPrice"});
+	fields.push({label:"Total Sale",value:"totalSale"});
+	fields.push({label:"Profit",value:"margin"});
+	fields.push({label:"Notes",value:"notes"});
+
+	return fields;
 }
