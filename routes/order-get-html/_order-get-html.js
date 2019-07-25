@@ -390,7 +390,7 @@ const exportExcel = function(results, callback){
 	const opts = { fields };
 
 	try {
-		const csv = json2csv(results, opts);
+		const csv = json2csv(results[0].decks, opts);
 		callback(csv);
 	} catch (err) {
 		console.error(err);
