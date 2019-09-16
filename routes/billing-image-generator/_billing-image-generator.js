@@ -61,7 +61,7 @@ const main = function(request, decoded, callback){
 	}
 
 	if (request.query.destination){
-		query.origin = request.query.destination
+		query.destiny = request.query.destination
 	}
 
 	if (request.query.isDelivered){
