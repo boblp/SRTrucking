@@ -29,8 +29,7 @@ module.exports.handler = function(request, h){
 const main = function(request, decoded, callback){
 	const collection = request.mongo.db.collection(collectionName);
 	const query = {
-		deleted: false,
-		"decks.POD": { $eq: '' }
+		deleted: false
 	};
 
 	if(request.query.id){
