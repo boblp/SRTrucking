@@ -39,7 +39,6 @@ const main = function(request, decoded, callback){
 	};
 
 	const deckQuery = {
-		POD: { $eq: '' },
         rc: { $eq: '' },
         paymentNafinas: { $eq: '' },
         invoice: { $eq: ''}
