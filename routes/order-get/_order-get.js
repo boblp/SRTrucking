@@ -55,6 +55,16 @@ const main = function(request, decoded, callback){
 			}
 		};
 		query["decks.status"] = "delivered";
+	}else{
+		query.decks = {
+			$not: {
+				$elemMatch:{
+					"status": {
+			           $eq: "delivered"
+			        }
+				}
+			}
+		};
 	}
 
 	if(request.query.type){

@@ -43,7 +43,7 @@ const main = function(request, decoded, callback){
 	if(request.query.createdAt){
 		query.createdAt = request.query.createdAt
 	}
-
+	
 	if(request.query.delivered){
 		query.decks = {
 			$not: {
@@ -55,6 +55,16 @@ const main = function(request, decoded, callback){
 			}
 		};
 		query["decks.status"] = "delivered";
+	}else{
+		query.decks = {
+			$not: {
+				$elemMatch:{
+					"status": {
+			           $eq: "delivered"
+			        }
+				}
+			}
+		};
 	}
 
 	if(request.query.type){
