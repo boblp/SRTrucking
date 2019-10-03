@@ -61,6 +61,8 @@ const main = function(request, callback){
 
 	if (request.query.hasClientInvoice){
 		deckQuery.invoiceClient = { $ne: '' };
+	}else{
+		deckQuery.invoiceClient = { $eq: '' };
 	}
 
 	var pipeline = [{
