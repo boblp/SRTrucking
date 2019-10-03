@@ -353,7 +353,7 @@ const main = function(request, decoded, callback){
 				var html='';
 				var notes = '';
 
-				if(result[0].creationNotes != undefined && result[0].creationNotes == ''){
+				if(result[0].creationNotes != undefined && result[0].creationNotes != ''){
 					notes = result[0].creationNotes;
 				}else{
 					notes = "No notes included, perhaps <b>"+result[0].lastModifier+"</b> has more details.";
