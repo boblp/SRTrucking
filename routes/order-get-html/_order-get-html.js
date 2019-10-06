@@ -55,16 +55,6 @@ const main = function(request, decoded, callback){
 			}
 		};
 		query["decks.status"] = "delivered";
-	}else{
-		query.decks = {
-			$not: {
-				$elemMatch:{
-					"status": {
-			           $eq: "delivered"
-			        }
-				}
-			}
-		};
 	}
 
 	if(request.query.type){
@@ -91,6 +81,7 @@ const main = function(request, decoded, callback){
 		query.createdAt = { $gt: queryDate };
 	}
 	console.log(JSON.stringify(query));
+
 	collection.find(query).toArray(function(err, result) {
 		if(err){ callback(err); }else{
 			if(request.query.returnExcel){
