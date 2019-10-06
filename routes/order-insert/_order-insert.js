@@ -196,6 +196,9 @@ var addDeck = function(id, srt, time, callback) {
 		plates: '',
 		state: '',
 		vendorPaymentStatus: 'false',
-		clientPaymentStatus: 'false'
+		clientPaymentStatus: 'false',
+		deliveryDate: '',
+		clientRepresentative: '',
+		model: ''
     });
 };
