@@ -49,8 +49,6 @@ const main = function(request, callback){
 
 	if (request.query.isDelivered){
 		deckQuery.status = 'delivered'
-	}else{
-		deckQuery.status = { $ne: 'delivered' };
 	}
 
 	if (request.query.missingClientInvoice){
