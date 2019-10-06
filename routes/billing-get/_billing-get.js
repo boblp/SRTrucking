@@ -148,6 +148,9 @@ const csvFields = function(){
 		label: 'Invoice Client',
 		value: 'invoiceClient'
 	},{
+		label: 'Invoice Vendor',
+		value: 'invoiceVendor'
+	},{
 		label: 'Payment Nafinas',
 		value: 'paymentNafinas'
 	}];
