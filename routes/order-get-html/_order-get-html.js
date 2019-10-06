@@ -119,7 +119,9 @@ const main = function(request, decoded, callback){
 								"<td class='import_table export_table national_table'><input type='text' class='browser-default  input-table' name='srt' value='"+result[0].decks[i].srt+"'></td>"+
 								"<td class='export_table national_table'><input type='text' class='browser-default timepicker input-table' name='timeWindow' value='"+moment(result[0].decks[i].timeWindow, 'hh:mmA').format('hh:mmA')+"'></td>"+
 								"<td class='import_table'><input type='text' class='browser-default  input-table' name='documentsDate' value='"+result[0].decks[i].documentsDate+"'></td>"+
-								"<td class='import_table export_table national_table'><input type='text' class='browser-default "+(result[0].decks[i].invoice == '' ? 'red' : '')+"  input-table' name='invoice' value='"+result[0].decks[i].invoice+"'></td>"+
+								"<td class='import_table export_table national_table'><input type='text' class='browser-default "+(result[0].decks[i].invoiceSRT == '' ? 'red' : '')+"  input-table' name='invoiceSRT' value='"+result[0].decks[i].invoiceSRT+"'></td>"+
+								"<td class='import_table export_table national_table'><input type='text' class='browser-default "+(result[0].decks[i].invoiceClient == '' ? 'red' : '')+"  input-table' name='invoiceClient' value='"+result[0].decks[i].invoiceClient+"'></td>"+
+								"<td class='import_table export_table national_table'><input type='text' class='browser-default "+(result[0].decks[i].invoiceVendor == '' ? 'red' : '')+"  input-table' name='invoiceVendor' value='"+result[0].decks[i].invoiceVendor+"'></td>"+
 								"<td class='import_table'><input type='text' class='browser-default  input-table' name='teamUS' value='"+result[0].decks[i].teamUS+"'></td>"+
 								"<td class='import_table'><input type='text' class='browser-default  input-table' name='teamMX' value='"+result[0].decks[i].teamMX+"'></td>"+
 								"<td class='import_table'><input type='text' class='browser-default  input-table' name='vehicleType' value='"+result[0].decks[i].vehicleType+"'></td>"+
@@ -217,6 +219,7 @@ const main = function(request, decoded, callback){
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='empty.paymentDate' value='"+result[0].decks[i].empty.paymentDate+"'></td>"+
 									"<td><input type='text' class='browser-default input-table' name='invoiceSRT' value='"+result[0].decks[i].invoiceSRT+"'></td>"+
 									"<td><input type='text' class='browser-default input-table' name='invoiceClient' value='"+result[0].decks[i].invoiceClient+"'></td>"+
+									"<td><input type='text' class='browser-default input-table' name='invoiceVendor' value='"+result[0].decks[i].invoiceVendor+"'></td>"+
 									"<td><input type='text' class='browser-default input-table' name='rc' value='"+result[0].decks[i].rc+"'></td>"+
 									"<td><input type='text' class='browser-default input-table datepicker dateTable' name='paymentNafinas' value='"+result[0].decks[i].paymentNafinas+"'></td>"+
 									"<td><input type='text' class='browser-default input-table' name='rebilling' value='"+result[0].decks[i].rebilling+"'></td>";
