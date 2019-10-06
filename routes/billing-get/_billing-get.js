@@ -35,9 +35,7 @@ const main = function(request, callback){
 		deleted: false
 	};
 
-	const deckQuery = {
-        invoice: { $eq: ''}
-	};
+	const deckQuery = {};
 
 	if (request.query.origin){
 		query.origin = request.query.origin
@@ -98,7 +96,7 @@ const main = function(request, callback){
 				var data = {
 					totalSale : 0,
 					actualPrice : 0,
-					margin : 0
+					margin : 0,
 				};
 
 				result.forEach(function(element) {
@@ -107,6 +105,7 @@ const main = function(request, callback){
 					data.margin += parseInt(element.margin);
 				});
 
+				data.totalRecords = result.length;
 				data.decks = result;
 
 				callback(data);

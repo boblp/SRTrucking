@@ -93,7 +93,6 @@ var addDeck = function(id, srt, time, callback) {
 		srt: "SRT"+srt,
 		timeWindow: moment(time, 'hh:mmA').add(id+1, 'hour').format('hh:mmA'),
 		documentsDate: '',
-		invoice: '',
 		teamUS: '',
 		teamMX: '',
 		vehicleType: '',
@@ -164,6 +163,7 @@ var addDeck = function(id, srt, time, callback) {
 
 		invoiceSRT: '',
 		invoiceClient: '',
+		invoiceVendor: '',
 		rc: '',
 		paymentNafinas: '',
 		rebilling: '',
