@@ -31,12 +31,11 @@ const main = function(request, callback){
 
 	const query = {
 		origin: { $ne: '' },
-		destiny: { $ne: '' }
+		destiny: { $ne: '' },
+		deleted: false
 	};
 
 	const deckQuery = {
-        rc: { $eq: '' },
-        paymentNafinas: { $eq: '' },
         invoice: { $eq: ''}
 	};
 
@@ -54,15 +53,12 @@ const main = function(request, callback){
 		deckQuery.status = { $ne: 'delivered' };
 	}
 
-	if (request.query.hasRC){
-		deckQuery.rc = { $ne: '' };
-		deckQuery.paymentNafinas = { $ne: '' };
+	if (request.query.missingClientInvoice){
+		deckQuery.invoiceClient = { $eq: '' };
 	}
 
-	if (request.query.hasClientInvoice){
-		deckQuery.invoiceClient = { $ne: '' };
-	}else{
-		deckQuery.invoiceClient = { $eq: '' };
+	if (request.query.missingVendorInvoice){
+		deckQuery.invoiceVendor = { $eq: '' };
 	}
 
 	var pipeline = [{
@@ -80,6 +76,19 @@ const main = function(request, callback){
 	},{
 	    $match: deckQuery
 	}];
+
+	if(request.query.missingRCNafinas){
+		var rcQuery = { 
+			$match: { 
+				$or: [{ 
+					rc: { $eq: '' }, 
+					paymentNafinas: { $eq: '' } 
+				}] 
+			} 
+		}
+
+		pipeline.push(rcQuery);
+	}
 
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ callback(err); }else{
