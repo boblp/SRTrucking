@@ -200,6 +200,7 @@ const main = function(request, decoded, callback){
 								"<tr data-id='"+result[0].decks[i].id+"' class='order_table_master_row'>"+
 									"<td>"+result[0].decks[i].deckNumber+"</td>"+
 									"<td><input type='text' class='browser-default  input-table' name='srt' value='"+result[0].decks[i].srt+"'></td>"+
+									"<td class='import_table export_table'><input type='text' class='browser-default  input-table' name='notes' value='"+result[0].decks[i].notes+"'></td>"+
 									"<td class='cross_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].cross.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='cross.invoice' value='"+result[0].decks[i].cross.invoice+"'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='cross.date' value='"+result[0].decks[i].cross.date+"'></td>"+
