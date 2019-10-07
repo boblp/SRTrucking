@@ -80,6 +80,19 @@ const main = function(request, decoded, callback){
 		let queryDate = moment().subtract(request.query.daysBack, 'days').format("YYYY-MM-DD");
 		query.createdAt = { $gt: queryDate };
 	}
+
+	if(request.query.invoiceSearch){
+        query.$or = [{
+            "decks.invoiceClient": { "$regex" : ".*"+request.query.invoiceSearch+".*"} 
+        }, {
+        	"decks.invoiceVendor": { "$regex" : ".*"+request.query.invoiceSearch+".*"} 
+        }, {
+        	"decks.invoiceSRT": { "$regex" : ".*"+request.query.invoiceSearch+".*"}
+        }, {
+        	"decks.srt": { "$regex" : ".*"+request.query.invoiceSearch+".*"}
+        }]
+	}
+
 	console.log(JSON.stringify(query));
 
 	collection.find(query).toArray(function(err, result) {

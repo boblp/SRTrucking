@@ -17,6 +17,7 @@ module.exports = {
 				mineOnly: joi.boolean(),
 				id: joi.string(),
 				get_type: joi.string(),
+				invoiceSearch: joi.string(),
 				viewComplete: joi.boolean().default(false).description('View complete orders'),
 				delivered: joi.boolean().description('View delivered orders'),
 				daysBack: joi.number().description('Days to look back'),
