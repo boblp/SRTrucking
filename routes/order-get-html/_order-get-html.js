@@ -531,6 +531,9 @@ const csvFields = function(type){
 	fields.push({label:"Extra Name",value:"extraName"});
 	fields.push({label:"Extra",value:"extra"});
 	fields.push({label:"Driver",value:"driver"});
+	fields.push({label:"Actual Price",value:"actualPrice"});
+	fields.push({label:"Total Sale",value:"totalSale"});
+	fields.push({label:"Profit",value:"margin"});
 	fields.push({label:"Notes",value:"notes"});
 
 	return fields;
