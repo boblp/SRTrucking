@@ -85,11 +85,21 @@ const main = function(request, decoded, callback){
         query.$or = [{
             "decks.invoiceClient": { "$regex" : ".*"+request.query.invoiceSearch+".*"} 
         }, {
-        	"decks.invoiceVendor": { "$regex" : ".*"+request.query.invoiceSearch+".*"} 
-        }, {
         	"decks.invoiceSRT": { "$regex" : ".*"+request.query.invoiceSearch+".*"}
         }, {
         	"decks.srt": { "$regex" : ".*"+request.query.invoiceSearch+".*"}
+        },{
+        	"decks.cross.invoice": { "$regex" : ".*"+request.query.invoiceSearch+".*"} 
+        },{
+        	"decks.carrierMX.invoice": { "$regex" : ".*"+request.query.invoiceSearch+".*"} 
+        }, {
+        	"decks.carrierUS.invoice": { "$regex" : ".*"+request.query.invoiceSearch+".*"} 
+        }, {
+        	"decks.transfer.invoice": { "$regex" : ".*"+request.query.invoiceSearch+".*"} 
+        }, {
+        	"decks.local.invoice": { "$regex" : ".*"+request.query.invoiceSearch+".*"} 
+        }, {
+        	"decks.empty.invoice": { "$regex" : ".*"+request.query.invoiceSearch+".*"} 
         }]
 	}
 

@@ -53,9 +53,10 @@ const main = function(request, callback){
 		deckQuery.invoiceClient = { $eq: '' };
 	}
 
-	if (request.query.missingVendorInvoice){
-		deckQuery.invoiceVendor = { $eq: '' };
-	}
+	//if (request.query.missingVendorInvoice){
+	//	deckQuery.cross = { invoice: { $eq: '' }};
+	//	deckQuery.empty = { invoice: { $eq: '' }};
+	//}
 
 	if(request.query.hasPOD){
 		deckQuery.POD = { $ne: "" };
