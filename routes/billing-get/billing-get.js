@@ -17,6 +17,7 @@ module.exports = {
 				missingRCNafinas: joi.boolean().default(false).description('Searches by RC'),
 				missingClientInvoice: joi.boolean().default(false).description('Searches by clientInvoice'),
 				missingVendorInvoice: joi.boolean().default(false).description('Searches by vendorInvoice'),
+				hasPOD: joi.boolean().default(false).description('Searches by POD'),
 				returnExcel: joi.boolean().default(false).description('returns an excel'),
 			}, 
 			failAction: async (request, h, err) => {

@@ -57,6 +57,10 @@ const main = function(request, callback){
 		deckQuery.invoiceVendor = { $eq: '' };
 	}
 
+	if(request.query.hasPOD){
+		deckQuery.POD = { $ne: "" };
+	}
+
 	var pipeline = [{
 	    $match: query
 	},{
@@ -85,6 +89,8 @@ const main = function(request, callback){
 
 		pipeline.push(rcQuery);
 	}
+
+	console.log(JSON.stringify(pipeline));
 
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ callback(err); }else{
