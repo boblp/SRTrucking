@@ -205,33 +205,22 @@ const main = function(request, decoded, callback){
 						}else{
 							orderTable += 
 								"<tr data-id='"+result[0].decks[i].id+"' class='order_table_master_row'>"+
+									"<td><button type='text' class='browser-default'>*</button></td>"+
 									"<td>"+result[0].decks[i].deckNumber+"</td>"+
 									"<td><input type='text' class='browser-default  input-table' name='srt' value='"+result[0].decks[i].srt+"'></td>"+
 									"<td class='import_table export_table'><input type='text' class='browser-default  input-table' name='notes' value='"+result[0].decks[i].notes+"'></td>"+
 									"<td class='cross_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].cross.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='cross.invoice' value='"+result[0].decks[i].cross.invoice+"'></td>"+
-									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='cross.date' value='"+result[0].decks[i].cross.date+"'></td>"+
-									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='cross.paymentDate' value='"+result[0].decks[i].cross.paymentDate+"'></td>"+
 									"<td class='carrierMX_name import_table export_table national_table_mx price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].carrierMX.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table national_table_mx price_listing'><input type='text' class='browser-default input-table' name='carrierMX.invoice' value='"+result[0].decks[i].carrierMX.invoice+"'></td>"+
-									"<td class='import_table export_table national_table_mx price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierMX.date' value='"+result[0].decks[i].carrierMX.date+"'></td>"+
-									"<td class='import_table export_table national_table_mx price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierMX.paymentDate' value='"+result[0].decks[i].carrierMX.paymentDate+"'></td>"+
 									"<td class='carrierUS_name import_table export_table national_table_us price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].carrierUS.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table national_table_us price_listing'><input type='text' class='browser-default input-table' name='carrierUS.invoice' value='"+result[0].decks[i].carrierUS.invoice+"'></td>"+
-									"<td class='import_table export_table national_table_us price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierUS.date' value='"+result[0].decks[i].carrierUS.date+"'></td>"+
-									"<td class='import_table export_table national_table_us price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='carrierUS.paymentDate' value='"+result[0].decks[i].carrierUS.paymentDate+"'></td>"+
 									"<td class='transfer_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].transfer.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='transfer.invoice' value='"+result[0].decks[i].transfer.invoice+"'></td>"+
-									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='transfer.date' value='"+result[0].decks[i].transfer.date+"'></td>"+
-									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='transfer.paymentDate' value='"+result[0].decks[i].transfer.paymentDate+"'></td>"+
 									"<td class='local_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].local.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='local.invoice' value='"+result[0].decks[i].local.invoice+"'></td>"+
-									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='local.date' value='"+result[0].decks[i].local.date+"'></td>"+
-									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='local.paymentDate' value='"+result[0].decks[i].local.paymentDate+"'></td>"+
 									"<td class='empty_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].empty.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='empty.invoice' value='"+result[0].decks[i].empty.invoice+"'></td>"+
-									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='empty.date' value='"+result[0].decks[i].empty.date+"'></td>"+
-									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='empty.paymentDate' value='"+result[0].decks[i].empty.paymentDate+"'></td>"+
 									"<td class='extraName import_table export_table'><input type='string' class='browser-default input-table' name='extraName' value='"+(!result[0].decks[i].extraName ? "" : result[0].decks[i].extraName)+"' list='vendor_options'></td>"+
 								    "<td class='import_table export_table'><input type='text' class='browser-default  input-table' name='extra' value='"+result[0].decks[i].extra+"'></td>"+
 									"<td><input type='text' class='browser-default input-table' name='invoiceSRT' value='"+result[0].decks[i].invoiceSRT+"'></td>"+
