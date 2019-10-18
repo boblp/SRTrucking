@@ -232,12 +232,14 @@ const main = function(request, decoded, callback){
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='empty.invoice' value='"+result[0].decks[i].empty.invoice+"'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='empty.date' value='"+result[0].decks[i].empty.date+"'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table datepicker dateTable' name='empty.paymentDate' value='"+result[0].decks[i].empty.paymentDate+"'></td>"+
+									"<td class='extraName import_table export_table'><input type='string' class='browser-default input-table' name='extraName' value='"+(!result[0].decks[i].extraName ? "" : result[0].decks[i].extraName)+"' list='vendor_options'></td>"+
+								    "<td class='import_table export_table'><input type='text' class='browser-default  input-table' name='extra' value='"+result[0].decks[i].extra+"'></td>"+
 									"<td><input type='text' class='browser-default input-table' name='invoiceSRT' value='"+result[0].decks[i].invoiceSRT+"'></td>"+
-									"<td><input type='text' class='browser-default input-table' name='invoiceClient' value='"+result[0].decks[i].invoiceClient+"'></td>"+
+									"<td><input type='text' class='browser-default input-table' name='rebilling' value='"+result[0].decks[i].rebilling+"'></td>"+
 									// "<td><input type='text' class='browser-default input-table' style='display:none;' name='invoiceVendor' value='"+result[0].decks[i].invoiceVendor+"'></td>"+
 									"<td><input type='text' class='browser-default input-table' name='rc' value='"+result[0].decks[i].rc+"'></td>"+
 									"<td><input type='text' class='browser-default input-table datepicker dateTable' name='paymentNafinas' value='"+result[0].decks[i].paymentNafinas+"'></td>"+
-									"<td><input type='text' class='browser-default input-table' name='rebilling' value='"+result[0].decks[i].rebilling+"'></td>";
+									"<td><input type='text' class='browser-default input-table' name='invoiceClient' value='"+result[0].decks[i].invoiceClient+"'></td>";
 									// "<td style='display:none;'>"+
 									// 	"<div class='file-field input-field'>"+
 									// 		"<div class='btn'>"+
