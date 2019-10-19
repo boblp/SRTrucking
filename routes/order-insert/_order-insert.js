@@ -141,8 +141,14 @@ var addDeck = function(id, srt, time, callback) {
 			paymentDate: '',
 			status: 'Not Started'
 		},
-		extra: '',
-		extraName: '',
+		extra: {
+			name: '',
+			invoice: '',
+			date: '',
+			cost: 0,
+			paymentDate: '',
+			status: 'Not Started'
+		},
 		empty: {
 			name: '',
 			invoice: '',

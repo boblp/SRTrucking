@@ -28,7 +28,7 @@ const main = function(request, callback){
 	const password = request.query.password;
 
 	const query = {
-		email: user,
+		email: user.toLowerCase(),
 		disabled: false
 	};
 

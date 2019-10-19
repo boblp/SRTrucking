@@ -33,7 +33,7 @@ const main = function(decoded, request, callback){
 	let response = '';
 
 	const name = request.query.name;
-	const email = request.query.email;
+	const email = request.query.email.toLowerCase();
 	const password = request.query.password;
 	const level = request.query.level;
 
