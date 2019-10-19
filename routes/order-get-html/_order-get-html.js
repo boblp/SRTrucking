@@ -160,8 +160,8 @@ const main = function(request, decoded, callback){
 								"<td class='empty_name price_listing import_table export_table'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].empty.name+"' list='vendor_options'></td>"+
 								"<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table' name='empty.invoice' value='"+result[0].decks[i].empty.invoice+"'></td>"+
 								// "<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table cost_master' name='empty.cost' value='"+result[0].decks[i].empty.cost+"'></td>"+
-								"<td class='extraName import_table export_table national_table extra_table'><input type='string' class='browser-default input-table' name='extraName' value='"+(!result[0].decks[i].extraName ? "" : result[0].decks[i].extraName)+"' list='vendor_options'></td>"+
-								"<td class='import_table export_table national_table extra_table'><input type='text' class='browser-default  input-table' name='extra' value='"+result[0].decks[i].extra+"'></td>"+
+								"<td class='extra.name import_table export_table national_table price_listing'><input type='string' class='browser-default input-table' name='extra.name' value='"+(!result[0].decks[i].extra.name ? "" : result[0].decks[i].extra.name)+"' list='vendor_options'></td>"+
+								"<td class='import_table export_table national_table price_listing'><input type='text' class='browser-default  input-table' name='extra.invoice' value='"+result[0].decks[i].extra.invoice+"'></td>"+
 								// "<td class='export_table'><input type='text' class='browser-default  input-table' name='documentsStatus' value='"+result[0].decks[i].documentsStatus+"'></td>"+
 								"<td class='export_table'><select class='browser-default "+(result[0].decks[i].documentsStatus == 'Pending' ? 'red white-text' : 'green white-text')+"' name='documentsStatus'>";
 								if(result[0].decks[i].documentsStatus == 'Pending' || result[0].decks[i].documentsStatus == '' || typeof result[0].decks[i].documentsStatus == 'undefined'){
@@ -208,21 +208,21 @@ const main = function(request, decoded, callback){
 									"<td><button type='text' class='browser-default view_deck' data-id='"+result[0].decks[i].id+"' data-order-id='"+result[0]._id+"'>*</button></td>"+
 									"<td>"+result[0].decks[i].deckNumber+"</td>"+
 									"<td><input type='text' class='browser-default  input-table' name='srt' value='"+result[0].decks[i].srt+"'></td>"+
-									"<td class='import_table export_table'><input type='text' class='browser-default  input-table' name='notes' value='"+result[0].decks[i].notes+"'></td>"+
+									"<td><input type='text' class='browser-default  input-table' name='notes' value='"+result[0].decks[i].notes+"'></td>"+
 									"<td class='cross_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].cross.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='cross.invoice' value='"+result[0].decks[i].cross.invoice+"'></td>"+
-									"<td class='carrierMX_name import_table export_table national_table_mx price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].carrierMX.name+"' list='vendor_options'></td>"+
+									"<td class='carrierMX_name import_table export_table national_table_mx price_listing'><input type='string' class='browser-default input-table' name='carrierMX.name' value='"+result[0].decks[i].carrierMX.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table national_table_mx price_listing'><input type='text' class='browser-default input-table' name='carrierMX.invoice' value='"+result[0].decks[i].carrierMX.invoice+"'></td>"+
-									"<td class='carrierUS_name import_table export_table national_table_us price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].carrierUS.name+"' list='vendor_options'></td>"+
+									"<td class='carrierUS_name import_table export_table national_table_us price_listing'><input type='string' class='browser-default input-table' name='carrierUS.name' value='"+result[0].decks[i].carrierUS.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table national_table_us price_listing'><input type='text' class='browser-default input-table' name='carrierUS.invoice' value='"+result[0].decks[i].carrierUS.invoice+"'></td>"+
-									"<td class='transfer_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].transfer.name+"' list='vendor_options'></td>"+
+									"<td class='transfer_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='transfer.name' value='"+result[0].decks[i].transfer.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='transfer.invoice' value='"+result[0].decks[i].transfer.invoice+"'></td>"+
-									"<td class='local_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].local.name+"' list='vendor_options'></td>"+
+									"<td class='local_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='local.name' value='"+result[0].decks[i].local.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='local.invoice' value='"+result[0].decks[i].local.invoice+"'></td>"+
 									"<td class='empty_name import_table export_table price_listing'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].empty.name+"' list='vendor_options'></td>"+
 									"<td class='import_table export_table price_listing'><input type='text' class='browser-default input-table' name='empty.invoice' value='"+result[0].decks[i].empty.invoice+"'></td>"+
-									"<td class='extraName import_table export_table'><input type='string' class='browser-default input-table' name='extraName' value='"+(!result[0].decks[i].extraName ? "" : result[0].decks[i].extraName)+"' list='vendor_options'></td>"+
-								    "<td class='import_table export_table'><input type='text' class='browser-default  input-table' name='extra' value='"+result[0].decks[i].extra+"'></td>"+
+									"<td class='extra_name import_table export_table national_table price_listing'><input type='string' class='browser-default input-table' name='extra.name' value='"+(!result[0].decks[i].extra.name ? "" : result[0].decks[i].extra.name)+"' list='vendor_options'></td>"+
+								    "<td class='import_table export_table national_table price_listing'><input type='text' class='browser-default  input-table' name='extra.invoice' value='"+result[0].decks[i].extra.invoice+"'></td>"+
 									"<td><input type='text' class='browser-default input-table' name='invoiceSRT' value='"+result[0].decks[i].invoiceSRT+"'></td>"+
 									"<td><input type='text' class='browser-default input-table' name='rebilling' value='"+result[0].decks[i].rebilling+"'></td>"+
 									// "<td><input type='text' class='browser-default input-table' style='display:none;' name='invoiceVendor' value='"+result[0].decks[i].invoiceVendor+"'></td>"+
@@ -310,6 +310,7 @@ const main = function(request, decoded, callback){
 									"<td class='import_table export_table'><input type='number' class='browser-default input-table cost_master' name='transfer.cost' value='"+result[0].decks[i].transfer.cost+"'></td>"+
 									"<td class='import_table export_table'><input type='number' class='browser-default input-table cost_master' name='local.cost' value='"+result[0].decks[i].local.cost+"'></td>"+
 									"<td class='import_table export_table'><input type='number' class='browser-default input-table cost_master' name='empty.cost' value='"+result[0].decks[i].empty.cost+"'></td>"+
+									"<td class='import_table export_table national_table'><input type='number' class='browser-default input-table cost_master' name='extra.cost' value='"+result[0].decks[i].extra.cost+"'></td>"+
 									"<td><input type='number' class='browser-default input-table' name='actualPrice' value='"+result[0].decks[i].actualPrice+"' readonly></td>"+
 									"<td><input type='number' class='browser-default input-table' name='totalSale' value='"+result[0].decks[i].totalSale+"'></td>"+
 									"<td><input type='number' class='browser-default input-table' name='margin' value='"+result[0].decks[i].margin+"' readonly></td>";
