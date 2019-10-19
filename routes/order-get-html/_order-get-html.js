@@ -205,7 +205,7 @@ const main = function(request, decoded, callback){
 						}else{
 							orderTable += 
 								"<tr data-id='"+result[0].decks[i].id+"' class='order_table_master_row'>"+
-									"<td><button type='text' class='browser-default'>*</button></td>"+
+									"<td><button type='text' class='browser-default view_deck' data-id='"+result[0].decks[i].id+"' data-order-id='"+result[0]._id+"'>*</button></td>"+
 									"<td>"+result[0].decks[i].deckNumber+"</td>"+
 									"<td><input type='text' class='browser-default  input-table' name='srt' value='"+result[0].decks[i].srt+"'></td>"+
 									"<td class='import_table export_table'><input type='text' class='browser-default  input-table' name='notes' value='"+result[0].decks[i].notes+"'></td>"+
