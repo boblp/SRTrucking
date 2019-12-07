@@ -82,8 +82,8 @@ const updateDeck = function(request, id, data, collection, callback){
 							cb2();
 						}else{
 							console.log(result[0]);
-							newData['decks.$.scac'] = (result[0].scac === undefined ? '' : result[0].scac);
-							newData['decks.$.caat'] = (result[0].caat === undefined ? '' : result[0].caat);
+							newData['decks.$.scac'] = (typeof result[0].scac === undefined ? '' : result[0].scac);
+							newData['decks.$.caat'] = (typeof result[0].caat === undefined ? '' : result[0].caat);
 							cb2();
 						}
 					});
