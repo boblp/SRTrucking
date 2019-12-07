@@ -67,22 +67,27 @@ const updateDeck = function(request, id, data, collection, callback){
 		if(key != 'id' && key != 'cross' && key != 'carrierMX' && key != 'carrierUS' && key != 'transfer' && key != 'local' && key != 'empty'){
 			newData['decks.$.'+key] = dataRow.trim();
 			if(key == 'cross.name'){
-				const collectionName2 = config.collections.vendors;
-				const collection2 = request.mongo.db.collection(collectionName2);
-				const query2 = {
-					disabled : false,
-					name : dataRow.trim()
-				};
-				collection2.find(query2).toArray(function(err, result) {
-					if(err){
-						cb2();
-					}else{
-						console.log(result[0]);
-						newData['decks.$.scac'] = (result[0].scac === undefined ? '' : result[0].scac);
-						newData['decks.$.caat'] = (result[0].caat === undefined ? '' : result[0].caat);
-						cb2();
-					}
-				});
+				if(dataRow.trim()==""){
+					cb2();
+				}else{
+					console.log("Cross Name "+dataRow.trim());
+					const collectionName2 = config.collections.vendors;
+					const collection2 = request.mongo.db.collection(collectionName2);
+					const query2 = {
+						disabled : false,
+						name : dataRow.trim()
+					};
+					collection2.find(query2).toArray(function(err, result) {
+						if(err){
+							cb2();
+						}else{
+							console.log(result[0]);
+							newData['decks.$.scac'] = (result[0].scac === undefined ? '' : result[0].scac);
+							newData['decks.$.caat'] = (result[0].caat === undefined ? '' : result[0].caat);
+							cb2();
+						}
+					});
+				}
 			}else{
 				cb2();
 			}
