@@ -186,6 +186,7 @@ const main = function(request, decoded, callback){
 									
 								}
 								orderTable += "</select</td>"+
+								"<td class='import_table export_table national_table'><input type='text' class='browser-default input-table datepicker dateTable' name='deliveryDate' value='"+result[0].decks[i].deliveryDate+"'></td>"+
 								"<td class='import_table export_table national_table'><input type='text' class='browser-default  input-table' name='notes' value='"+result[0].decks[i].notes+"'></td>"+
 								"<td class='national_table'><input type='text' class='browser-default  input-table' name='tractor' value='"+result[0].decks[i].tractor+"'></td>"+
 								"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].instructionsLetter_file ? "<input type='file' data-name='instructionsLetter' data-value='"+result[0].decks[i].id+"' name='instructionsLetter_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].instructionsLetter_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
@@ -195,7 +196,6 @@ const main = function(request, decoded, callback){
 								"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].clientInvoiceXml_file ? "<input type='file' data-name='clientInvoiceXml' data-value='"+result[0].decks[i].id+"' name='clientInvoiceXml_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].clientInvoiceXml_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
 								"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px'>"+(!result[0].decks[i].releaseOrder_file ? "<input type='file' data-name='releaseOrder' data-value='"+result[0].decks[i].id+"' name='releaseOrder_file' class='file-path-order-view'>" : "<a target='_blank' href='"+ result[0].decks[i].releaseOrder_file +"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a>")+"</td>"+
 								"<td class='import_table export_table national_table extra_table'><input type='text' class='browser-default input-table' name='driver' value='"+result[0].decks[i].driver+"'></td>"+
-								"<td class='import_table export_table national_table extra_table'><input type='text' class='browser-default input-table datepicker dateTable' name='deliveryDate' value='"+result[0].decks[i].deliveryDate+"'></td>"+
 								"<td class='import_table export_table national_table extra_table'><input type='text' class='browser-default input-table' name='clientRepresentative' value='"+result[0].decks[i].clientRepresentative+"'></td>"+
 								"<td class='import_table export_table national_table extra_table'><input type='text' class='browser-default input-table' name='model' value='"+result[0].decks[i].model+"'></td>"+
 								"<td><input type='number' class='browser-default input-table' name='actualPrice' value='"+result[0].decks[i].actualPrice+"' readonly hidden></td>"+
