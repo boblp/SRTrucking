@@ -74,7 +74,7 @@ const main = function(request, decoded, callback){
 	console.log(JSON.stringify(pipeline));
 
 	collection.aggregate(pipeline, {}, function(err, result) {
-		if(err){ callback(err); }else{
+		if(err){ console.log(err);callback(err); }else{
 			var text = '';
 			var html = '';
 			html += '<table style="font-family:Verdana;width:1000px;height:100px;text-align:center;"><thead style="background: #0B6FA4;"><tr>';
@@ -93,7 +93,11 @@ const main = function(request, decoded, callback){
 			for( var i = 0; i < result.length; i++) {
 				html += '<tr>';
 				for( var j in result[i] ) {
-					html += '<td style="padding:3px 2px;font-size:10px">' + result[i][j] + '</td>';
+					if(typeof result[i][j] === 'object' && result[i][j] !== null){
+						html += '<td style="padding:3px 2px;font-size:10px">' + result[i][j].name + '</td>';
+					}else{
+						html += '<td style="padding:3px 2px;font-size:10px">' + result[i][j] + '</td>';
+					}
 				}
 			}
 
