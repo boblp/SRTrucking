@@ -158,6 +158,7 @@ const main = function(request, decoded, callback){
 								"<td class='empty_name price_listing import_table export_table'><input type='string' class='browser-default input-table' name='empty.name' value='"+result[0].decks[i].empty.name+"' list='vendor_options'></td>"+
 								"<td class='hidden price_listing import_table export_table'><input type='number' class='browser-default input-table' name='empty.invoice' value='"+result[0].decks[i].empty.invoice+"'></td>"+
 								// "<td class='price_listing import_table export_table'><input type='number' class='browser-default input-table cost_master' name='empty.cost' value='"+result[0].decks[i].empty.cost+"'></td>"+
+								"<td><button type='text' class='browser-default edit_dates' data-id='"+result[0].decks[i].id+"' data-order-id='"+result[0]._id+"'>Dates</button></td>"+
 								"<td class='extra_name import_table export_table national_table price_listing'><input type='string' class='browser-default input-table' name='extra.name' value='"+(!result[0].decks[i].extra.name ? "" : result[0].decks[i].extra.name)+"' list='vendor_options'></td>"+
 								"<td class='hidden import_table export_table national_table price_listing'><input type='text' class='browser-default  input-table' name='extra.invoice' value='"+result[0].decks[i].extra.invoice+"'></td>"+
 								// "<td class='export_table'><input type='text' class='browser-default  input-table' name='documentsStatus' value='"+result[0].decks[i].documentsStatus+"'></td>"+
