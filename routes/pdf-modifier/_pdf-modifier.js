@@ -138,7 +138,6 @@ const main = function(request, decoded, callback){
 				// filePath += fileName;
 
 				imagesToPdf([response1], filePath, function(response2){
-					console.log('imgtoPDF');
 					var filePath = 'pdf/combined/';
 					var fileName = 'combinado.pdf';
 					filePath += fileName;
@@ -152,12 +151,10 @@ const main = function(request, decoded, callback){
 					 
 					download(pdf, options, function(err){
 					    if (err) throw err
-					    console.log("PDF downloaded from S3");
 					
 						merge(['pdf/s3/'+fileName,response2],filePath,function(err){
 						        if(err)
 						        return console.log(err);
-						        console.log('Successfully merged!');
 						        callback(filePath);
 						});
 					});
@@ -181,6 +178,5 @@ async function createImageFromHTML(html, count, callback){
 	await page.setContent(html);
 	await page.screenshot({path: filePath, fullPage: true});
 	await browser.close();
-	console.log("El archivo está en: %s",filePath);
 	callback(filePath);
 }

@@ -98,8 +98,6 @@ const main = function(request, decoded, callback){
 	}
 	];
 
-	console.log(JSON.stringify(pipeline));
-
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ callback(err); }else{
 			var text = '';
@@ -141,6 +139,5 @@ async function createImageFromHTML(html, count, callback){
 	await page.setContent(html);
 	await page.screenshot({path: filePath, fullPage: true});
 	await browser.close();
-	console.log("El archivo está en: %s",filePath);
 	callback(filePath);
 }

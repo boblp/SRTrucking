@@ -28,7 +28,6 @@ module.exports.handler = function(request, h){
 
 const main = function(decoded, request, callback){
 	const collection = request.mongo.db.collection(collectionName);
-	console.log(decoded);
 
 	const query = {
 		email: decoded.id
@@ -36,7 +35,6 @@ const main = function(decoded, request, callback){
 
 	collection.findOne(query, function(err, result) {
 		if(err){ callback(err); }else{
-			console.log(result)
 			callback(result);
 		}
 	});

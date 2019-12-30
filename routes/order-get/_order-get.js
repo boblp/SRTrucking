@@ -103,8 +103,6 @@ const main = function(request, decoded, callback){
         }]
 	}
 
-	console.log(JSON.stringify(query));
-
 	collection.find(query).toArray(function(err, result) {
 		if(err){ callback(err); }else{
 			if(request.query.returnExcel){

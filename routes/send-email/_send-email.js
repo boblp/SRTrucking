@@ -71,8 +71,6 @@ const main = function(request, decoded, callback){
 		$project: selectMode(request.query.mode)
 	}];
 
-	console.log(JSON.stringify(pipeline));
-
 	collection.aggregate(pipeline, {}, function(err, result) {
 		if(err){ console.log(err);callback(err); }else{
 			var text = '';
@@ -128,9 +126,6 @@ async function sendEmail(data, html){
 	    text: data.message,
 	    html: data.message + "<br><br>" + html
 	});
-
-	console.log("Message sent: %s", info.messageId);
-	console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
 const selectMode = function(mode){
