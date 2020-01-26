@@ -7,8 +7,10 @@
     "start": "nodemon --exec babel-node server.js --presets es2015"
   },
   "dependencies": {
+    "@sendgrid/mail": "^6.5.0",
     "bcrypt": "^3.0.0",
     "bobtestmodule": "^1.0.8",
+    "dot-object": "^2.1.2",
     "dotenv": "^6.2.0",
     "download": "^7.1.0",
     "download-csv": "^1.1.1",
@@ -17,6 +19,7 @@
     "easy-pdf-merge": "^0.2.1",
     "email-templates": "^5.0.5",
     "excel-export": "^0.5.1",
+    "excel4node": "^1.7.2",
     "fs-extra": "^7.0.0",
     "glob": "^7.1.2",
     "hapi": "^17.8.4",
