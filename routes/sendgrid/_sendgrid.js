@@ -88,15 +88,13 @@ const main = function(decoded, request, callback){
         html: table,
       };
       sgMail.send(msg).then(() => {
-        console.log('Celebrate');
+        callback('success')
       })
       .catch(error => {
-        console.log('Fuck: ', error.toString());
+        console.log(error.toString());
       });
 		}
   });
-			
-    callback('jejex')
 }
 
 const generateTable = (tableStructure) => {
