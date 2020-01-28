@@ -52,13 +52,46 @@ const main = function(decoded, request, callback){
 		deckQuery.push({
 			"decks.deckNumber": deckIds[i]
 		});
-	};
-
+  };
+  
 	if(request.query.deckIds) {
 		insertObject.deckData = request.query.deckData
-	}
+  }
+  
+	// let pipeline = [
+  //   {$match: {_id: ObjectId(request.query.orderId)}},
+  //   { $project: {
+  //       decks: {$filter: {
+  //           input: '$decks',
+  //           as: 'deck',
+  //           // cond: {$eq: ['$$deck.deckNumber', 3]}
+  //           cond: {$eq: deckQuery}
+  //       }},
+  //       "documentsDate": 1,
+  //       "timeWindow": 1,
+  //       "origin": 1,
+  //       "destiny": 1,
+  //       "invoiceClient": 1,
+  //       "flat_or_equipment": 1,
+  //       "carrierMX.name": 1,
+  //       "status": 1,
+  //       "tractor": 1,
+  //       "teamUS": 1,
+  //       "teamMX": 1,
+  //       "type": 1, 
+  //       "scac": 1, 
+  //       "caat": 1,        
+  //       "transfer.name": 1,
+  //       "carrierUS.name": 1,
+  //       "flat": 1,
+  //       "plates": 1,
+  //       "state": 1,
+  //       "equipment": 1, 
+  //       "extra.name": 1
+  //   }}
+  // ];
 
-	let pipeline = [{
+  let pipeline = [{
 		$match: {
       _id: ObjectId(request.query.orderId),
       "$or": deckQuery
@@ -70,6 +103,7 @@ const main = function(decoded, request, callback){
     else {
       let headerLabels = getHeaderLabels(request.query.mode);
       let dataAttributes = getDataAttributes(request.query.mode);
+      result[0].decks = result[0].decks.filter((deck) => request.query.deckIds.includes(deck.deckNumber))
 
       let tableStructure = {
         autoIncrement: true,
@@ -120,23 +154,24 @@ const generateTable = (tableStructure) => {
 				</tr>`
 			}).join('')}
 		</table>
-	`
+  `
 	return table;
 }
 
 const getHeaderLabels = (mode) => {
   switch(mode) { 
     case 'National MX':
-      return ["Fecha de carga", 
-      "Ventana",
-      "Origen",
-      "Destino",
-      "Factura",
-      "#planas o #equipo",
-      "MX Carrier",
-      "Status",
-      "Tractor"
-    ];
+      return [
+        "Fecha de carga", 
+        "Ventana",
+        "Origen",
+        "Destino",
+        "Factura",
+        "#planas o #equipo",
+        "MX Carrier",
+        "Status",
+        "Tractor"
+      ];
     case 'Import':
         return ["Fecha de carga", "Fecha de papeles", "Fecha de cruce", "Origen", "Destino", "Factura", "Equipo USA", "Equipo MX", "Tipo", "SCAC", "CAAT", "Transfer", "Mex. Carr", "Carrier USA", "Status"];
     case 'Export':
@@ -194,7 +229,8 @@ const getDataAttributes = (mode) => {
           "documentsDate",
           "origin", //No es del deck, dot.pick lo busca automaticamente.
 					"destiny", // no es del deck, dot.pick lo busca automaticamente.
-					"timeWindow",
+          "timeWindow",
+          "invoiceClient",
 					"flat",
 					"plates",
           "state",
