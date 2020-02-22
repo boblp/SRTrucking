@@ -171,7 +171,7 @@ const main = function(request, decoded, callback){
 								orderTable +=
 								"</select></td>"+
 								"<td class='import_table export_table national_table status'><select class='browser-default "+statusOptions[result[0].decks[i].status]+"' name='status'>";
-								if(result[0].decks[i].status == ''){
+								if(result[0].decks[i].status == '') {
 									orderTable += "<option value='Not Started' class='white black-text' selected>Not Started</option>";
 								}else{
 									orderTable += "<option value='Not Started' class='white black-text'>Not Started</option>";
@@ -185,8 +185,8 @@ const main = function(request, decoded, callback){
 									
 								}
 								orderTable += "</select</td>"+
-								"<td class='import_table export_table national_table'><input type='text' class='browser-default input-table datepicker dateTable' name='deliveryDate' value='"+result[0].decks[i].deliveryDate+"'></td>"+
 								"<td class='import_table export_table national_table'><input type='text' class='browser-default  input-table' name='notes' value='"+result[0].decks[i].notes+"'></td>"+
+								"<td class='import_table export_table national_table'><input type='text' class='browser-default input-table datepicker dateTable' name='deliveryDate' value='"+result[0].decks[i].deliveryDate+"'></td>"+
 								"<td class='national_table'><input type='text' class='browser-default  input-table' name='tractor' value='"+result[0].decks[i].tractor+"'></td>"+
 								"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px; overflow: hidden'><a target='_blank' href='pdf.php?id="+result[0]._id+"&deckId="+result[0].decks[i].id+"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a></td>"+
 								"<td class='import_table export_table national_table files_table overflow_hidden' style='max-width:104px; overflow: hidden'><a target='_blank' href='pdf_orden_retiro.php?id="+result[0]._id+"&deckId="+result[0].decks[i].id+"'><i class='material-icons blue-text file_icon'>insert_drive_file</i></a></td>"+

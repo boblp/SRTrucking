@@ -45,7 +45,6 @@ const main = function(decoded, request, callback){
 	};
 
 	const deckIds = JSON.parse(request.query.deckIds);
-
 	const deckQuery = []
 
 	for (let i = deckIds.length - 1; i >= 0; i--) {
@@ -109,15 +108,17 @@ const main = function(decoded, request, callback){
         autoIncrement: true,
         headerLabels: headerLabels,
         dataAttributes: dataAttributes,
-        data: result
+        data: result,
+        userName: decoded.name,
+        message: insertObject.message
       };
 
-      let table = generateTable(tableStructure);
+      let table = generateHTMLBody(tableStructure);
 
       const msg = {
         to: request.query.email,
         from: 'srt.emailsender@gmail.com',
-        subject: 'Sending with SendGrid is Fun',
+        subject: insertObject.subject,
         text: 'Test from text',
         html: table,
       };
@@ -131,8 +132,10 @@ const main = function(decoded, request, callback){
   });
 }
 
-const generateTable = (tableStructure) => {
-	let table = `<table style="width:100%; border-collapse: collapse;">
+const generateHTMLBody = (tableStructure) => {
+  let html = `
+    <p>${tableStructure.message}<p>
+    <table style="width:100%; border-collapse: collapse;">
 			<tr>
 				${tableStructure.autoIncrement? `<th style="background-color: #303f9f; height: 15.75pt; padding: 0 2.25pt; border-width: 1pt; border-style: solid solid solid none; border-color: black; color: white;">#</th>` : null}
 				${tableStructure.headerLabels.map((label) => {
@@ -153,9 +156,12 @@ const generateTable = (tableStructure) => {
 					}).join('')}
 				</tr>`
 			}).join('')}
-		</table>
+    </table>
+    <p>Atentamente</<p>
+    <p>${tableStructure.userName} de SRTrucking</<p>
   `
-	return table;
+  console.log(html);
+	return html;
 }
 
 const getHeaderLabels = (mode) => {
@@ -170,12 +176,13 @@ const getHeaderLabels = (mode) => {
         "#planas o #equipo",
         "MX Carrier",
         "Status",
-        "Tractor"
+        "Tractor",
+        "Notas"
       ];
     case 'Import':
-        return ["Fecha de carga", "Fecha de papeles", "Fecha de cruce", "Origen", "Destino", "Factura", "Equipo USA", "Equipo MX", "Tipo", "SCAC", "CAAT", "Transfer", "Mex. Carr", "Carrier USA", "Status"];
+        return ["Fecha de carga", "Fecha de papeles", "Fecha de cruce", "Origen", "Destino", "Factura", "Equipo USA", "Equipo MX", "Tipo", "SCAC", "CAAT", "Transfer", "Mex. Carr", "Carrier USA", "Status", "Notas"];
     case 'Export':
-        return ["Fecha de carga", "Origen", "Destino", "Ventana", "Factura", "Plana", "Placas", "Estado", "SCAC", "CAAT", "Transfer", "Mex. Carr", "Status"];
+        return ["Fecha de carga", "Origen", "Destino", "Ventana", "Factura", "Plana", "Placas", "Estado", "SCAC", "CAAT", "Transfer", "Mex. Carr", "Status", "Notas"];
     case 'National US':
         return ["Date loaded",
           "Origin",
@@ -185,7 +192,8 @@ const getHeaderLabels = (mode) => {
           "Truck",
           "Carrier",
           "Status",
-          "Extra"
+          "Extra",
+          "Notes"
         ];
     default: 
       return [];
@@ -204,7 +212,8 @@ const getDataAttributes = (mode) => {
           "flat_or_equipment",
 					"carrierMX.name",
           "status",
-          "tractor"
+          "tractor",
+          "notes"
       ];
     case 'Import':
         return [
@@ -222,7 +231,8 @@ const getDataAttributes = (mode) => {
           "transfer.name",
 					"carrierMX.name",
 					"carrierUS.name",
-          "status"
+          "status",
+          "notes"
         ];
     case 'Export':
         return [
@@ -238,7 +248,8 @@ const getDataAttributes = (mode) => {
           "caat",
           "transfer.name",
           "carrierMX.name",
-          "status"
+          "status",
+          "notes"
         ];
     case 'National US':
         return [
@@ -250,7 +261,8 @@ const getDataAttributes = (mode) => {
           "tractor", //truck
           "carrierUS.name", 
           "status",
-          "extra.name"
+          "extra.name",
+          "notes"
         ];
     default: 
       return [];
