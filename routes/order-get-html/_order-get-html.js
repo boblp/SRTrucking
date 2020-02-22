@@ -103,7 +103,7 @@ const main = function(request, decoded, callback){
 				if(result[0]){
 					var orderTable = "";
 					var statusOptions = {
-						"carrierMX" : "green white-text",
+						"carrierMX" : "white black-text",
 						"cross" : "purple white-text",
 						"customs" : "white black-text",
 						"transfer" : "blue white-text",
