@@ -116,11 +116,11 @@ const main = function(request, decoded, callback){
 					for(var i=0; i<result[0].decks.length; i++) {
 						if(request.query.get_type == "view"){
 
-							let loadDate = null;
-							if((request.query.type === 'National MX' ||  request.query.type === 'Export') && result[0].decks[i].carrierMX.date) {
-								loadDate = moment(result[0].decks[i].carrierMX.date).format('DD/MM/YYYY');
-							} else if((request.query.type === 'National US' ||  request.query.type === 'Import') && result[0].decks[i].carrierUS.date)  {
-								loadDate = moment(result[0].decks[i].carrierUS.date).format('DD/MM/YYYY');
+							let loadDate = "";
+							if((result[0].type === 'National MX' ||  result[0].type === 'Export') && result[0].decks[i].carrierMX.date) {
+								loadDate = moment(+result[0].decks[i].carrierMX.date).format("DD/MM/YYYY");
+							} else if((result[0].type === 'National US' ||  result[0].type === 'Import') && result[0].decks[i].carrierUS.date)  {
+								loadDate = moment(+result[0].decks[i].carrierUS.date).format("DD/MM/YYYY");
 							}
 
 							orderTable += 
