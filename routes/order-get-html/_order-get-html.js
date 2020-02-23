@@ -460,10 +460,10 @@ const csvFields = function(type, results){
 
 
 	if(type == 'National MX'){
-		fields.push({label:"Documents Date",value:"documentsDate"});
+		fields.push({label:"Load Date", value: (row) => `"${ row.carrierMX.date? moment(+row.carrierMX.date).format("DD/MM/YYYY") : "" }"`, stringify: false });
 		fields.push({label:"Time Window", value:"timeWindow"});
-		fields.push({label:"Origin", value:"", default: `${results[0].origin}`}); //Falta ponerlo
-		fields.push({label:"Destiny", value:"", default: `${results[0].destiny}`});//Falta ponerlo
+		fields.push({label:"Origin", value:"", default: `${results[0].origin}`}); 
+		fields.push({label:"Destiny", value:"", default: `${results[0].destiny}`});
 		fields.push({label:"Invoice",value:"invoiceClient"});
 		fields.push({label:"Flat or Equipment",value:"flat_or_equipment"});
 		fields.push({label:"CarrierMX Name",value:"carrierMX.name"});
@@ -471,11 +471,11 @@ const csvFields = function(type, results){
 		fields.push({label:"Truck",value:"tractor"});
 		fields.push({label:"Notes",value:"notes", default: ''});
 	}else if(type == 'Import'){
-		fields.push({label:"Documents Date",value:"documentsDate"});//Falta arreglar label
-		fields.push({label:"Documents Date",value:"documentsDate"});//Falta arreglar label
-		fields.push({label:"Documents Date",value:"documentsDate"});//Falta arreglar label
-		fields.push({label:"Origin",value:"documentsDate"}); //Falta ponerlo
-		fields.push({label:"Destiny",value:"documentsDate"});//Falta ponerlo
+		fields.push({label:"Load Date", value: (row) => `"${ row.carrierUS.date? moment(+row.carrierUS.date).format("DD/MM/YYYY") : "" }"`, stringify: false });//Falta arreglar label
+		fields.push({label:"Documents Date",value:"documentsDate"});
+		fields.push({label:"Cross Date",value:"cross.date"});
+		fields.push({label:"Origin",value:"documentsDate"}); 
+		fields.push({label:"Destiny",value:"documentsDate"});
 		fields.push({label:"Invoice",value:"invoiceClient"});
 		fields.push({label:"Team US",value:"teamUS"});
 		fields.push({label:"Team MX",value:"teamMX"});
@@ -488,9 +488,9 @@ const csvFields = function(type, results){
 		fields.push({label:"Status",value:"status"});
 		fields.push({label:"Notes",value:"notes", default: ''});
 	} else if(type == 'Export'){
-		fields.push({label:"Documents Date",value:"documentsDate"});
-		fields.push({label:"Origin", value:"", default: `${results[0].origin}`}); //Falta ponerlo
-		fields.push({label:"Destiny", value:"", default: `${results[0].destiny}`});//Falta ponerlo
+		fields.push({label:"Load Date", value: (row) => `"${ row.carrierMX.date? moment(+row.carrierMX.date).format("DD/MM/YYYY") : "" }"`, stringify: false });
+		fields.push({label:"Origin", value:"", default: `${results[0].origin}`}); 
+		fields.push({label:"Destiny", value:"", default: `${results[0].destiny}`});
 		fields.push({label:"Time Window", value:"timeWindow"});
 		fields.push({label:"Invoice",value:"invoiceClient"});
 		fields.push({label:"Flat",value:"flat"});
@@ -502,9 +502,9 @@ const csvFields = function(type, results){
 		fields.push({label:"CarrierMX Name",value:"carrierMX.name"});
 		fields.push({label:"Notes",value:"notes", default: ''});
 	}else if(type == 'National US'){
-		fields.push({label:"Documents Date",value:"documentsDate"});
-		fields.push({label:"Origin", value:"", default: `${results[0].origin}`}); //Falta ponerlo
-		fields.push({label:"Destiny", value:"", default: `${results[0].destiny}`});//Falta ponerlo
+		fields.push({label:"Load Date", value: (row) => `"${ row.carrierUS.date? moment(+row.carrierUS.date).format("DD/MM/YYYY") : "" }"`, stringify: false });
+		fields.push({label:"Origin", value:"", default: `${results[0].origin}`}); 
+		fields.push({label:"Destiny", value:"", default: `${results[0].destiny}`});
 		fields.push({label:"Invoice",value:"invoiceClient"});
 		fields.push({label:"Trailer",value:"equipment"});
 		fields.push({label:"Truck",value:"tractor"});
