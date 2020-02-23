@@ -423,7 +423,7 @@ const main = function(request, decoded, callback){
 
 const exportExcel = function(request, results, callback){
 	const json2csv = require('json2csv').parse;
-	const fields = csvFields(request.query.type);
+	const fields = csvFields(request.query.type, results);
 	const opts = { fields };
 
 	try {
@@ -435,114 +435,91 @@ const exportExcel = function(request, results, callback){
 	}
 }
 
-const csvFields = function(type){
+const csvFields = function(type, results){
+	// const fields = [{
+	// 	label: 'Deck Number',
+	// 	value: 'deckNumber'
+	// },{
+	// 	label: 'SRT',
+	// 	value: 'srt'
+	// },{
+	// 	label: 'Time Window',
+	// 	value: 'timeWindow'
+	// },{
+	// 	label: 'Invoice',
+	// 	value: 'invoice'
+	// },{
+	// 	label: 'Status',
+	// 	value: 'status'
+	// }];
+
 	const fields = [{
 		label: 'Deck Number',
 		value: 'deckNumber'
-	},{
-		label: 'SRT',
-		value: 'srt'
-	},{
-		label: 'Time Window',
-		value: 'timeWindow'
-	},{
-		label: 'Invoice',
-		value: 'invoice'
-	},{
-		label: 'Status',
-		value: 'status'
 	}];
-
-	
 
 
 	if(type == 'National MX'){
-		fields.push({label: 'Vehicle Type',value: 'vehicleType'});
-		fields.push({label:"Flar or Equipment",value:"flat_or_equipment"});
+		fields.push({label:"Documents Date",value:"documentsDate"});
+		fields.push({label:"Time Window", value:"timeWindow"});
+		fields.push({label:"Origin", value:"", default: `${results[0].origin}`}); //Falta ponerlo
+		fields.push({label:"Destiny", value:"", default: `${results[0].destiny}`});//Falta ponerlo
+		fields.push({label:"Invoice",value:"invoiceClient"});
+		fields.push({label:"Flat or Equipment",value:"flat_or_equipment"});
 		fields.push({label:"CarrierMX Name",value:"carrierMX.name"});
-		fields.push({label:"CarrierMX Invoice",value:"carrierMX.invoice"});
-		fields.push({label:"CarrierMX Date",value:"carrierMX.date"});
-		fields.push({label:"CarrierMX Cost",value:"carrierMX.cost"});
-		fields.push({label:"CarrierMX Payment Date",value:"carrierMX.paymentDate"});
-		fields.push({label:"CarrierMX Status",value:"carrierMX.status"});
-		fields.push({label:"Tractor",value:"tractor"});
+		fields.push({label:"Status",value:"status"});
+		fields.push({label:"Truck",value:"tractor"});
+		fields.push({label:"Notes",value:"notes", default: ''});
 	}else if(type == 'Import'){
+		fields.push({label:"Documents Date",value:"documentsDate"});//Falta arreglar label
+		fields.push({label:"Documents Date",value:"documentsDate"});//Falta arreglar label
+		fields.push({label:"Documents Date",value:"documentsDate"});//Falta arreglar label
+		fields.push({label:"Origin",value:"documentsDate"}); //Falta ponerlo
+		fields.push({label:"Destiny",value:"documentsDate"});//Falta ponerlo
+		fields.push({label:"Invoice",value:"invoiceClient"});
 		fields.push({label:"Team US",value:"teamUS"});
 		fields.push({label:"Team MX",value:"teamMX"});
+		fields.push({label:"Type",value:"", default: 'Flat'});
 		fields.push({label:"Scac",value:"scac"});
 		fields.push({label:"Caat",value:"caat"});
-		fields.push({label:"Documents Date",value:"documentsDate"});
-		fields.push({label:"CarrierMX Name",value:"carrierMX.name"});
-		fields.push({label:"CarrierMX Invoice",value:"carrierMX.invoice"});
-		fields.push({label:"CarrierMX Date",value:"carrierMX.date"});
-		fields.push({label:"CarrierMX Cost",value:"carrierMX.cost"});
-		fields.push({label:"CarrierMX Payment Date",value:"carrierMX.paymentDate"});
-		fields.push({label:"CarrierMX Status",value:"carrierMX.status"});
-		fields.push({label:"CarrierUS Name",value:"carrierUS.name"});
-		fields.push({label:"CarrierUS Invoice",value:"carrierUS.invoice"});
-		fields.push({label:"CarrierUS Date",value:"carrierUS.date"});
-		fields.push({label:"CarrierUS Cost",value:"carrierUS.cost"});
-		fields.push({label:"CarrierUS Payment Date",value:"carrierUS.paymentDate"});
-		fields.push({label:"CarrierUS Status",value:"carrierUS.status"});
 		fields.push({label:"Transfer Name",value:"transfer.name"});
-		fields.push({label:"Transfer Invoice",value:"transfer.invoice"});
-		fields.push({label:"Transfer Date",value:"transfer.date"});
-		fields.push({label:"Transfer Cost",value:"transfer.cost"});
-		fields.push({label:"Transfer Payment Date",value:"transfer.paymentDate"});
-		fields.push({label:"Transfer Status",value:"transfer.status"});
-		fields.push({label:"Cross Name",value:"cross.name"});
-		fields.push({label:"Cross Invoice",value:"cross.invoice"});
-		fields.push({label:"Cross Date",value:"cross.date"});
-		fields.push({label:"Cross Cost",value:"cross.cost"});
-		fields.push({label:"Cross Payment Date",value:"cross.paymentDate"});
-		fields.push({label:"Cross Status",value:"cross.status"});
-	}else if(type == 'Export'){
+		fields.push({label:"CarrierMX Name",value:"carrierMX.name"});
+		fields.push({label:"CarrierUS Name",value:"carrierUS.name"});
+		fields.push({label:"Status",value:"status"});
+		fields.push({label:"Notes",value:"notes", default: ''});
+	} else if(type == 'Export'){
+		fields.push({label:"Documents Date",value:"documentsDate"});
+		fields.push({label:"Origin", value:"", default: `${results[0].origin}`}); //Falta ponerlo
+		fields.push({label:"Destiny", value:"", default: `${results[0].destiny}`});//Falta ponerlo
+		fields.push({label:"Time Window", value:"timeWindow"});
+		fields.push({label:"Invoice",value:"invoiceClient"});
+		fields.push({label:"Flat",value:"flat"});
 		fields.push({label:"Plates",value:"plates"});
 		fields.push({label:"State",value:"state"});
 		fields.push({label:"SCAC",value:"scac"});
 		fields.push({label:"CAAT",value:"caat"});
-		fields.push({label:"CarrierMX Name",value:"carrierMX.name"});
-		fields.push({label:"CarrierMX Invoice",value:"carrierMX.invoice"});
-		fields.push({label:"CarrierMX Date",value:"carrierMX.date"});
-		fields.push({label:"CarrierMX Cost",value:"carrierMX.cost"});
-		fields.push({label:"CarrierMX Payment Date",value:"carrierMX.paymentDate"});
-		fields.push({label:"CarrierMX Status",value:"carrierMX.status"});
-		fields.push({label:"CarrierUS Name",value:"carrierUS.name"});
-		fields.push({label:"CarrierUS Invoice",value:"carrierUS.invoice"});
-		fields.push({label:"CarrierUS Date",value:"carrierUS.date"});
-		fields.push({label:"CarrierUS Cost",value:"carrierUS.cost"});
-		fields.push({label:"CarrierUS Payment Date",value:"carrierUS.paymentDate"});
-		fields.push({label:"CarrierUS Status",value:"carrierUS.status"});
 		fields.push({label:"Transfer Name",value:"transfer.name"});
-		fields.push({label:"Transfer Invoice",value:"transfer.invoice"});
-		fields.push({label:"Transfer Date",value:"transfer.date"});
-		fields.push({label:"Transfer Cost",value:"transfer.cost"});
-		fields.push({label:"Transfer Payment Date",value:"transfer.paymentDate"});
-		fields.push({label:"Transfer Status",value:"transfer.status"});
-		fields.push({label:"Cross Name",value:"cross.name"});
-		fields.push({label:"Cross Invoice",value:"cross.invoice"});
-		fields.push({label:"Cross Date",value:"cross.date"});
-		fields.push({label:"Cross Cost",value:"cross.cost"});
-		fields.push({label:"Cross Payment Date",value:"cross.paymentDate"});
-		fields.push({label:"Cross Status",value:"cross.status"});
+		fields.push({label:"CarrierMX Name",value:"carrierMX.name"});
+		fields.push({label:"Notes",value:"notes", default: ''});
 	}else if(type == 'National US'){
-		fields.push({label: 'Vehicle Type',value: 'vehicleType'});
-		fields.push({label:"Flar or Equipment",value:"flat_or_equipment"});
+		fields.push({label:"Documents Date",value:"documentsDate"});
+		fields.push({label:"Origin", value:"", default: `${results[0].origin}`}); //Falta ponerlo
+		fields.push({label:"Destiny", value:"", default: `${results[0].destiny}`});//Falta ponerlo
+		fields.push({label:"Invoice",value:"invoiceClient"});
+		fields.push({label:"Trailer",value:"equipment"});
+		fields.push({label:"Truck",value:"tractor"});
 		fields.push({label:"CarrierUS Name",value:"carrierUS.name"});
-		fields.push({label:"CarrierUS Invoice",value:"carrierUS.invoice"});
-		fields.push({label:"CarrierUS Date",value:"carrierUS.date"});
-		fields.push({label:"CarrierUS Cost",value:"carrierUS.cost"});
-		fields.push({label:"CarrierUS Payment Date",value:"carrierUS.paymentDate"});
-		fields.push({label:"CarrierUS Status",value:"carrierUS.status"});
-		fields.push({label:"Tractor",value:"tractor"});
+		fields.push({label:"Status",value:"status"});
+		fields.push({label:"Extra",value:"extra.name"});
+		fields.push({label:"Notes",value:"notes", default: ''});
 	}
-	fields.push({label:"Extra Name",value:"extraName"});
-	fields.push({label:"Extra",value:"extra"});
-	fields.push({label:"Driver",value:"driver"});
-	fields.push({label:"Actual Price",value:"actualPrice"});
-	fields.push({label:"Total Sale",value:"totalSale"});
-	fields.push({label:"Profit",value:"margin"});
-	fields.push({label:"Notes",value:"notes"});
+	// fields.push({label:"Extra Name",value:"extraName"});
+	// fields.push({label:"Extra",value:"extra"});
+	// fields.push({label:"Driver",value:"driver"});
+	// fields.push({label:"Actual Price",value:"actualPrice"});
+	// fields.push({label:"Total Sale",value:"totalSale"});
+	// fields.push({label:"Profit",value:"margin"});
+	// fields.push({label:"Notes",value:"notes"});
 
 	return fields;
 }
