@@ -44,6 +44,7 @@ const main = function(decoded, request, callback){
 		createdAt: moment(Date.now()).format('YYYY-MM-DD')
 	};
 
+  console.log(decoded);
 	const deckIds = JSON.parse(request.query.deckIds);
 	const deckQuery = []
 
@@ -117,7 +118,8 @@ const main = function(decoded, request, callback){
 
       const msg = {
         to: request.query.email,
-        from: 'srt.emailsender@gmail.com',
+        // from: 'srt.emailsender@gmail.com',
+        from: decoded.id,
         subject: insertObject.subject,
         text: 'Test from text',
         html: table,
