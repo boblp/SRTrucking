@@ -44,7 +44,6 @@ const main = function(decoded, request, callback){
 		createdAt: moment(Date.now()).format('YYYY-MM-DD')
 	};
 
-  console.log(decoded);
 	const deckIds = JSON.parse(request.query.deckIds);
 	const deckQuery = []
 
@@ -111,13 +110,14 @@ const main = function(decoded, request, callback){
         dataAttributes: dataAttributes,
         data: result,
         userName: decoded.name,
+        userEmail: decoded.id,
+        userPhone: decoded.phone,
         message: insertObject.message
       };
 
       let table = generateHTMLBody(tableStructure);
-
       const msg = {
-        to: request.query.email.replace(/\s/g,'').split(';'),
+        to: request.query.email.split(';'),
         // from: 'srt.emailsender@gmail.com',
         from: decoded.id,
         subject: insertObject.subject,
@@ -159,10 +159,19 @@ const generateHTMLBody = (tableStructure) => {
 				</tr>`
 			}).join('')}
     </table>
-    <p>Atentamente</<p>
-    <p>${tableStructure.userName} de SRTrucking</<p>
+    <p>Saludos</<p>
+    <p>${tableStructure.userName}</p>
+    <p>Tel: ${tableStructure.userPhone}</p>
+    <p>Email: ${tableStructure.userEmail}</p>
+    <a href="http://www.sepulvedatransport.com/">http://www.sepulvedatransport.com/</a>
+    <p style="color: #c4c6c9">
+      El contenido de este correo electrónico es confidencial y está destinado al destinatario 
+      especificado solo en el mensaje. Está estrictamente prohibido compartir cualquier parte de este 
+      mensaje con terceros, sin el consentimiento por escrito del remitente. Si recibió este mensaje por error, 
+      responda a este mensaje y continúe con su eliminación, para que podamos asegurarnos de 
+      que no se produzcan errores en el futuro.
+    </p>
   `
-  console.log(html);
 	return html;
 }
 

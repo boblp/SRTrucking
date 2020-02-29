@@ -55,7 +55,8 @@ const main = function(request, callback){
 							id: result.email, 
 							level: result.level,
 							profilePic: result.profilePic,
-							signaturePic: result.signaturePic
+							signaturePic: result.signaturePic,
+							phone: result.phone,
 						};
 					}
 
