@@ -13,6 +13,8 @@ module.exports = {
 				auth: joi.string().required(),
 				origin: joi.string(),
 				destination: joi.string(),
+				startDate: joi.string(),
+				endDate: joi.string(),
 				isDelivered: joi.boolean().default(false).description('View delivered orders, by POD'),
 				missingRCNafinas: joi.boolean().default(false).description('Searches by RC'),
 				missingClientInvoice: joi.boolean().default(false).description('Searches by clientInvoice'),
