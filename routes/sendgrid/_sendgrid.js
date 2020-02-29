@@ -117,7 +117,7 @@ const main = function(decoded, request, callback){
       let table = generateHTMLBody(tableStructure);
 
       const msg = {
-        to: request.query.email,
+        to: request.query.email.replace(/\s/g,'').split(';'),
         // from: 'srt.emailsender@gmail.com',
         from: decoded.id,
         subject: insertObject.subject,
