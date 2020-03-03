@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../../util/config.js');
 const collectionName = config.collections.orders;
 const json2csv = require('json2csv');
+const moment = require('moment');
 const downloadCsv = require('download-csv');
 
 module.exports.handler = function(request, h){
@@ -60,6 +61,25 @@ const main = function(request, callback){
 
 	if(request.query.hasPOD){
 		deckQuery.POD = { $ne: "" };
+	}
+
+	if (request.query.startDate){
+		let queryDateStart = moment(request.query.startDate, 'YYYY-MM-DD', true);
+
+		console.log(queryDateStart.format("YYYY-MM-DD"), queryDateStart.isValid())
+
+		if(queryDateStart.isValid()){
+			query.createdAt = { $gt: queryDateStart.format("YYYY-MM-DD") };
+		}
+	}
+
+	if (request.query.endDate){
+		let queryDateEnd = moment(request.query.endDate, 'YYYY-MM-DD', true);
+		console.log(queryDateEnd.format("YYYY-MM-DD"), queryDateEnd.isValid())
+
+		if(queryDateEnd.isValid()){
+			query.createdAt = { $lt: queryDateEnd.format("YYYY-MM-DD") };
+		}
 	}
 
 	var pipeline = [{
