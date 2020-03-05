@@ -66,19 +66,21 @@ const main = function(request, callback){
 	if (request.query.startDate){
 		let queryDateStart = moment(request.query.startDate, 'YYYY-MM-DD', true);
 
-		console.log(queryDateStart.format("YYYY-MM-DD"), queryDateStart.isValid())
-
 		if(queryDateStart.isValid()){
-			query.createdAt = { $gt: queryDateStart.format("YYYY-MM-DD") };
+			query.$and = []
+			query.$and.push({ createdAt: { $gte: queryDateStart.format("YYYY-MM-DD") } });
 		}
 	}
 
 	if (request.query.endDate){
 		let queryDateEnd = moment(request.query.endDate, 'YYYY-MM-DD', true);
-		console.log(queryDateEnd.format("YYYY-MM-DD"), queryDateEnd.isValid())
-
+		
 		if(queryDateEnd.isValid()){
-			query.createdAt = { $lt: queryDateEnd.format("YYYY-MM-DD") };
+			if(typeof(query.$and) === 'undefined') {
+				query.$and = []
+			}
+
+			query.$and.push({ createdAt: { $lte: queryDateEnd.format("YYYY-MM-DD") } });
 		}
 	}
 
