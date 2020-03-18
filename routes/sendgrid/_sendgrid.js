@@ -147,12 +147,28 @@ const generateHTMLBody = (tableStructure) => {
 				}).join('')}
 			</tr>
 			${tableStructure.data[0].decks.map((deck, index) => {
+        let rowBackgroundColor = '#fff';
+        switch(deck.status) {
+          case 'delivered':
+            rowBackgroundColor = '#C6EFCE';
+            break;
+          case 'cross':
+            rowBackgroundColor = '#00bfff';
+            break;
+          case 'transfer':
+            rowBackgroundColor = '#ffff00';
+            break;
+          default:
+            rowBackgroundColor = '#fff';
+            break;
+        }
+
 				return `<tr style="height: 15.75pt">
-					${tableStructure.autoIncrement? `<td style="background-color: #C6EFCE; height: 15.75pt; padding: 0 2.25pt; border-style: none solid solid none; border-right-width: 1pt; border-bottom-width: 1pt; border-right-color: black; border-bottom-color: black;">
+					${tableStructure.autoIncrement? `<td style="background-color: ${rowBackgroundColor}; height: 15.75pt; padding: 0 2.25pt; border-style: none solid solid none; border-right-width: 1pt; border-bottom-width: 1pt; border-right-color: black; border-bottom-color: black;">
 						${index + 1}</td>` : null}
 					${tableStructure.dataAttributes.map((attr) => {
             let dotDeck = dot.dot(deck);
-						return `<td style="background-color: #C6EFCE; height: 15.75pt; padding: 0 2.25pt; border-style: none solid solid none; border-right-width: 1pt; border-bottom-width: 1pt; border-right-color: black; border-bottom-color: black;">
+						return `<td style="background-color: ${rowBackgroundColor}; height: 15.75pt; padding: 0 2.25pt; border-style: none solid solid none; border-right-width: 1pt; border-bottom-width: 1pt; border-right-color: black; border-bottom-color: black;">
 								${dotDeck[attr]? dotDeck[attr] : (dot.pick(attr, tableStructure.data[0])? dot.pick(attr, tableStructure.data[0]) : '')}
 							</td>`
 					}).join('')}
